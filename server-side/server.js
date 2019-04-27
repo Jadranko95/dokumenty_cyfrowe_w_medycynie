@@ -46,6 +46,12 @@ router.put("/get-patient-data", async (req, res) => {
   return patientID;
 });
 
+//POBRANIE INF O ZALOGOWANYM UŻYTKOWNIKU (Recommendations.js)
+router.get("/active-user", (req, res) => {
+  console.log(activeUser);
+  res.send(activeUser);
+});
+
 //POBRANIE DOKUMENTACJI (Documentation.js)
 router.get("/documentation", async (req, res) => {
   const db = client.db("DokumentyCyfrowe");
@@ -163,7 +169,7 @@ router.post("/attach-document", async (req, res) => {
   return attachedDocument._id;
 });
 
-//DODANIE NOWEGO ZADANIE (MedicalProcess.js, SideBar.js)
+//DODANIE NOWEGO ZADANIA (MedicalProcess.js, SideBar.js)
 router.post("/new-task", async (req, res) => {
   const db = client.db("DokumentyCyfrowe");
   const { title, date, completed, details } = req.body;
@@ -173,7 +179,7 @@ router.post("/new-task", async (req, res) => {
     date,
     completed,
     details,
-    addedBy: doctor
+    addedBy: activeUser.name
   };
   await db.collection("Zadanie").insertOne(newTask);
   //aktualizacja widoku
@@ -197,22 +203,33 @@ router.put("/complete-task", async (req, res) => {
   res.status(200).send(task);
 });
 
+//LABORANT - POBRANIE DANYCH O PARAMETRACH LABORATORYJNYCH
+router.get("/lab-data", async (req, res) => {
+  const db = client.db("DokumentyCyfrowe");
+  parameters = await db
+    .collection("ParametryLaboratoryjne")
+    .find({})
+    .toArray();
+  res.json(parameters);
+  return parameters;
+});
+
 //LABORANT - DODAWANIE WYNIKÓW BADAŃ (LabTechnician.js)
 router.post("/lab-result", async (req, res) => {
-  console.log(req.body);
   const db = client.db("DokumentyCyfrowe");
   const {
     labPatientID,
+    orderingDoctor,
     title,
-    collectionDate,
+    testDate,
     issueDate,
     results
   } = req.body;
   const newLabResult = {
     patientID: labPatientID,
     title,
-
-    collectionDate,
+    orderingDoctor,
+    testDate,
     issueDate,
     labTechnician: activeUser.name,
     results
@@ -251,9 +268,7 @@ router.post("/login", async (req, res) => {
     res.status(200).send(activeUser);
     return activeUser;
   } else {
-    
     res.status(400).json("FAIL");
-
   }
 });
 

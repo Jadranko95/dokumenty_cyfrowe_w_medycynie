@@ -8,20 +8,38 @@
   form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
    
     width: 60%;
     margin: 0 auto;
 
-    .inner-form,
-    label {
+   
+    .mainLabel {
       
-      
+      margin-right: 150px;
       
 
-      input[type="text"], input[type="date"], select {
+      input[type="text"], input[type="datetime-local"] {
         width: 150px;
         margin-top: 4px;
+       
+      }
+      select {
+        width: 162px;
+        margin-top: 4px;
+      }
+    }
+
+    .inner-from {
+     
+      label {
+        
+        input[type="text"], select {
+          width: 150px;
+          margin-top: 4px;
+         
+        }
+      }
        
       }
     }
@@ -42,4 +60,4 @@
       }
     }
   }
-}
+

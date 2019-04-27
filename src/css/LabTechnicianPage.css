@@ -9,30 +9,41 @@
 .lab-container form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   width: 60%;
   margin: 0 auto;
 }
 
-.lab-container form .inner-form input[type="text"], .lab-container form .inner-form input[type="date"], .lab-container form .inner-form select,
-.lab-container form label input[type="text"],
-.lab-container form label input[type="date"],
-.lab-container form label select {
+.lab-container form .mainLabel {
+  margin-right: 150px;
+}
+
+.lab-container form .mainLabel input[type="text"], .lab-container form .mainLabel input[type="datetime-local"] {
   width: 150px;
   margin-top: 4px;
 }
 
-.lab-container .table {
+.lab-container form .mainLabel select {
+  width: 162px;
+  margin-top: 4px;
+}
+
+.lab-container form .inner-from label input[type="text"], .lab-container form .inner-from label select {
+  width: 150px;
+  margin-top: 4px;
+}
+
+.table {
   width: 90%;
   margin: 0 auto;
 }
 
-.lab-container .table table {
+.table table {
   width: 70%;
   text-align: left;
   margin: auto;
 }
 
-.lab-container .table table td {
+.table table td {
   margin: 10px;
 }

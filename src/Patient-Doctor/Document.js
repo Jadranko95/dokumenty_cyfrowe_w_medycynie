@@ -48,7 +48,7 @@ class Document extends Component {
           <p style={{ fontWeight: "700" }}>{currentDocument.title}</p>
           {!currentDocument.title.includes("Badanie krwi") && (
             <div style={{ textAlign: "left", width: "30%", margin: "0 auto" }}>
-              <p>Data: {currentDocument.date}</p>
+              <p>Data: {currentDocument.testDate}</p>
               <p>Lekarz zlecający: {currentDocument.orderingDoctor}</p>
               <p>Lekarz wykonujący: {currentDocument.performingDoctor}</p>
               <p>Lekarz opisujący: {currentDocument.describingDoctor}</p>
@@ -60,6 +60,12 @@ class Document extends Component {
           )}
           {currentDocument.title.includes("Badanie krwi") && (
             <div className="table">
+            <div style={{ textAlign: "left", width: "50%", margin: "0 auto" }}>
+            <p>Data pobrania: {currentDocument.testDate} </p>
+               <p>Data wydania: {currentDocument.issueDate}</p>
+              <p>Lekarz zlecający: {currentDocument.orderingDoctor}</p>
+              <p>Laborant: {currentDocument.labTechnician}</p>
+            </div>
               <table>
                 <thead>
                   <tr>

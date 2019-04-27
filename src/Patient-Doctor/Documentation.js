@@ -10,28 +10,39 @@ class Documentation extends Component {
   componentDidMount() {
     fetch("https://medical-documentation.herokuapp.com/documentation")
       .then(result => result.json())
-      .then(data => this.setState({ documents: data }));
+      .then(data => this.setState({ documents: data.sort(this.compare) }));
 
-    //TODO sort by date
+    
   }
 
-  sort = (a, b) => {
-    a.date = parseInt(a.date.split(" ")[0].split("-").join(""));
-    b.date = parseInt(b.date.split(" ")[0].split("-").join(""));
-    return a.date > b.date ? 1 : a.date < b.date ? -1 : 0;
+  compare = (a, b) => {
+    const dateA = parseInt(
+      a.testDate
+        .split(" ")[0]
+        .split("-")
+        .join("")
+    );
+    const dateB = parseInt(
+      b.testDate
+        .split(" ")[0]
+        .split("-")
+        .join("")
+    );
+    return dateA > dateB ? -1 : dateA < dateB ? 1 : 0;
   };
 
   filterResults = async e => {
     e.preventDefault();
-    const fromDate = parseInt(e.target.fromDate.value.split("-").join("")) || null;
+    const fromDate =
+      parseInt(e.target.fromDate.value.split("-").join("")) || null;
     const toDate = parseInt(e.target.toDate.value.split("-").join("")) || null;
     const tag = e.target.tags.value;
     await fetch("https://medical-documentation.herokuapp.com/documentation")
       .then(result => result.json())
       .then(data => this.setState({ documents: data }));
-   
+
     console.log(fromDate, toDate);
-     const filtered = this.state.documents
+    const filtered = this.state.documents
       .filter(document => {
         if (tag !== "all") {
           return document.documentType === tag;
@@ -64,8 +75,8 @@ class Documentation extends Component {
   };
 
   render() {
-    //this.state.documents.sort();
 
+    const height = this.props.activeAccount === "doctor" ? "41vh" : "65vh"
     return (
       <div className="container documentation-container">
         {this.props.activeAccount === "doctor" && (
@@ -82,7 +93,8 @@ class Documentation extends Component {
               <option value="Badanie USG">Badanie USG</option>
               <option value="Badanie EKG">Badanie EKG</option>
               <option value="Echokardiografia">Echokardiografia</option>
-              <option value="Tomografia komputerowa">Tomografia komputerowa
+              <option value="Tomografia komputerowa">
+                Tomografia komputerowa
               </option>
               <option value="Rezonans magnetyczny">Rezonans magnetyczny</option>
               <option value="Angiografia">Angiografia / Koronarografia</option>
@@ -94,7 +106,7 @@ class Documentation extends Component {
           </label>
           <input type="submit" value="Filtruj" />
         </form>
-        <div className="documents content">
+        <div className="documents content" style={{height: height}}>
           <ul>
             {this.state.documents.map((document, i) => {
               return (

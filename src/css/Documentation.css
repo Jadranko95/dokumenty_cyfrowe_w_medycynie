@@ -3,7 +3,9 @@
 }
 
 .documentation-container .documents {
+  height: 41vh;
   text-align: left;
+  overflow-y: auto;
 }
 
 .documentation-container .filterForm {

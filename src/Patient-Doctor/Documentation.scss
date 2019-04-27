@@ -4,7 +4,9 @@
         
     }
     .documents {
+        height: 41vh;
         text-align: left;
+        overflow-y: auto;
     }
     
     .filterForm {

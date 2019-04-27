@@ -6,15 +6,20 @@ import LabTechnicianPage from "./LabTechnician/LabTechnicianPage";
 
 class Main extends Component {
   state = {
-    activeAccount: JSON.parse(localStorage.getItem("account")) || "",
-    isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")) || "false"
+    activeAccount: JSON.parse(localStorage.getItem("account"))
+      ? JSON.parse(localStorage.getItem("account"))
+      : "",
+    isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")) || "false", 
+    activeUser:  []
   };
 
   componentDidUpdate() {
     //because setState is asynchronous
     localStorage.setItem("isLoggedIn", JSON.stringify(this.state.isLoggedIn));
     localStorage.setItem("account", JSON.stringify(this.state.activeAccount));
+    
   }
+
 
   changeAccount = e => {
     this.setState({ activeAccount: e.target.value });
@@ -39,7 +44,8 @@ class Main extends Component {
         } else {
           this.setState({
             activeAccount: data.accountType,
-            isLoggedIn: "true"
+            isLoggedIn: "true",
+            activeUser: data
           });
         }
       });

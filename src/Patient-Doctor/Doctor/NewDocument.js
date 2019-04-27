@@ -16,16 +16,16 @@ class NewDocument extends Component {
     e.preventDefault();
     const title = `${this.state.documentType}: ${
       e.target.region ? e.target.region.value : ""
-    }  ${e.target.testDate.value.split('T')[0]}`;
-    console.log(title);
+    }  ${e.target.testDate.value.split("T")[0]}`;
+    //console.log(title);
     fetch("https://medical-documentation.herokuapp.com/new-document", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         documentType: this.state.documentType,
         title,
-        testDate: e.target.testDate.value.split('T').join(' '),
-        
+        testDate: e.target.testDate.value.split("T").join(" "),
+
         orderingDoctor: e.target.orderingDoctor.value,
         performingDoctor: e.target.performingDoctor.value,
         content: e.target.content.value
@@ -91,7 +91,6 @@ class NewDocument extends Component {
                   required
                 />
               </label>
-            
 
               <label>
                 {" "}

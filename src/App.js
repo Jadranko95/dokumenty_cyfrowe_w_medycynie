@@ -8,6 +8,14 @@ import Main from "./Main";
 import "./css/App.css";
 
 class App extends Component {
+  async componentWillMount() {
+    if (!localStorage.getItem("account")) {
+      console.log("no account");
+      const text = "";
+      await localStorage.setItem("account", JSON.stringify(text));
+    }
+  }
+
   render() {
     return (
       <div className="App">

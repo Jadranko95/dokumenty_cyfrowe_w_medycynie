@@ -29,7 +29,8 @@ class DoctorPage extends Component {
 
     fetch("https://medical-documentation.herokuapp.com/new-task", {
       method: "post",
-      headers: { "Content-Type": "application/json" },
+      mode: 'cors',
+      headers: { "Content-Type": "application/json", 'Access-Control-Allow-Origin':'*' },
       body: JSON.stringify({
         title: e.target.title.value,
         date: e.target.date.value.split("T").join(" "),
@@ -236,7 +237,7 @@ class DoctorPage extends Component {
                 <Route
                   path="/recommendations"
                   render={props => (
-                    <Recommendations {...props} activeAccount="doctor" />
+                    <Recommendations {...props} activeAccount="doctor"/>
                   )}
                 />
                 <Route

@@ -5,7 +5,7 @@ import React, { Component } from "react";
 class Register extends Component {
   state = {
     accountType: "patient",
-    generatedLogin: "",
+    generatedLogin: ""
   };
 
   chooseAccountType = e => {
@@ -28,10 +28,9 @@ class Register extends Component {
   };
 
   registerUser = async e => {
-    
     e.preventDefault();
     if (this.state.accountType === "doctor") {
-      fetch("https://medical-documentation.herokuapp.com/register", {
+      await fetch("https://medical-documentation.herokuapp.com/register", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -44,11 +43,11 @@ class Register extends Component {
           password: e.target.password.value
         })
       })
-      .then(result => result.json())
-      .then(data => {
-        this.setState({generatedLogin: data.login});
-      });
-    await localStorage.setItem("generatedLogin", this.state.generatedLogin);
+        .then(result => result.json())
+        .then(data => {
+          this.setState({ generatedLogin: data.login });
+        });
+      await localStorage.setItem("generatedLogin", this.state.generatedLogin);
     } else {
       await fetch("https://medical-documentation.herokuapp.com/register", {
         method: "post",
@@ -66,7 +65,7 @@ class Register extends Component {
       })
         .then(result => result.json())
         .then(data => {
-          this.setState({generatedLogin: data.login});
+          this.setState({ generatedLogin: data.login });
         });
       await localStorage.setItem("generatedLogin", this.state.generatedLogin);
     }
