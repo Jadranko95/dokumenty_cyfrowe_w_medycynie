@@ -1,7 +1,12 @@
 .documentation-container {
-    button {
-        margin: 30px 40%;
+  button {
+        margin: 30px 40px;
         
+    } 
+
+    .buttons {
+        display: flex;
+        justify-content: center;
     }
     .documents {
         height: 41vh;

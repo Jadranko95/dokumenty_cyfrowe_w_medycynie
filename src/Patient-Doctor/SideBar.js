@@ -4,17 +4,44 @@ import "../css/SideBar.css";
 class SideBar extends Component {
   state = {
     patient: [],
-    tasks: []
+    tasks: [],
+    editMode: false
   };
 
-  componentDidMount() {
-    fetch("https://medical-documentation.herokuapp.com/patient")
+  async componentDidMount() {
+    await fetch("https://medical-documentation.herokuapp.com/patient")
       .then(result => result.json())
       .then(data => this.setState({ patient: data }));
   }
 
+  editData = async e => {
+    if (!this.state.editMode) {
+      this.setState({ editMode: true });
+    } else {
+      //sent to db
+      await fetch(
+        "https://medical-documentation.herokuapp.com/edit-patient-data",
+        {
+          method: "put",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: document.querySelector("#name").value,
+            sex: document.querySelector("#sex").value,
+            PESEL: document.querySelector("#PESEL").value,
+            telephone: document.querySelector("#telephone").value,
+            address: document.querySelector("#address").value,
+            icd10: document.querySelector("#icd10").value
+          })
+        }
+      ).then(result => result.json())
+      .then(data => this.setState({ patient: data }));
+      this.setState({ editMode: false });
+    }
+  };
+
   render() {
     const patient = this.state.patient;
+    const name = `${patient.name} ${patient.surname}`;
     return (
       <div className="side-bar">
         <div className="patient-info">
@@ -25,13 +52,22 @@ class SideBar extends Component {
               <tr>
                 <td>Imię i nazwisko: </td>
                 <td>
-                  {" "}
-                  {patient.name} {patient.surname}{" "}
+                  {this.state.editMode ? (
+                    <input type="text" defaultValue={name} id="name" />
+                  ) : (
+                    <p>{name}</p>
+                  )}
                 </td>
               </tr>
               <tr>
                 <td>Płeć: </td>
-                <td> {patient.sex} </td>
+                <td>
+                  {this.state.editMode ? (
+                    <input type="text" defaultValue={patient.sex} id="sex" />
+                  ) : (
+                    <p>{patient.sex}</p>
+                  )}
+                </td>
               </tr>
               <tr>
                 <td>Wiek: </td>
@@ -39,7 +75,18 @@ class SideBar extends Component {
               </tr>
               <tr>
                 <td>PESEL: </td>
-                <td> {patient.PESEL} </td>
+                <td>
+                  {" "}
+                  {this.state.editMode ? (
+                    <input
+                      type="text"
+                      defaultValue={patient.PESEL}
+                      id="PESEL"
+                    />
+                  ) : (
+                    <p>{patient.PESEL}</p>
+                  )}{" "}
+                </td>
               </tr>
               <tr>
                 <td>Data urodzenia: </td>
@@ -47,20 +94,56 @@ class SideBar extends Component {
               </tr>
               <tr>
                 <td>Adres: </td>
-                <td> {patient.address} </td>
+                <td>
+                  {this.state.editMode ? (
+                    <input
+                      type="text"
+                      defaultValue={patient.address}
+                      id="address"
+                    />
+                  ) : (
+                    <p>{patient.address}</p>
+                  )}
+                </td>
               </tr>
               <tr>
                 <td>Telefon: </td>
-                <td> {patient.telephone} </td>
+                <td>
+                  {" "}
+                  {this.state.editMode ? (
+                    <input
+                      type="text"
+                      defaultValue={patient.telephone}
+                      id="telephone"
+                    />
+                  ) : (
+                    <p>{patient.telephone}</p>
+                  )}
+                </td>
               </tr>
               <tr>
                 <td>ICD10: </td>
-                <td> {patient.icd10} </td>
+                <td>
+                  {" "}
+                  {this.state.editMode ? (
+                    <input
+                      type="text"
+                      defaultValue={patient.icd10}
+                      id="icd10"
+                    />
+                  ) : (
+                    <p>{patient.icd10}</p>
+                  )}
+                </td>
               </tr>
             </tbody>
           </table>
 
-          {this.props.activeAccount === "doctor" && <button>Edytuj</button>}
+          {this.props.activeAccount === "doctor" && (
+            <button onClick={this.editData}>
+              {this.state.editMode ? "Zapisz" : "Edytuj"}
+            </button>
+          )}
         </div>
         <div className="todo-list">
           <h3>Zadania do wykonania</h3>

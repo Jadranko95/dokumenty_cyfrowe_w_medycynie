@@ -3,14 +3,29 @@ import React, { Component } from "react";
 import "../css/MedicalProcess.css";
 import "../css/App.css";
 
-
 class MedicalProcess extends Component {
   state = {
-    tasks: []
+    tasks: [],
+    editMode: []
   };
-  
+
+  editMode = e => {
+    const id = e.target.id;
+    if (!this.state.editMode.includes(id)) {
+      const editMode = [...this.state.editMode, id];
+      this.setState({ editMode });
+    } else {
+      //dodanie do bazy
+      this.props.editTask(id);
+      //usunięcie z tablicy editMode
+      let editMode = [...this.state.editMode];
+      const index = editMode.indexOf(id);
+      delete editMode[index];
+      this.setState({ editMode });
+    }
+  };
+
   render() {
-  
     return (
       <div className="container medical-process-container">
         {this.props.activeAccount === "doctor" && (
@@ -33,7 +48,18 @@ class MedicalProcess extends Component {
               .map((task, i) => {
                 return (
                   <li key={i}>
-                    <strong>{task.title}</strong>
+                    <strong>
+                      {this.state.editMode.includes(task._id) ? (
+                        <input
+                          type="text"
+                          name="title"
+                          id="title"
+                          defaultValue={task.title}
+                        />
+                      ) : (
+                        task.title
+                      )}
+                    </strong>
                     {this.props.activeAccount === "doctor" && (
                       <button
                         className="set-done"
@@ -44,13 +70,39 @@ class MedicalProcess extends Component {
                       </button>
                     )}
 
-                    <button className="edit" id={i}>
+                    <button
+                      className="edit"
+                      onClick={this.editMode}
+                      id={task._id}
+                    >
                       🖉
                     </button>
 
                     <br />
-                    {task.details}
-                    <span style={{ float: "right" }}>{task.date}</span>
+                    {this.state.editMode.includes(task._id) ? (
+                      <input
+                        type="text"
+                        name="details"
+                        id="details"
+                        defaultValue={task.details}
+                        placeholder="Szczegóły"
+                      />
+                    ) : (
+                      task.details
+                    )}
+                    <span style={{ float: "right" }}>
+                      {this.state.editMode.includes(task._id) ? (
+                        <input
+                          type="text"
+                          name="date"
+                          id="date"
+                          defaultValue={task.date}
+                          placeholder="Data"
+                        />
+                      ) : (
+                        task.date
+                      )}
+                    </span>
                   </li>
                 );
               })}
@@ -63,15 +115,51 @@ class MedicalProcess extends Component {
               .map((task, i) => {
                 return (
                   <li key={i}>
-                    <strong>{task.title}</strong>
-
-                    <button className="edit" id={i}>
+                    <strong>
+                      {this.state.editMode.includes(task._id) ? (
+                        <input
+                          type="text"
+                          name="title"
+                          id="title"
+                          defaultValue={task.title}
+                        />
+                      ) : (
+                        task.title
+                      )}
+                    </strong>
+                    <button
+                      className="edit"
+                      onClick={this.editMode}
+                      id={task._id}
+                    >
                       🖉
                     </button>
 
                     <br />
-                    {task.details}
-                    <span style={{ float: "right" }}>{task.date}</span>
+                    {this.state.editMode.includes(task._id) ? (
+                      <input
+                        type="text"
+                        name="details"
+                        id="details"
+                        defaultValue={task.details}
+                        placeholder="Szczegóły"
+                      />
+                    ) : (
+                      task.details
+                    )}
+                    <span style={{ float: "right" }}>
+                      {this.state.editMode.includes(task._id) ? (
+                        <input
+                          type="text"
+                          name="date"
+                          id="date"
+                          defaultValue={task.date}
+                          placeholder="Data"
+                        />
+                      ) : (
+                        task.date
+                      )}
+                    </span>
                   </li>
                 );
               })}

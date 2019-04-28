@@ -41,7 +41,7 @@ class NewDocument extends Component {
         <Link
           to="/documentation"
           className="backButton"
-          style={{ position: "absolute", top: "2%", left: "30px" }}
+         
         >
           <button>Powrót</button>
         </Link>

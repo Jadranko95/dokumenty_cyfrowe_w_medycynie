@@ -11,8 +11,6 @@ class Documentation extends Component {
     fetch("https://medical-documentation.herokuapp.com/documentation")
       .then(result => result.json())
       .then(data => this.setState({ documents: data.sort(this.compare) }));
-
-    
   }
 
   compare = (a, b) => {
@@ -75,15 +73,19 @@ class Documentation extends Component {
   };
 
   render() {
-
-    const height = this.props.activeAccount === "doctor" ? "41vh" : "65vh"
+    //const height = this.props.activeAccount === "doctor" ? "41vh" : "55vh";
     return (
       <div className="container documentation-container">
-        {this.props.activeAccount === "doctor" && (
-          <Link to="documentation/create-new">
-            <button>Dodaj wynik badania</button>
+        <div className="buttons">
+          {this.props.activeAccount === "doctor" && (
+            <Link to="documentation/create-new">
+              <button>Dodaj wynik badania</button>
+            </Link>
+          )}
+          <Link to="documentation/report">
+            <button>Wygeneruj raport</button>
           </Link>
-        )}
+        </div>
         <form className="filterForm" onSubmit={this.filterResults}>
           <label>
             Filtruj po tagu:{" "}
@@ -106,7 +108,7 @@ class Documentation extends Component {
           </label>
           <input type="submit" value="Filtruj" />
         </form>
-        <div className="documents content" style={{height: height}}>
+        <div className="documents content" style={{ height: "41vh" }}>
           <ul>
             {this.state.documents.map((document, i) => {
               return (

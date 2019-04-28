@@ -5,7 +5,7 @@ import MedicalProcess from "../MedicalProcess";
 import Documentation from "../Documentation";
 import NewDocument from "./NewDocument";
 import Document from "../Document";
-
+import Report from "../Report";
 import SideBar from "../SideBar";
 import "../../css/PatientDoctorPage.css";
 import NewRecommendation from "./NewRecommendation";
@@ -29,8 +29,11 @@ class DoctorPage extends Component {
 
     fetch("https://medical-documentation.herokuapp.com/new-task", {
       method: "post",
-      mode: 'cors',
-      headers: { "Content-Type": "application/json", 'Access-Control-Allow-Origin':'*' },
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
       body: JSON.stringify({
         title: e.target.title.value,
         date: e.target.date.value.split("T").join(" "),
@@ -84,6 +87,21 @@ class DoctorPage extends Component {
     e.target.title.value = "";
   };
 
+  editTask = async id => {
+    await fetch("https://medical-documentation.herokuapp.com/edit-task", {
+      method: "put",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: document.querySelector("#title").value,
+        details: document.querySelector("#details").value,
+        date: document.querySelector("#date").value,
+        id: id
+      })
+    })
+      .then(result => result.json())
+      .then(data => this.setState({ tasks: data }));
+  };
+
   toggleComplete = e => {
     const id = e.target.id;
     let isCompleted = "";
@@ -96,12 +114,14 @@ class DoctorPage extends Component {
         return task;
       })
     });
-    //add to db
+    //dodanie do bazy
     fetch("https://medical-documentation.herokuapp.com/complete-task", {
       method: "put",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: id, completed: isCompleted })
-    });
+    })
+      .then(response => response.json())
+      .then(data => this.setState({ tasks: data }));
   };
 
   searchPatient = async e => {
@@ -127,7 +147,6 @@ class DoctorPage extends Component {
       await fetch("https://medical-documentation.herokuapp.com/medical-process")
         .then(result => result.json())
         .then(data => {
-          console.log(data);
           this.setState({ tasks: data });
         });
     } else {
@@ -145,13 +164,15 @@ class DoctorPage extends Component {
     return (
       <div>
         <form className="ID-form" onSubmit={this.searchPatient}>
-        <label>Testowe ID pacjentów: 11111 i 12345
-          <input
-            type="text"
-            placeholder="Wpisz ID pacjenta"
-            name="patientID"
-            pattern="[0-9]{5}"
-          /></label>
+          <label>
+            Testowe ID pacjentów: 11111 i 12345
+            <input
+              type="text"
+              placeholder="Wpisz ID pacjenta"
+              name="patientID"
+              pattern="[0-9]{5}"
+            />
+          </label>
           <input
             type="submit"
             value={this.state.patientID ? "Zmień pacienta" : "Znajdź pacjenta"}
@@ -187,7 +208,6 @@ class DoctorPage extends Component {
                     <NewAttachment {...props} documentType="prescription" />
                   )}
                 />
-
                 <Route
                   exact
                   path="/recommendations/create-new/generate-sickleave"
@@ -195,7 +215,6 @@ class DoctorPage extends Component {
                     <NewAttachment {...props} documentType="sickleave" />
                   )}
                 />
-
                 <Route
                   exact
                   path="/recommendations/create-new/generate-referral"
@@ -203,7 +222,6 @@ class DoctorPage extends Component {
                     <NewAttachment {...props} documentType="referral" />
                   )}
                 />
-
                 <Route
                   exact
                   path="/recommendations/create-new/generate-lab-order"
@@ -221,13 +239,13 @@ class DoctorPage extends Component {
                   path="/recommendations/create-new"
                   component={NewRecommendation}
                 />
-
                 <Route
                   exact
                   path="/documentation/create-new"
                   component={NewDocument}
                 />
-
+                <Route exact path="/documentation/report" component={Report} />}
+                />
                 <Route
                   path="/documentation"
                   render={props => (
@@ -237,7 +255,7 @@ class DoctorPage extends Component {
                 <Route
                   path="/recommendations"
                   render={props => (
-                    <Recommendations {...props} activeAccount="doctor"/>
+                    <Recommendations {...props} activeAccount="doctor" />
                   )}
                 />
                 <Route
@@ -249,10 +267,10 @@ class DoctorPage extends Component {
                       tasks={this.state.tasks}
                       addTask={this.addTask}
                       setCompleted={this.setCompleted}
+                      editTask={this.editTask}
                     />
                   )}
                 />
-
                 <Redirect from="/" to="/documentation" />
               </Switch>
             </HashRouter>

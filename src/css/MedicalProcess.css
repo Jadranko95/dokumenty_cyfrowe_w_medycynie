@@ -43,3 +43,15 @@
 .medical-process-container ul li {
   margin-bottom: 30px;
 }
+
+.medical-process-container ul li input {
+  margin: 0;
+}
+
+.medical-process-container ul li #title {
+  width: 300px;
+}
+
+.medical-process-container ul li #details {
+  width: 500px;
+}

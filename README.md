@@ -4,7 +4,7 @@ Projekt z Dokumentów Cyfrowych w Medycynie
 
 ## Front-End
 
-##### Link do strony
+#### Link do strony
 
 https://mickanie.github.io/dokumenty_cyfrowe_w_medycynie/
 
@@ -30,12 +30,14 @@ Podczas rejestracji hasło: 8-12 cyfr, ma zawierać duże i małe litery, cyfry 
 ##### Work in progress
 
 Do zrobienia
-
-- edycja zadań i danych pacjenta
+- ~~sortowanie dokumentów chronologicznie~~
+- ~~wyróżnienie zaleceń zalogowanego lekarza~~
+- ~~edycja zadań i danych pacjenta~~
 - responsywność
-- raporty HTML 
+- raporty HTML - do rozwinięcia?
 
 Baza danych
 - dodawanie plików multimedialnych do bazy (IMG, PDF)
+- ~~słownik laboratoryjny (zakresy i jednostki)~~
 
 
