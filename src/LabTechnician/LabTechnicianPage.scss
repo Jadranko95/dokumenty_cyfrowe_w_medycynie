@@ -1,28 +1,41 @@
+@import "_config";
+
 .lab-container {
   text-align: center;
   width: 70%;
-  margin: 10px auto !important;
+  margin: 10px auto;
   height: 75vh;
   overflow: auto;
-  
+
+  @include mobile {
+    width: 100%;
+    margin: 0;
+  }
+
   form {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-   
+
     width: 60%;
     margin: 0 auto;
 
-   
-    .mainLabel {
-      
-      margin-right: 150px;
-      
+    @include mobile {
+      width: 100%;
+    }
 
-      input[type="text"], input[type="datetime-local"] {
+    .mainLabel {
+      margin-right: 150px;
+
+      @include mobile {
+        margin: 0;
+        width: 100%;
+      }
+
+      input[type="text"],
+      input[type="datetime-local"] {
         width: 150px;
         margin-top: 4px;
-       
       }
       select {
         width: 162px;
@@ -30,34 +43,63 @@
       }
     }
 
-    .inner-from {
-     
-      label {
-        
-        input[type="text"], select {
-          width: 150px;
-          margin-top: 4px;
-         
+    .result-display {
+
+      @include mobile {
+        width: 100%
+      }
+
+      .inner-form {
+      
+        @include mobile {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+        label {
+          input[type="text"],
+          select {
+            width: 150px;
+            margin-top: 4px;
+          }
         }
       }
-       
-      }
+
+    }
+
+
+  }
+}
+
+.table {
+  width: 90%;
+
+  margin: 0 auto;
+
+  table {
+    width: 70%;
+    text-align: left;
+    margin: auto;
+    border-collapse: collapse;
+    border: 2px solid black;
+
+    @include mobile {
+      width: 100%;
+    }
+
+    td,
+    th {
+      margin: 10px;
+      padding: 5px;
+      text-align: center;
     }
   }
 
-  .table {
-    width: 90%;
-
-    margin: 0 auto;
-
-    table {
-      width: 70%;
-      text-align: left;
-      margin: auto;
-
-      td {
-        margin: 10px;
-      }
+  @include mobile {
+    .mobile-out {
+      display: none;
     }
   }
+}
+
 

@@ -1,13 +1,29 @@
-.raport-content {
-  width: 60%;
+@import "_config";
+
+.report-content {
+  width: 70%;
   margin: auto;
   text-align: center;
 
-  table {
-    td {
-      padding: 10px;
+  @include mobile {
+    width: 95%;
+  }
 
-      width: 200px;
+
+
+  select {
+    margin-bottom: 0;
+  }
+
+  
+  table {
+    border-collapse: collapse;
+    border: 2px solid black;
+
+    td {
+      padding: 10px 7px;
+
+      width: 250px;
       text-align: center;
     }
   }

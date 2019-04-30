@@ -1,4 +1,10 @@
+@import "_config";
+
 .medical-process-container {
+  @include mobile {
+    margin-top: 15px !important;
+  }
+
   .set-done,
   .edit {
     border-radius: 50%;
@@ -14,6 +20,12 @@
   .content {
     overflow-y: auto;
     height: 50vh;
+
+    @include mobile {
+      padding: 15px;
+      overflow-y: visible;
+      height: auto;
+    }
   }
 
   form {
@@ -22,16 +34,33 @@
     justify-content: space-between;
     align-items: center;
     height: 70px;
+
+    @include mobile {
+      flex-direction: column;
+      height: 250px;
+      margin-top: 15px;
+      p {
+        display: none;
+      }
+    }
     input,
     select {
       margin: 20px 5px 10px 5px;
       flex: 2 1 250px;
+      @include mobile {
+        width: 80%;
+        margin-top: 5px;
+      }
     }
 
     textarea {
       margin: 30px 10px 0 10px;
       height: 50px;
       flex: 2 1 300px;
+      @include mobile {
+        width: 80%;
+        margin: 5px auto 10px auto;
+      }
     }
   }
 
@@ -42,9 +71,25 @@
     li {
       margin-bottom: 30px;
 
+      .task-header {
+        display: flex;
+      }
+
+      .task-info {
+        display: flex;
+        justify-content: space-between;
+        p {
+          margin: 5px 0;
+        }
+
+        @include mobile {
+          flex-direction: column;
+        }
+      }
       input {
         margin: 0;
       }
+
       #title {
         width: 300px;
       }

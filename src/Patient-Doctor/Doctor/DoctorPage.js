@@ -49,24 +49,6 @@ class DoctorPage extends Component {
     e.target.date.value = "";
   };
 
-  setCompleted = e => {
-    console.log(e.target.id);
-    const id = e.target.id;
-    this.setState({
-      tasks: this.state.tasks.map((task, i) => {
-        if (task._id === id) {
-          task.completed = true;
-        }
-        return task;
-      })
-    });
-
-    fetch("https://medical-documentation.herokuapp.com/complete-task", {
-      method: "put",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: id })
-    });
-  };
   //SIDE BAR
   addTaskFromSideBar = e => {
     e.preventDefault();
@@ -102,7 +84,26 @@ class DoctorPage extends Component {
       .then(data => this.setState({ tasks: data }));
   };
 
-  toggleComplete = e => {
+  setCompleted = e => {
+    //console.log(e.target.id);
+    const id = e.target.id;
+    this.setState({
+      tasks: this.state.tasks.map((task, i) => {
+        if (task._id === id) {
+          task.completed = true;
+        }
+        return task;
+      })
+    });
+
+    fetch("https://medical-documentation.herokuapp.com/complete-task", {
+      method: "put",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: id, completed: true })
+    });
+  };
+
+  toggleComplete = async e => {
     const id = e.target.id;
     let isCompleted = "";
     this.setState({
@@ -115,13 +116,13 @@ class DoctorPage extends Component {
       })
     });
     //dodanie do bazy
-    fetch("https://medical-documentation.herokuapp.com/complete-task", {
+    await fetch("https://medical-documentation.herokuapp.com/complete-task", {
       method: "put",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: id, completed: isCompleted })
-    })
-      .then(response => response.json())
-      .then(data => this.setState({ tasks: data }));
+    });
+    /* .then(response => response.json())
+      .then(data => this.setState({ tasks: data })); */
   };
 
   searchPatient = async e => {
@@ -164,15 +165,13 @@ class DoctorPage extends Component {
     return (
       <div>
         <form className="ID-form" onSubmit={this.searchPatient}>
-          <label>
-            Testowe ID pacjentów: 11111 i 12345
-            <input
-              type="text"
-              placeholder="Wpisz ID pacjenta"
-              name="patientID"
-              pattern="[0-9]{5}"
-            />
-          </label>
+          <input
+            type="text"
+            placeholder="Wpisz ID pacjenta"
+            name="patientID"
+            pattern="[0-9]{5}"
+          />
+
           <input
             type="submit"
             value={this.state.patientID ? "Zmień pacienta" : "Znajdź pacjenta"}

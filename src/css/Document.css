@@ -5,7 +5,34 @@
   text-align: center;
 }
 
+.document-container .result-info {
+  text-align: left;
+  width: 50%;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 470px) {
+  .document-container .result-info {
+    width: 90%;
+    margin-top: 50px;
+  }
+}
+
 .document-container table {
+  border-collapse: collapse;
+  border: 2px solid black;
   width: 50%;
   margin: 30px auto;
+}
+
+.document-container table td,
+.document-container table th {
+  text-align: center;
+  padding: 5px;
+}
+
+@media screen and (max-width: 470px) {
+  .document-container .mobile-out {
+    display: none;
+  }
 }

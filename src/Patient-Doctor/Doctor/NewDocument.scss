@@ -1,12 +1,27 @@
+@import "_config";
+
 .new-document {
   width: 60%;
   margin: 20px auto;
+
+  @include mobile {
+    margin-top: 50px;
+  }
+
+  @include mobile {
+    width: 90%;
+  }
 
   input {
     width: 300px;
     margin: 0 20px 10px 30px;
 
     float: right;
+
+    @include mobile {
+      margin: 10px 0;
+      width: 100%;
+    }
   }
   input[type="submit"] {
     width: 300px;
@@ -14,9 +29,15 @@
   }
 
   select {
-    margin: 0 20px 10px 30px;
-    margin-left: 160px;
+    margin: 10px 0;
+    margin-left: 110px;
     width: 310px;
+
+    @include mobile {
+      margin: 10px 0;
+      display: block;
+      width: 100%;
+    }
   }
 
   textarea {
@@ -25,6 +46,10 @@
     width: 310px;
     height: 100px;
     float: right;
+    @include mobile {
+      margin: 10px 0;
+      width: 100%;
+    }
   }
   .document-form {
     display: flex;

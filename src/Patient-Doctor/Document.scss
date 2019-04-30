@@ -1,12 +1,38 @@
+@import "_config";
+
 .document-container {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  text-align: center;
 
-    table {
-        width: 50%;
-        margin: 30px auto;
-        }
+  //LAB RESULT
+  .result-info {
+    text-align: left;
+    width: 50%;
+    margin: 0 auto;
+    @include mobile {
+      width: 90%;
+      margin-top: 50px;
+    }
+  }
 
+  table {
+    border-collapse: collapse;
+    border: 2px solid black;
+    width: 50%;
+    margin: 30px auto;
+
+    td,
+    th {
+      text-align: center;
+      padding: 5px;
+    }
+  }
+
+  .mobile-out {
+    @include mobile {
+      display: none;
+    }
+  }
 }

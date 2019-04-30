@@ -6,17 +6,17 @@ import LabTechnicianPage from "./LabTechnician/LabTechnicianPage";
 
 class Main extends Component {
   state = {
-    activeAccount: JSON.parse(localStorage.getItem("account"))
-      ? JSON.parse(localStorage.getItem("account"))
+    activeAccount: JSON.parse(sessionStorage.getItem("account"))
+      ? JSON.parse(sessionStorage.getItem("account"))
       : "",
-    isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")) || "false", 
+    isLoggedIn: JSON.parse(sessionStorage.getItem("isLoggedIn")) || "false", 
     activeUser:  []
   };
 
   componentDidUpdate() {
     //because setState is asynchronous
-    localStorage.setItem("isLoggedIn", JSON.stringify(this.state.isLoggedIn));
-    localStorage.setItem("account", JSON.stringify(this.state.activeAccount));
+    sessionStorage.setItem("isLoggedIn", JSON.stringify(this.state.isLoggedIn));
+    sessionStorage.setItem("account", JSON.stringify(this.state.activeAccount));
     
   }
 
@@ -53,24 +53,24 @@ class Main extends Component {
 
   logOut = async () => {
     this.setState({ activeAccount: "", isLoggedIn: "false" });
-    //await localStorage.setItem("isLoggedIn", false);
+    //await sessionStorage.setItem("isLoggedIn", false);
     this.props.history.push("/");
   };
 
   render() {
     let infoText;
-    if (localStorage.getItem("generatedLogin")) {
-      infoText = `Twój wygenerowany login: ${localStorage.getItem(
+    if (sessionStorage.getItem("generatedLogin")) {
+      infoText = `Twój wygenerowany login: ${sessionStorage.getItem(
         "generatedLogin"
       )}`;
-      localStorage.removeItem("generatedLogin");
+      sessionStorage.removeItem("generatedLogin");
     } else {
       infoText = <br />;
     }
     return (
       <div>
         {this.state.isLoggedIn === "false" ? (
-          <div className="container login-container">
+          <div className="login-container">
             <h2>Zaloguj się</h2>
             <p id="login-info">{infoText}</p>
             <form onSubmit={this.logIn}>
@@ -92,7 +92,8 @@ class Main extends Component {
             </Link>
           </div>
         ) : (
-          <div className="header">
+          <div>
+          <header>
             <div className="radio-buttons">
               <label>
                 <input
@@ -132,7 +133,10 @@ class Main extends Component {
             <button className="log-out" onClick={this.logOut}>
               Wyloguj się
             </button>
-
+          </header>
+        
+          
+        
             {this.state.activeAccount === "patient" ? (
               <PatientPage />
             ) : this.state.activeAccount === "doctor" ? (
@@ -140,8 +144,9 @@ class Main extends Component {
             ) : (
               <LabTechnicianPage />
             )}
-          </div>
-        )}
+            </div>
+
+            )}
       </div>
     );
   }

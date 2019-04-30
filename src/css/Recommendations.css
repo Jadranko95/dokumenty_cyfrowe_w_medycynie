@@ -3,13 +3,33 @@
   flex-direction: column;
 }
 
-.recommendations-container button {
-  margin-bottom: 10px;
+@media screen and (max-width: 470px) {
+  .recommendations-container {
+    margin-top: 15px;
+  }
 }
 
-.recommendations-container a {
+.recommendations-container .content {
+  overflow-y: auto;
+}
+
+@media screen and (max-width: 470px) {
+  .recommendations-container .content {
+    height: 100%;
+  }
+}
+
+.recommendations-container button {
+  display: block;
   margin: 10px auto;
   width: 200px;
+}
+
+@media screen and (max-width: 470px) {
+  .recommendations-container button {
+    margin: 20px auto;
+    width: 300px;
+  }
 }
 
 .recommendation {
@@ -21,4 +41,10 @@
   box-shadow: 2px 2px 2px #333;
   width: 60%;
   margin: 5px auto 20px auto;
+}
+
+@media screen and (max-width: 470px) {
+  .recommendation {
+    width: 90%;
+  }
 }

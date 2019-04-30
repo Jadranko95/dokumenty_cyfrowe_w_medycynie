@@ -1,18 +1,23 @@
 @import "_config";
 
-
 body {
   font-size: 0.9em;
 }
-.header {
-
+header {
   background: $second-color;
   height: $header-height;
   width: 100%;
   position: relative;
 
+  @include mobile {
+    height: 130px;
+  }
+
   .radio-buttons {
     padding: 25px;
+    @include mobile {
+      display: none;
+    }
   }
 
   .log-out {
@@ -20,7 +25,9 @@ body {
     top: 12px;
     right: 10px;
     margin: 15px;
- 
+    @include mobile {
+      right: 6%;
+    }
   }
 }
 
@@ -77,6 +84,25 @@ input[type="submit"] {
   text-align: center;
   height: 75vh;
   border-radius: 10px;
+  background: $container-color;
+  width: 60%;
+  border-radius: 10px 10px 10px 10px;
+  padding: 20px 50px;
+  box-shadow: 5px 5px 5px rgb(88, 88, 88);
+  position: relative;
+
+  @include mobile {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    margin: 0;
+    box-shadow: none;
+    padding: 5px;
+  }
+
+  @include mobile {
+    padding: 0;
+  }
 
   #login-info {
     margin: 5px 0 0 0;
@@ -87,6 +113,11 @@ input[type="submit"] {
     width: 30%;
     margin: 50px auto;
     margin-bottom: 10px;
+
+    @include mobile {
+      width: 100%;
+      margin: 0;
+    }
   }
   button {
     margin-top: 0;
@@ -96,6 +127,29 @@ input[type="submit"] {
   margin: 15px auto;
   height: 85vh;
   border-radius: 10px;
+  background: $container-color;
+  width: 60%;
+  border-radius: 10px 10px 10px 10px;
+  padding: 20px 50px;
+  box-shadow: 5px 5px 5px rgb(88, 88, 88);
+  position: relative;
+
+  .backButton {
+    @include mobile {
+      margin-top: 5px;
+      right: 6%;
+    }
+  }
+
+  @include mobile {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    margin: 0;
+    box-shadow: none;
+
+    padding: 50px 5px 5px 5px;
+  }
 
   p,
   h2 {
@@ -107,30 +161,71 @@ input[type="submit"] {
     width: 50%;
     margin: auto;
 
+    @include mobile {
+      width: 100%;
+    }
+
     span {
       padding: 7px;
       height: 40px;
-    }
-    input,
-    select {
-      float: right;
-      width: 200px;
-      margin-top: 0;
-    }
 
-    select {
-      width: 210px;
+      input[type="date"] {
+        margin-top: -2px;
+      }
+
+      input,
+      select {
+        float: right;
+        width: 200px;
+        margin-top: 0;
+
+        @include mobile {
+          margin-right: 10px;
+        }
+      }
+
+      select {
+        width: 210px;
+        @include mobile {
+          width: 200px;
+        }
+      }
     }
   }
-}
 
-.content {
-  overflow-y: auto;
-}
+  .content {
+    overflow-y: auto;
+  }
 
-.backButton {
-  position: absolute;
-  top: 2%;
-  left: 30px
+  .backButton {
+    position: absolute;
+    top: 2%;
+    left: 30px;
+  }
 }
+@include mobile {
+  * {
+    box-sizing: border-box;
+  }
+  .container {
+    width: 100vw;
+    min-height: 100vh;
+    height: 100%;
+    border-radius: 0;
+    margin: 15px 0 0 0;
+    box-shadow: none;
+    padding: 5px;
+  }
 
+  button,
+  input[type="submit"] {
+    width: 300px;
+    display: block;
+  }
+
+  .backButton {
+    width: 300px;
+    display: block;
+    margin: 10px auto;
+  }
+}

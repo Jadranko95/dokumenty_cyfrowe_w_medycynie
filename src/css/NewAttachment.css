@@ -5,11 +5,24 @@
   justify-content: center;
 }
 
+@media screen and (max-width: 470px) {
+  .attachment-form {
+    margin: 60px auto;
+  }
+}
+
 .attachment-form input[type="text"],
 .attachment-form input[type="date"] {
   float: right;
   margin: 0 0 30px 40px;
   width: 300px;
+}
+
+@media screen and (max-width: 470px) {
+  .attachment-form input[type="text"],
+  .attachment-form input[type="date"] {
+    margin: 10px 0;
+  }
 }
 
 .lab-order-form {
@@ -21,6 +34,18 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;
+}
+
+@media screen and (max-width: 470px) {
+  .lab-order-form .tests {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .lab-order-form {
+    margin-top: 40px;
+  }
 }
 
 h2 {

@@ -2,22 +2,40 @@ body {
   font-size: 0.9em;
 }
 
-.header {
+header {
   background: #929292;
   height: 90px;
   width: 100%;
   position: relative;
 }
 
-.header .radio-buttons {
+@media screen and (max-width: 470px) {
+  header {
+    height: 130px;
+  }
+}
+
+header .radio-buttons {
   padding: 25px;
 }
 
-.header .log-out {
+@media screen and (max-width: 470px) {
+  header .radio-buttons {
+    display: none;
+  }
+}
+
+header .log-out {
   position: absolute;
   top: 12px;
   right: 10px;
   margin: 15px;
+}
+
+@media screen and (max-width: 470px) {
+  header .log-out {
+    right: 6%;
+  }
 }
 
 ul {
@@ -73,6 +91,29 @@ input[type="submit"]:hover {
   text-align: center;
   height: 75vh;
   border-radius: 10px;
+  background: #e4dcc4;
+  width: 60%;
+  border-radius: 10px 10px 10px 10px;
+  padding: 20px 50px;
+  box-shadow: 5px 5px 5px #585858;
+  position: relative;
+}
+
+@media screen and (max-width: 470px) {
+  .login-container {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    margin: 0;
+    box-shadow: none;
+    padding: 5px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .login-container {
+    padding: 0;
+  }
 }
 
 .login-container #login-info {
@@ -87,6 +128,13 @@ input[type="submit"]:hover {
   margin-bottom: 10px;
 }
 
+@media screen and (max-width: 470px) {
+  .login-container form {
+    width: 100%;
+    margin: 0;
+  }
+}
+
 .login-container button {
   margin-top: 0;
 }
@@ -95,6 +143,30 @@ input[type="submit"]:hover {
   margin: 15px auto;
   height: 85vh;
   border-radius: 10px;
+  background: #e4dcc4;
+  width: 60%;
+  border-radius: 10px 10px 10px 10px;
+  padding: 20px 50px;
+  box-shadow: 5px 5px 5px #585858;
+  position: relative;
+}
+
+@media screen and (max-width: 470px) {
+  .register-container .backButton {
+    margin-top: 5px;
+    right: 6%;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .register-container {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    margin: 0;
+    box-shadow: none;
+    padding: 50px 5px 5px 5px;
+  }
 }
 
 .register-container p,
@@ -108,28 +180,76 @@ input[type="submit"]:hover {
   margin: auto;
 }
 
+@media screen and (max-width: 470px) {
+  .register-container form {
+    width: 100%;
+  }
+}
+
 .register-container form span {
   padding: 7px;
   height: 40px;
 }
 
-.register-container form input,
-.register-container form select {
+.register-container form span input[type="date"] {
+  margin-top: -2px;
+}
+
+.register-container form span input,
+.register-container form span select {
   float: right;
   width: 200px;
   margin-top: 0;
 }
 
-.register-container form select {
+@media screen and (max-width: 470px) {
+  .register-container form span input,
+  .register-container form span select {
+    margin-right: 10px;
+  }
+}
+
+.register-container form span select {
   width: 210px;
 }
 
-.content {
+@media screen and (max-width: 470px) {
+  .register-container form span select {
+    width: 200px;
+  }
+}
+
+.register-container .content {
   overflow-y: auto;
 }
 
-.backButton {
+.register-container .backButton {
   position: absolute;
   top: 2%;
   left: 30px;
+}
+
+@media screen and (max-width: 470px) {
+  * {
+    box-sizing: border-box;
+  }
+  .container {
+    width: 100vw;
+    min-height: 100vh;
+    height: 100%;
+    border-radius: 0;
+    margin: 15px 0 0 0;
+    box-shadow: none;
+    padding: 5px;
+  }
+  button,
+  input[type="submit"] {
+    width: 300px;
+    display: block;
+  }
+  .backButton {
+    width: 300px;
+    display: block;
+    margin: 10px auto;
+  }
 }

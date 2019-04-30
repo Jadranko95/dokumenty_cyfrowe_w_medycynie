@@ -1,14 +1,27 @@
+@import "_config";
+
 .attachment-form {
   width: 60%;
   margin: 40px auto;
   display: grid;
   justify-content: center;
 
+  @include mobile {
+    margin: 60px auto;
+  }
+
+  
+
   input[type="text"],
   input[type="date"] {
     float: right;
     margin: 0 0 30px 40px;
     width: 300px;
+
+    @include mobile {
+      //width: 80%;
+      margin: 10px 0;
+    }
   }
 }
 
@@ -19,6 +32,13 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-content: center;
+
+    @include mobile {
+      grid-template-columns: repeat(2, 1fr)
+    }
+  }
+  @include mobile {
+    margin-top: 40px;
   }
 }
 

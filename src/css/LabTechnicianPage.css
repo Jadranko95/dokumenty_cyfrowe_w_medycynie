@@ -1,9 +1,16 @@
 .lab-container {
   text-align: center;
   width: 70%;
-  margin: 10px auto !important;
+  margin: 10px auto;
   height: 75vh;
   overflow: auto;
+}
+
+@media screen and (max-width: 470px) {
+  .lab-container {
+    width: 100%;
+    margin: 0;
+  }
 }
 
 .lab-container form {
@@ -14,11 +21,25 @@
   margin: 0 auto;
 }
 
+@media screen and (max-width: 470px) {
+  .lab-container form {
+    width: 100%;
+  }
+}
+
 .lab-container form .mainLabel {
   margin-right: 150px;
 }
 
-.lab-container form .mainLabel input[type="text"], .lab-container form .mainLabel input[type="datetime-local"] {
+@media screen and (max-width: 470px) {
+  .lab-container form .mainLabel {
+    margin: 0;
+    width: 100%;
+  }
+}
+
+.lab-container form .mainLabel input[type="text"],
+.lab-container form .mainLabel input[type="datetime-local"] {
   width: 150px;
   margin-top: 4px;
 }
@@ -28,7 +49,22 @@
   margin-top: 4px;
 }
 
-.lab-container form .inner-from label input[type="text"], .lab-container form .inner-from label select {
+@media screen and (max-width: 470px) {
+  .lab-container form .result-display {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .lab-container form .result-display .inner-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.lab-container form .result-display .inner-form label input[type="text"],
+.lab-container form .result-display .inner-form label select {
   width: 150px;
   margin-top: 4px;
 }
@@ -42,8 +78,25 @@
   width: 70%;
   text-align: left;
   margin: auto;
+  border-collapse: collapse;
+  border: 2px solid black;
 }
 
-.table table td {
+@media screen and (max-width: 470px) {
+  .table table {
+    width: 100%;
+  }
+}
+
+.table table td,
+.table table th {
   margin: 10px;
+  padding: 5px;
+  text-align: center;
+}
+
+@media screen and (max-width: 470px) {
+  .table .mobile-out {
+    display: none;
+  }
 }

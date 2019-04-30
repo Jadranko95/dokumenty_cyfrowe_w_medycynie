@@ -1,40 +1,109 @@
+@import "_config";
+
 .documentation-container {
+  @include mobile {
+    margin-top: 15px;
+  }
   button {
-        margin: 30px 40px;
-        
-    } 
+    margin: 30px 40px;
 
-    .buttons {
-        display: flex;
-        justify-content: center;
+    @include mobile {
+      width: 300px;
+      display: block;
+      margin: 15px auto;
     }
-    .documents {
-        height: 41vh;
-        text-align: left;
-        overflow-y: auto;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+
+    @include mobile {
+      flex-direction: column;
     }
-    
-    .filterForm {
-        margin: 20px 0 0 20px;
+  }
+  .documents {
+    height: 41vh;
+    text-align: left;
+    overflow-y: auto;
+  }
+
+  .filterForm {
+    margin: 20px 0 0 20px;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    flex-wrap: nowrap;
+    height: 50px;
+    align-items: center;
+
+    @include mobile {
+      height: 170px;
+    }
+    label {
+      display: flex;
+
+      p {
         display: flex;
-        justify-content: flex-start;
-        width: 100%;
         flex-wrap: nowrap;
-    
-        input, select {
-            margin:  0 10px;
-            width: 120px;
-        }
-        
+        min-width: 100px;
+      }
     }
 
-    ul {
-
-        margin-top: 40px;
-        padding-left: 0;
-        li {
-            margin: 20px;
-        }
+    input,
+    select {
+      width: 120px;
+      margin-top: 0;
     }
 
+    #dateFiler {
+      span {
+        display: inline;
+      }
+    }
+
+    @include mobile {
+      flex-direction: column;
+      width: 90%;
+
+      label {
+        width: 100%;
+      }
+
+      #dateFilter {
+        display: grid;
+
+       
+
+        p {
+         
+          display: inline-block;
+          margin: 10px 0;
+
+          input {
+            width: 37%;
+          }
+        }
+      }
+      input,
+      select {
+        margin: 0 10px;
+        width: 120px;
+      }
+
+      input[type="submit"] {
+        width: 300px;
+        display: block;
+        margin: 10px auto;
+      }
+    }
+  }
+
+  ul {
+    margin-top: 40px;
+    padding-left: 0;
+    li {
+      margin: 20px;
+    }
+  }
 }

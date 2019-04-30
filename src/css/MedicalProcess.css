@@ -1,3 +1,9 @@
+@media screen and (max-width: 470px) {
+  .medical-process-container {
+    margin-top: 15px !important;
+  }
+}
+
 .medical-process-container .set-done,
 .medical-process-container .edit {
   border-radius: 50%;
@@ -15,6 +21,14 @@
   height: 50vh;
 }
 
+@media screen and (max-width: 470px) {
+  .medical-process-container .content {
+    padding: 15px;
+    overflow-y: visible;
+    height: auto;
+  }
+}
+
 .medical-process-container form {
   display: flex;
   width: 100%;
@@ -23,16 +37,42 @@
   height: 70px;
 }
 
+@media screen and (max-width: 470px) {
+  .medical-process-container form {
+    flex-direction: column;
+    height: 250px;
+    margin-top: 15px;
+  }
+  .medical-process-container form p {
+    display: none;
+  }
+}
+
 .medical-process-container form input,
 .medical-process-container form select {
   margin: 20px 5px 10px 5px;
   flex: 2 1 250px;
 }
 
+@media screen and (max-width: 470px) {
+  .medical-process-container form input,
+  .medical-process-container form select {
+    width: 80%;
+    margin-top: 5px;
+  }
+}
+
 .medical-process-container form textarea {
   margin: 30px 10px 0 10px;
   height: 50px;
   flex: 2 1 300px;
+}
+
+@media screen and (max-width: 470px) {
+  .medical-process-container form textarea {
+    width: 80%;
+    margin: 5px auto 10px auto;
+  }
 }
 
 .medical-process-container ul {
@@ -42,6 +82,25 @@
 
 .medical-process-container ul li {
   margin-bottom: 30px;
+}
+
+.medical-process-container ul li .task-header {
+  display: flex;
+}
+
+.medical-process-container ul li .task-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.medical-process-container ul li .task-info p {
+  margin: 5px 0;
+}
+
+@media screen and (max-width: 470px) {
+  .medical-process-container ul li .task-info {
+    flex-direction: column;
+  }
 }
 
 .medical-process-container ul li input {

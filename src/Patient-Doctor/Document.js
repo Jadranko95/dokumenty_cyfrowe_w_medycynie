@@ -1,37 +1,34 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../css/Document.css";
-import FileSaver from 'file-saver'
+import FileSaver from "file-saver";
 
 class Document extends Component {
   state = {
     documents: [],
-	patients: []
+    patients: []
   };
 
   async componentDidMount() {
     await fetch("https://medical-documentation.herokuapp.com/documentation")
       .then(result => result.json())
       .then(data => this.setState({ documents: data }));
-	await fetch("https://medical-documentation.herokuapp.com/patient")
+    await fetch("https://medical-documentation.herokuapp.com/patient")
       .then(result => result.json())
       .then(data => this.setState({ patients: data }));
   }
 
   render() {
-
     if (this.state.documents.length && this.state.patients) {
-
       let currentDocument;
       this.state.documents.forEach(document => {
-        
         if (document._id === this.props.match.params.documentId) {
           currentDocument = document;
         }
       });
-	  
-	  let currentPatient;
-	  currentPatient = this.state.patients;
+
+      let currentPatient;
+      currentPatient = this.state.patients;
       /*this.state.patients.forEach(document => {
 		  alert(document.patientID + " " + currentDocument.patientID);
         if (document.patientID === currentDocument.patientID) {
@@ -47,7 +44,7 @@ class Document extends Component {
           </Link>
           <p style={{ fontWeight: "700" }}>{currentDocument.title}</p>
           {!currentDocument.title.includes("Badanie krwi") && (
-            <div style={{ textAlign: "left", width: "30%", margin: "0 auto" }}>
+            <div className="result-info">
               <p>Data: {currentDocument.testDate}</p>
               <p>Lekarz zlecający: {currentDocument.orderingDoctor}</p>
               <p>Lekarz wykonujący: {currentDocument.performingDoctor}</p>
@@ -60,16 +57,16 @@ class Document extends Component {
           )}
           {currentDocument.title.includes("Badanie krwi") && (
             <div className="table">
-            <div style={{ textAlign: "left", width: "50%", margin: "0 auto" }}>
-            <p>Data pobrania: {currentDocument.testDate} </p>
-               <p>Data wydania: {currentDocument.issueDate}</p>
-              <p>Lekarz zlecający: {currentDocument.orderingDoctor}</p>
-              <p>Laborant: {currentDocument.labTechnician}</p>
-            </div>
-              <table>
+              <div className="result-info">
+                <p>Data pobrania: {currentDocument.testDate} </p>
+                <p>Data wydania: {currentDocument.issueDate}</p>
+                <p>Lekarz zlecający: {currentDocument.orderingDoctor}</p>
+                <p>Laborant: {currentDocument.labTechnician}</p>
+              </div>
+              <table border="1">
                 <thead>
                   <tr>
-                    <th>Lp</th>
+                    <th className="mobile-out">Lp.</th>
                     <th>Parametr</th>
                     <th>Wartość</th>
                     <th>Zakres</th>
@@ -80,7 +77,7 @@ class Document extends Component {
                   return (
                     <tbody key={i}>
                       <tr>
-                        <td>{i + 1}</td>
+                        <td className="mobile-out">{i + 1}</td>
                         <td>{currentDocument.results[i].name}</td>
                         <td>{currentDocument.results[i].value}</td>
                         <td>{currentDocument.results[i].range}</td>
@@ -93,20 +90,31 @@ class Document extends Component {
             </div>
           )}
 
-          <button onClick={() => this.handleClick(currentDocument, currentPatient)}>Zapisz do PDF</button>
-
+          <button
+            onClick={() => this.handleClick(currentDocument, currentPatient)}
+          >
+            Zapisz do PDF
+          </button>
         </div>
       );
     }
     return null;
   }
-  
+
   handleClick(currentDocument, currentPatient) {
-	//const FileSaver = require('file-saver');
-	const filePatient = new File([JSON.stringify(currentPatient)], 'patient.json', {type: "text/plain;charset=utf-8"});
-	FileSaver.saveAs(filePatient);
-	const fileResults = new File([JSON.stringify(currentDocument)], 'results.json', {type: "text/plain;charset=utf-8"});
-	FileSaver.saveAs(fileResults);
+    //const FileSaver = require('file-saver');
+    const filePatient = new File(
+      [JSON.stringify(currentPatient)],
+      "patient.json",
+      { type: "text/plain;charset=utf-8" }
+    );
+    FileSaver.saveAs(filePatient);
+    const fileResults = new File(
+      [JSON.stringify(currentDocument)],
+      "results.json",
+      { type: "text/plain;charset=utf-8" }
+    );
+    FileSaver.saveAs(fileResults);
   }
 }
 

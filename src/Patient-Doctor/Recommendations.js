@@ -36,6 +36,7 @@ class Recommendations extends Component {
     return dateA > dateB ? -1 : dateA < dateB ? 1 : 0;
   };
   render() {
+    //const height = this.props.activeAccount === "doctor" ? "50vh" : "65vh";
     return (
       <div className="container recommendations-container">
         {this.props.activeAccount === "doctor" && (
@@ -44,7 +45,7 @@ class Recommendations extends Component {
           </Link>
         )}
 
-        <div className="content">
+        <div className="content" /*style={{ height: height }}*/>
           {this.state.recommendations.map((recommendation, i) => {
             const color =
               recommendation.doctor === this.state.activeUser.name

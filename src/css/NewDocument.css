@@ -3,10 +3,29 @@
   margin: 20px auto;
 }
 
+@media screen and (max-width: 470px) {
+  .new-document {
+    margin-top: 50px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .new-document {
+    width: 90%;
+  }
+}
+
 .new-document input {
   width: 300px;
   margin: 0 20px 10px 30px;
   float: right;
+}
+
+@media screen and (max-width: 470px) {
+  .new-document input {
+    margin: 10px 0;
+    width: 100%;
+  }
 }
 
 .new-document input[type="submit"] {
@@ -15,9 +34,17 @@
 }
 
 .new-document select {
-  margin: 0 20px 10px 30px;
-  margin-left: 160px;
+  margin: 10px 0;
+  margin-left: 110px;
   width: 310px;
+}
+
+@media screen and (max-width: 470px) {
+  .new-document select {
+    margin: 10px 0;
+    display: block;
+    width: 100%;
+  }
 }
 
 .new-document textarea {
@@ -25,6 +52,13 @@
   width: 310px;
   height: 100px;
   float: right;
+}
+
+@media screen and (max-width: 470px) {
+  .new-document textarea {
+    margin: 10px 0;
+    width: 100%;
+  }
 }
 
 .new-document .document-form {

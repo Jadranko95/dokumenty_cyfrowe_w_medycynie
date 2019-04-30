@@ -54,7 +54,7 @@ class Raport extends Component {
           <button>Powrót</button>
         </Link>
         <h2>Raport z badań laboratoryjnych</h2>
-        <div className="raport-content">
+        <div className="report-content">
           <label>
             Wybierz parametr do porównania
             <select
@@ -74,23 +74,46 @@ class Raport extends Component {
           </label>
           {this.state.filteredResults.length > 0 && (
             <div>
-              <table>
+              <p className="mobile-info">
+                Zakres:{" "}
+                {
+                  this.state.parameters.find(
+                    item => item.name === this.state.chosenParameter
+                  ).range
+                }{" "}
+                {
+                  this.state.parameters.find(
+                    item => item.name === this.state.chosenParameter
+                  ).unit
+                }
+              </p>
+              <table border="1">
                 <thead>
                   <tr>
                     <th>Data</th>
                     <th>Wartość {this.state.chosenParameter}</th>
-                    <th>Zakres</th>
-                    <th>Jednostka</th>
+                    {/*<th>Zakres</th>
+                    <th>Jednostka</th>*/}
+                    <th>Lekarz zlecający</th>
+                    <th>Laborant</th>
                   </tr>
                 </thead>
                 <tbody>
                   {this.state.filteredResults.map((result, i) => {
                     return (
                       <tr key={i}>
-                        <td>{ result.testDate } </td>
-                        <td>{ result.results.find(item => item.name === this.state.chosenParameter).value }</td>
-                        <td>{ result.results.find(item => item.name === this.state.chosenParameter).range }</td>
-                        <td>{ result.results.find(item => item.name === this.state.chosenParameter).unit }</td>
+                        <td>{result.testDate} </td>
+                        <td>
+                          {
+                            result.results.find(
+                              item => item.name === this.state.chosenParameter
+                            ).value
+                          }
+                        </td>
+                        {/*<td>{ result.results.find(item => item.name === this.state.chosenParameter).range }</td>
+                        <td>{ result.results.find(item => item.name === this.state.chosenParameter).unit }</td>*/}
+                        <td>{result.orderingDoctor}</td>
+                        <td>{result.labTechnician}</td>
                       </tr>
                     );
                   })}

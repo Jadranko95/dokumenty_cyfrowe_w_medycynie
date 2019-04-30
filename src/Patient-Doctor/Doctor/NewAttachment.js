@@ -74,9 +74,9 @@ class NewAttachment extends Component {
      .then(result => result.json())
       .then(data => attachedDocument.id = data);
     console.log(attachedDocument.id);
-    let attachments = JSON.parse(localStorage.getItem("attachments")) || [];
+    let attachments = JSON.parse(sessionStorage.getItem("attachments")) || [];
     attachments.push(attachedDocument);
-    localStorage.setItem("attachments", JSON.stringify(attachments));
+    sessionStorage.setItem("attachments", JSON.stringify(attachments));
     this.props.history.push("/recommendations/create-new");
   };
 

@@ -1,10 +1,30 @@
+@media screen and (max-width: 470px) {
+  .documentation-container {
+    margin-top: 15px;
+  }
+}
+
 .documentation-container button {
   margin: 30px 40px;
+}
+
+@media screen and (max-width: 470px) {
+  .documentation-container button {
+    width: 300px;
+    display: block;
+    margin: 15px auto;
+  }
 }
 
 .documentation-container .buttons {
   display: flex;
   justify-content: center;
+}
+
+@media screen and (max-width: 470px) {
+  .documentation-container .buttons {
+    flex-direction: column;
+  }
 }
 
 .documentation-container .documents {
@@ -19,11 +39,64 @@
   justify-content: flex-start;
   width: 100%;
   flex-wrap: nowrap;
+  height: 50px;
+  align-items: center;
 }
 
-.documentation-container .filterForm input, .documentation-container .filterForm select {
-  margin: 0 10px;
+@media screen and (max-width: 470px) {
+  .documentation-container .filterForm {
+    height: 170px;
+  }
+}
+
+.documentation-container .filterForm label {
+  display: flex;
+}
+
+.documentation-container .filterForm label p {
+  display: flex;
+  flex-wrap: nowrap;
+  min-width: 100px;
+}
+
+.documentation-container .filterForm input,
+.documentation-container .filterForm select {
   width: 120px;
+  margin-top: 0;
+}
+
+.documentation-container .filterForm #dateFiler span {
+  display: inline;
+}
+
+@media screen and (max-width: 470px) {
+  .documentation-container .filterForm {
+    flex-direction: column;
+    width: 90%;
+  }
+  .documentation-container .filterForm label {
+    width: 100%;
+  }
+  .documentation-container .filterForm #dateFilter {
+    display: grid;
+  }
+  .documentation-container .filterForm #dateFilter p {
+    display: inline-block;
+    margin: 10px 0;
+  }
+  .documentation-container .filterForm #dateFilter p input {
+    width: 37%;
+  }
+  .documentation-container .filterForm input,
+  .documentation-container .filterForm select {
+    margin: 0 10px;
+    width: 120px;
+  }
+  .documentation-container .filterForm input[type="submit"] {
+    width: 300px;
+    display: block;
+    margin: 10px auto;
+  }
 }
 
 .documentation-container ul {

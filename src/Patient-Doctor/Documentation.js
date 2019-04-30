@@ -102,9 +102,15 @@ class Documentation extends Component {
               <option value="Angiografia">Angiografia / Koronarografia</option>
             </select>
           </label>
-          <label>
-            Filtruj po dacie: od <input type="date" name="fromDate" /> do{" "}
-            <input type="date" name="toDate" />
+          <label id="dateFilter">
+            <p>Filtruj po dacie: </p>
+
+            <p>
+              {" "}
+              od
+              <input type="date" name="fromDate" /> do
+              <input type="date" name="toDate" />
+            </p>
           </label>
           <input type="submit" value="Filtruj" />
         </form>

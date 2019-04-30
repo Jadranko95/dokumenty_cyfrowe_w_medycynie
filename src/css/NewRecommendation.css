@@ -22,6 +22,21 @@
   margin: 0;
 }
 
+.form-container .attachments-choice {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 470px) {
+  .form-container .attachments-choice {
+    flex-direction: column;
+  }
+  .form-container .attachments-choice .attachment-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .form-container form {
   display: grid;
   width: 50%;
@@ -29,14 +44,33 @@
   padding: 10px;
 }
 
+@media screen and (max-width: 470px) {
+  .form-container form {
+    margin-top: 40px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .form-container form {
+    width: 100%;
+  }
+}
+
 .form-container form label {
-  width: 400px;
+  width: 100%;
+  float: right;
 }
 
 .form-container form label input {
   float: right;
   margin: 0 0 15px 0;
   width: 300px;
+}
+
+@media screen and (max-width: 470px) {
+  .form-container form label input {
+    width: 80%;
+  }
 }
 
 .form-container form label textarea {
@@ -46,6 +80,24 @@
   height: 70px;
 }
 
+@media screen and (max-width: 470px) {
+  .form-container form label textarea {
+    width: 80%;
+  }
+}
+
 .form-container form input {
   margin-bottom: 10px;
+}
+
+.backButton {
+  position: absolute;
+  top: 2%;
+  left: 30px;
+}
+
+@media screen and (max-width: 470px) {
+  .backButton {
+    margin: 25px auto;
+  }
 }
