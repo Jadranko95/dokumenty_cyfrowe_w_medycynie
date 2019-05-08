@@ -71,6 +71,10 @@
     li {
       margin-bottom: 30px;
 
+      i {
+        font-size: 0.85em;
+      }
+
       .task-header {
         display: flex;
       }
@@ -87,7 +91,11 @@
         }
       }
       input {
-        margin: 0;
+        margin: 5px 0;
+
+        @include mobile {
+          width: 100%;
+        }
       }
 
       #title {
@@ -96,6 +104,10 @@
 
       #details {
         width: 500px;
+
+        @include mobile {
+          width: 100%;
+        }
       }
     }
   }

@@ -84,6 +84,10 @@
   margin-bottom: 30px;
 }
 
+.medical-process-container ul li i {
+  font-size: 0.85em;
+}
+
 .medical-process-container ul li .task-header {
   display: flex;
 }
@@ -104,7 +108,13 @@
 }
 
 .medical-process-container ul li input {
-  margin: 0;
+  margin: 5px 0;
+}
+
+@media screen and (max-width: 470px) {
+  .medical-process-container ul li input {
+    width: 100%;
+  }
 }
 
 .medical-process-container ul li #title {
@@ -113,4 +123,10 @@
 
 .medical-process-container ul li #details {
   width: 500px;
+}
+
+@media screen and (max-width: 470px) {
+  .medical-process-container ul li #details {
+    width: 100%;
+  }
 }

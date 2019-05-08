@@ -9,11 +9,11 @@ class MedicalProcess extends Component {
     editMode: []
   };
 
-  editMode = e => {
+  editMode = async e => {
     const id = e.target.id;
     if (!this.state.editMode.includes(id)) {
       const editMode = [...this.state.editMode, id];
-      this.setState({ editMode });
+      await this.setState({ editMode });
     } else {
       //dodanie do bazy
       this.props.editTask(id);
@@ -21,7 +21,7 @@ class MedicalProcess extends Component {
       let editMode = [...this.state.editMode];
       const index = editMode.indexOf(id);
       delete editMode[index];
-      this.setState({ editMode });
+      await this.setState({ editMode });
     }
   };
 
@@ -30,14 +30,14 @@ class MedicalProcess extends Component {
       <div className="container medical-process-container">
         {this.props.activeAccount === "doctor" && (
           <form onSubmit={this.props.addTask}>
-            <input type="text" placeholder="Tytuł" name="title" />
+            <input type="text" placeholder="Tytuł" name="title" required />
             <select name="completed">
               <option value="done">Wykonane</option>
               <option value="todo">Do zrobienia</option>
             </select>
             <p>Data:</p>
             <input type="datetime-local" name="date" placeholder="date" />
-            <textarea placeholder="Szczegóły" name="details" />
+            <textarea placeholder="Szczegóły" name="details" required />
             <input type="submit" value="Dodaj zadanie" />
           </form>
         )}
@@ -76,8 +76,9 @@ class MedicalProcess extends Component {
                         className="edit"
                         onClick={this.editMode}
                         id={task._id}
-                      >
-                        🖉
+                        style={{fontFamily: "Wingdings"}}>
+                      
+                        &#33;
                       </button>
                     </span>
 
@@ -135,8 +136,9 @@ class MedicalProcess extends Component {
                         className="edit"
                         onClick={this.editMode}
                         id={task._id}
-                      >
-                        🖉
+                        style={{fontFamily: "Wingdings"}}>
+                      
+                        &#33;
                       </button>
                     </span>
 

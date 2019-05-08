@@ -89,15 +89,3 @@
 .form-container form input {
   margin-bottom: 10px;
 }
-
-.backButton {
-  position: absolute;
-  top: 2%;
-  left: 30px;
-}
-
-@media screen and (max-width: 470px) {
-  .backButton {
-    margin: 25px auto;
-  }
-}

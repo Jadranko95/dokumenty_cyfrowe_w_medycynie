@@ -12,6 +12,7 @@ header {
 @media screen and (max-width: 470px) {
   header {
     height: 130px;
+    padding-top: 20px;
   }
 }
 
@@ -25,6 +26,19 @@ header .radio-buttons {
   }
 }
 
+header .login-info {
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 0;
+  padding: 35px 50px;
+}
+
+@media screen and (max-width: 470px) {
+  header .login-info {
+    display: none;
+  }
+}
+
 header .log-out {
   position: absolute;
   top: 12px;
@@ -34,7 +48,8 @@ header .log-out {
 
 @media screen and (max-width: 470px) {
   header .log-out {
-    right: 6%;
+    position: static;
+    margin: auto;
   }
 }
 
@@ -223,10 +238,19 @@ input[type="submit"]:hover {
   overflow-y: auto;
 }
 
-.register-container .backButton {
+.backButton {
   position: absolute;
   top: 2%;
   left: 30px;
+}
+
+@media screen and (max-width: 470px) {
+  .backButton {
+    position: static;
+    width: 300px;
+    display: block;
+    margin: 0 auto;
+  }
 }
 
 @media screen and (max-width: 470px) {
@@ -246,10 +270,5 @@ input[type="submit"]:hover {
   input[type="submit"] {
     width: 300px;
     display: block;
-  }
-  .backButton {
-    width: 300px;
-    display: block;
-    margin: 10px auto;
   }
 }

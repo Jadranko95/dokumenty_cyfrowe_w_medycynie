@@ -57,10 +57,11 @@ class NewRecommendation extends Component {
   render() {
     return (
       <div className="container form-container">
-        <h2>Nowe zalecenie</h2>
         <Link to="/recommendations" className="backButton">
           <button>Powrót</button>
         </Link>
+        <h2>Nowe zalecenie</h2>
+
         <form>
           <label>
             Data:
@@ -106,7 +107,7 @@ class NewRecommendation extends Component {
             })}
           </p>
         )}
-        <p className="attachments-choice">
+        <section className="attachments-choice">
           Wygeneruj załącznik:{" "}
           <div className="attachment-links">
             <Link to="/recommendations/create-new/generate-prescription">
@@ -122,7 +123,7 @@ class NewRecommendation extends Component {
               <button className="attachment-button">Zlecenie badania</button>
             </Link>
           </div>
-        </p>
+        </section>
         <button className="submit-button" onClick={this.submitRecommendation}>
           Dodaj zalecenie
         </button>

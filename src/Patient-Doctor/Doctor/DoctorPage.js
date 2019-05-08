@@ -135,15 +135,21 @@ class DoctorPage extends Component {
       e.preventDefault();
       patientID = e.target.patientID.value;
       await fetch(
+
+  
         "https://medical-documentation.herokuapp.com/get-patient-data",
         {
           method: "put",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ patientID })
         }
-      )
-        .then(response => response.json())
-        .then(data => this.setState({ patientID: data }));
+      ).then(result => {
+        if (result.status === 400) {
+          alert("Nie ma takiego pacjenta");
+        } else {
+          result.json().then(data => this.setState({ patientID: data }));
+        }
+      });
 
       await fetch("https://medical-documentation.herokuapp.com/medical-process")
         .then(result => result.json())
@@ -170,6 +176,7 @@ class DoctorPage extends Component {
             placeholder="Wpisz ID pacjenta"
             name="patientID"
             pattern="[0-9]{5}"
+            required
           />
 
           <input
@@ -193,7 +200,7 @@ class DoctorPage extends Component {
                   Dokumentacja
                 </NavLink>
                 <NavLink to="/recommendations" activeClassName="active">
-                  Zalecenia lekarskie
+                  Zalecenia
                 </NavLink>
                 <NavLink to="/medical-process" activeClassName="active">
                   Proces medyczny

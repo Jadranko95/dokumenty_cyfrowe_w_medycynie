@@ -38,16 +38,13 @@ class NewDocument extends Component {
   render() {
     return (
       <div className="container">
-        <h2 style={{ textAlign: "center" }}>Nowy dokument</h2>
-        <Link
-          to="/documentation"
-          className="backButton"
-         
-        >
+        <Link to="/documentation" className="backButton">
           <button>Powrót</button>
         </Link>
-        <div className="new-document">
         
+        <h2 style={{ textAlign: "center" }}>Nowy dokument</h2>
+
+        <div className="new-document">
           <label style={{ width: "70%", margin: "auto" }}>
             Typ dokumentu:
             <select

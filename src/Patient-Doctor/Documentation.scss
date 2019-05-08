@@ -17,6 +17,7 @@
   .buttons {
     display: flex;
     justify-content: center;
+    margin-top: 5px;
 
     @include mobile {
       flex-direction: column;
@@ -73,10 +74,7 @@
       #dateFilter {
         display: grid;
 
-       
-
         p {
-         
           display: inline-block;
           margin: 10px 0;
 

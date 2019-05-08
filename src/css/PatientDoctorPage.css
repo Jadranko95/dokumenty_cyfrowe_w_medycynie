@@ -19,7 +19,7 @@ nav a {
 
 @media screen and (max-width: 470px) {
   nav a {
-    padding: 20px 5px 20px 5px;
+    padding: 20px 3px 20px 3px;
   }
 }
 
@@ -36,12 +36,14 @@ nav a.active {
 
 @media screen and (max-width: 470px) {
   .ID-form {
-    top: 9%;
+    top: 60px;
     left: 0;
     width: 100%;
+    display: flex;
+    justify-content: center;
   }
   .ID-form input {
     width: 150px;
-    display: inline;
+    margin: 20px 10px;
   }
 }

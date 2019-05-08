@@ -15,7 +15,7 @@ nav {
     border-radius: 10px 10px 0 0;
     color: black;
     @include mobile {
-      padding: 20px 5px 20px 5px;
+      padding: 20px 3px 20px 3px;
     }
 
     &.active {
@@ -31,12 +31,15 @@ nav {
   left: 30%;
 
   @include mobile {
-    top: 9%;
+    top: 60px;
     left: 0;
     width: 100%;
+    display: flex;
+    justify-content: center;
     input {
       width: 150px;
-      display: inline;
+      margin: 20px 10px;
+     
     }
   }
 }

@@ -68,7 +68,7 @@ class PatientPage extends Component {
               Dokumentacja
             </NavLink>
             <NavLink to="/recommendations" activeClassName="active">
-              Zalecenia lekarskie
+              Zalecenia
             </NavLink>
             <NavLink to="/medical-process" activeClassName="active">
               Proces medyczny

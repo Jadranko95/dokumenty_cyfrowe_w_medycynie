@@ -4,6 +4,10 @@ import "../../css/NewAttachment.css";
 import { today, threeDaysAgo } from "../../DateParser";
 
 class NewAttachment extends Component {
+
+  state = {
+    startDate: ""
+  }
   submitAttachment = async e => {
     e.preventDefault();
 
@@ -18,8 +22,7 @@ class NewAttachment extends Component {
           payment: payment.value,
           issueDate: date.value,
           startDate: startDate.value,
-          type: "recepta",
-
+          type: "recepta"
         };
         break;
       case "sickleave":
@@ -30,8 +33,7 @@ class NewAttachment extends Component {
           placeOfWork: placeOfWork.value,
           startDate: startDate.value,
           endDate: endDate.value,
-          type: "zwolnienie",
-
+          type: "zwolnienie"
         };
         break;
 
@@ -44,8 +46,7 @@ class NewAttachment extends Component {
           examination: examination.value,
           diagnosis: diagnosis.value,
           aim: aim.value,
-          type: "skierowanie",
-
+          type: "skierowanie"
         };
         break;
       case "lab-order":
@@ -58,11 +59,10 @@ class NewAttachment extends Component {
         attachedDocument = {
           title: `Zlecenie badań laboratoryjnych ${date.value}`,
           labTests: labTests,
-          type: "zlecenie badań",
-
-          };
-         break;
-        default:
+          type: "zlecenie badań"
+        };
+        break;
+      default:
         return;
     }
 
@@ -71,8 +71,8 @@ class NewAttachment extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(attachedDocument)
     })
-     .then(result => result.json())
-      .then(data => attachedDocument.id = data);
+      .then(result => result.json())
+      .then(data => (attachedDocument.id = data));
     console.log(attachedDocument.id);
     let attachments = JSON.parse(sessionStorage.getItem("attachments")) || [];
     attachments.push(attachedDocument);
@@ -80,8 +80,13 @@ class NewAttachment extends Component {
     this.props.history.push("/recommendations/create-new");
   };
 
+  setStartDate = (e) => {
+    this.setState({startDate: e.target.value})
+  }
+
   render() {
     const documentType = this.props.documentType;
+
     return (
       <div className="container">
         <Link to="/recommendations/create-new" className="backButton">
@@ -145,10 +150,18 @@ class NewAttachment extends Component {
                   name="startDate"
                   min={threeDaysAgo}
                   required
+                  id="startDate"
+                  onChange={this.setStartDate}
                 />
               </label>
               <label>
-                do: <input type="date" name="endDate" required />
+                do:{" "}
+                <input
+                  type="date"
+                  name="endDate"
+                  required
+                  min={this.state.startDate}
+                />
               </label>
               <input type="submit" value="Dodaj" />
             </form>

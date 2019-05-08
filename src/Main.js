@@ -9,17 +9,16 @@ class Main extends Component {
     activeAccount: JSON.parse(sessionStorage.getItem("account"))
       ? JSON.parse(sessionStorage.getItem("account"))
       : "",
-    isLoggedIn: JSON.parse(sessionStorage.getItem("isLoggedIn")) || "false", 
-    activeUser:  []
+    isLoggedIn: JSON.parse(sessionStorage.getItem("isLoggedIn")) || "false",
+    activeUser: JSON.parse(sessionStorage.getItem("user")) || []
   };
 
   componentDidUpdate() {
     //because setState is asynchronous
     sessionStorage.setItem("isLoggedIn", JSON.stringify(this.state.isLoggedIn));
     sessionStorage.setItem("account", JSON.stringify(this.state.activeAccount));
-    
+    sessionStorage.setItem("user", JSON.stringify(this.state.activeUser));
   }
-
 
   changeAccount = e => {
     this.setState({ activeAccount: e.target.value });
@@ -93,8 +92,8 @@ class Main extends Component {
           </div>
         ) : (
           <div>
-          <header>
-            <div className="radio-buttons">
+            <header>
+              {/*<div className="radio-buttons">
               <label>
                 <input
                   type="radio"
@@ -128,15 +127,16 @@ class Main extends Component {
                 />{" "}
                 Laborant
               </label>
-            </div>
+        </div>*/}
+              <p className="login-info">
+                Zalogowano jako: {this.state.activeUser.name}
+              </p>
 
-            <button className="log-out" onClick={this.logOut}>
-              Wyloguj się
-            </button>
-          </header>
-        
-          
-        
+              <button className="log-out" onClick={this.logOut}>
+                Wyloguj się
+              </button>
+            </header>
+
             {this.state.activeAccount === "patient" ? (
               <PatientPage />
             ) : this.state.activeAccount === "doctor" ? (
@@ -144,9 +144,8 @@ class Main extends Component {
             ) : (
               <LabTechnicianPage />
             )}
-            </div>
-
-            )}
+          </div>
+        )}
       </div>
     );
   }

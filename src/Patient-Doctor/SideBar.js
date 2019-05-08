@@ -9,9 +9,13 @@ class SideBar extends Component {
   };
 
   async componentDidMount() {
-    await fetch("https://medical-documentation.herokuapp.com/patient")
-      .then(result => result.json())
-      .then(data => this.setState({ patient: data }));
+    await fetch("https://medical-documentation.herokuapp.com/patient").then(result => {
+      if (result.status === 400) {
+        alert("Nie ma takiego pacjenta");
+      } else {
+        result.json().then(data => this.setState({ patient: data }));
+      }
+    });
   }
 
   editData = async e => {
@@ -188,6 +192,7 @@ class SideBar extends Component {
                   type="text"
                   placeholder="Wpisz nowe zadanie"
                   name="title"
+                  required
                 />
                 <input type="submit" value="Dodaj" />
               </form>

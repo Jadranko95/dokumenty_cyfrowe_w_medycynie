@@ -2,12 +2,16 @@
 
 Projekt z Dokumentów Cyfrowych w Medycynie
 
-## Front-End
+### Testowe dane logowania:
+
+- konto lekarza: login D10000 hasło doktor,
+- konto laboranta: login L10000 hasło laborant,
+- konto pacjenta: login P12345 hasło 123,
+- konto pacjenta: login P11111 hasło abc)
 
 #### Link do strony
 
 https://mickanie.github.io/dokumenty_cyfrowe_w_medycynie/
-
 
 #### Link do repozytorium z plikami serwera (Node.js)
 
@@ -17,11 +21,7 @@ https://github.com/Mickanie/medical-documentation-API
 
 https://medical-documentation.herokuapp.com
 
-Aby się zalogować na jakieś konto, trzeba podać login składający się z litery i 5 cyfr - tymczasowy system, jak będzie baza danych to będzie z niej odczytywało typ konta
-
-P - pacjent, D - doktor, L - laborant
-
-(np. D10000 hasło doktor, L10000 hasło laborant, P12345 hasło 123, P11111 hasło abc)
+Loginy składają się z litery i 5 cyfr, P - pacjent, D - doktor, L - laborant
 
 W panelu Lekarza należy podać ciąg 5 znaków, żeby zobaczyć dane o Pacjencie. Utworzone i wypełnione konta Pacjentów: P11111 i P12345
 
@@ -30,14 +30,21 @@ Podczas rejestracji hasło: 8-12 cyfr, ma zawierać duże i małe litery, cyfry 
 ##### Work in progress
 
 Do zrobienia
-- ~~sortowanie dokumentów chronologicznie~~
-- ~~wyróżnienie zaleceń zalogowanego lekarza~~
-- ~~edycja zadań i danych pacjenta~~
-- responsywność
-- raporty HTML - do rozwinięcia?
+
+- [x] logowanie
+- [x] rejestracja z generacją loginu
+- [x] pobieranie informacji z bazy
+- [x] dodawanie nowych dokumentów i zadań do bazy
+- [x] filtrowanie dokumentów po typie i po dacie
+- [x] sortowanie dokumentów chronologicznie
+- [x] wyróżnienie zaleceń zalogowanego lekarza
+- [x] edycja zadań i danych pacjenta
+- [x] raporty HTM badań laboratoryjnych
+- [x] zagwarantowanie responsywności
+- [ ] zagwarantowanie bezpieczeństwa
+- [ ] połączenia między dokumentami (np. id zlecenia do wyników badań)
 
 Baza danych
-- dodawanie plików multimedialnych do bazy (IMG, PDF)
-- ~~słownik laboratoryjny (zakresy i jednostki)~~
 
-
+- [x] słownik laboratoryjny (zakresy i jednostki)
+- [ ] dodawanie plików multimedialnych do bazy (IMG, PDF)

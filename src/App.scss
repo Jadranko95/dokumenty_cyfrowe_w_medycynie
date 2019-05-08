@@ -11,10 +11,22 @@ header {
 
   @include mobile {
     height: 130px;
+    padding-top: 20px;
   }
 
   .radio-buttons {
     padding: 25px;
+    @include mobile {
+      display: none;
+    }
+  }
+
+  .login-info {
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 0;
+    padding: 35px 50px;
+
     @include mobile {
       display: none;
     }
@@ -26,7 +38,8 @@ header {
     right: 10px;
     margin: 15px;
     @include mobile {
-      right: 6%;
+      position: static;
+      margin: auto;
     }
   }
 }
@@ -196,11 +209,17 @@ input[type="submit"] {
   .content {
     overflow-y: auto;
   }
+}
+.backButton {
+  position: absolute;
+  top: 2%;
+  left: 30px;
 
-  .backButton {
-    position: absolute;
-    top: 2%;
-    left: 30px;
+  @include mobile {
+    position: static;
+    width: 300px;
+    display: block;
+    margin: 0 auto;
   }
 }
 @include mobile {
@@ -221,11 +240,5 @@ input[type="submit"] {
   input[type="submit"] {
     width: 300px;
     display: block;
-  }
-
-  .backButton {
-    width: 300px;
-    display: block;
-    margin: 10px auto;
   }
 }
