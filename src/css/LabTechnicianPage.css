@@ -50,6 +50,12 @@
 }
 
 @media screen and (max-width: 470px) {
+  .lab-container form .lab-orders {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 470px) {
   .lab-container form .result-display {
     width: 100%;
   }

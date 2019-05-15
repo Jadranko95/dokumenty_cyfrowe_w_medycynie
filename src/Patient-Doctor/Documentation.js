@@ -52,13 +52,13 @@ class Documentation extends Component {
         if (fromDate && toDate) {
           return (
             parseInt(
-              document.date
+              document.testDate
                 .split(" ")[0]
                 .split("-")
                 .join("")
             ) >= fromDate &&
             parseInt(
-              document.date
+              document.testDate
                 .split(" ")[0]
                 .split("-")
                 .join("")

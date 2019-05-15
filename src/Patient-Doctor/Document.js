@@ -46,6 +46,7 @@ class Document extends Component {
           {!currentDocument.title.includes("Badanie krwi") && (
             <div className="result-info">
               <p>Data: {currentDocument.testDate}</p>
+              <p>ID skierowania: {currentDocument.referralID}</p>
               <p>Lekarz zlecający: {currentDocument.orderingDoctor}</p>
               <p>Lekarz wykonujący: {currentDocument.performingDoctor}</p>
               <p>Lekarz opisujący: {currentDocument.describingDoctor}</p>

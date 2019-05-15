@@ -1,8 +1,40 @@
 @import "_config";
 
 .medical-process-container {
+  * {
+    box-sizing: border-box;
+  }
   @include mobile {
     margin-top: 15px !important;
+  }
+  .change-view {
+    margin: auto;
+    display: block;
+    width: 300px;
+
+    input[type="radio"] {
+      visibility: hidden;
+    }
+    label {
+      cursor: pointer;
+      padding: 7px 13px;
+      margin: 0;
+      background: rgb(185, 185, 185);
+
+      &.tasks-label {
+        border-radius: 15px 0 0 15px;
+        margin-right: -26px;
+      }
+      &.process-label {
+        border-radius: 0 15px 15px 0;
+        margin-left: -26px;
+      }
+    }
+    input[type="radio"]:checked + label {
+      background: $accent-color;
+      border: 1px solid #777;
+      //box-shadow: 1px 1px 1px #333;
+    }
   }
 
   .set-done,
@@ -17,9 +49,17 @@
     font-size: 14px;
   }
 
+  .edit {
+    background: url("../img/edit.png");
+    background-size: cover;
+    background-color: rgb(100, 100, 100);
+  }
+
   .content {
+    margin-top: 30px;
     overflow-y: auto;
-    height: 50vh;
+    height: 43vh;
+    padding-right: 10px;
 
     @include mobile {
       padding: 15px;
@@ -30,6 +70,7 @@
 
   form {
     display: flex;
+    flex-direction: column;
     width: 100%;
     justify-content: space-between;
     align-items: center;
@@ -37,29 +78,66 @@
 
     @include mobile {
       flex-direction: column;
-      height: 250px;
+      height: 300px;
       margin-top: 15px;
       p {
         display: none;
       }
     }
+
+    span {
+      height: 30px;
+      display: flex;
+      align-content: center;
+      margin: 5px;
+
+      @include mobile {
+        width: 90%;
+        flex-direction: column;
+        height: 160px;
+        align-content: center;
+        margin-top: 0px;
+      }
+    }
     input,
     select {
-      margin: 20px 5px 10px 5px;
-      flex: 2 1 250px;
+      margin: 0 5px 10px 5px;
+      width: 180px;
+      height: 30px;
       @include mobile {
-        width: 80%;
+        width: 100%;
         margin-top: 5px;
+      }
+
+      &.preceding-document {
+        width: 200px;
+      }
+    
+    }
+
+    input[type="datetime-local"] {
+      width: 190px;
+
+      @include mobile {
+        width: 100%;
+      }
+    }
+
+    .previous-task {
+      width: 250px;
+
+      @include mobile {
+        width: 100%;
       }
     }
 
     textarea {
-      margin: 30px 10px 0 10px;
-      height: 50px;
-      flex: 2 1 300px;
+      height: 30px;
+      width: 400px;
+
       @include mobile {
-        width: 80%;
-        margin: 5px auto 10px auto;
+        width: 100%;
+        margin: 5px;
       }
     }
   }
@@ -90,6 +168,13 @@
           flex-direction: column;
         }
       }
+
+      .previous-task-label {
+        select {
+          margin: 0 10px;
+        }
+      }
+
       input {
         margin: 5px 0;
 
@@ -100,6 +185,9 @@
 
       #title {
         width: 300px;
+        @include mobile {
+          width: 100%;
+        }
       }
 
       #details {
@@ -111,4 +199,264 @@
       }
     }
   }
+
+
+ 
+
+/*
+
+    .li {
+      position: relative;
+      &:before {
+        content: '';
+        border-left: 2px solid grey;
+        //height: 100%;
+        position: absolute;
+        top: 0px;
+        bottom: 28px;
+        left: 16px;
+        
+      }
+  
+      
+    }
+
+    .next-tasks {
+      margin-left: 50px;
+      position: relative;
+      
+      &:before {
+        content: "";
+       // border-left: 2px solid grey;
+        position: absolute;
+        bottom: 50%;
+        left: -35px;
+        top: 0;
+        //height: 150%;
+      }
+      &:last-child:before {
+        border-left: 2px solid transparent;
+       }
+
+     
+    }
+
+    .process-task ~ .next-tasks {
+      display: none;
+    }
+    .process-task.active ~ .next-tasks {
+      display: block;
+    }
+
+    .process-task {
+      &:before {
+        content: "";
+        border-bottom: 2px solid grey;
+       // border-left: 2px solid grey;
+        position: absolute;
+        left: -35px;
+        top: -10px;
+    
+        width: 30px;
+        height: 70%;
+        z-index: 1;
+      }
+      &:after {
+        font-family: "Font Awesome 5 Free";
+        content: "\f107";
+        font-weight: 700;
+        font-size: 1.5em;
+        position: absolute;
+        right: 30px;
+        bottom: 5px;
+        color: grey;
+
+        @include mobile {
+         
+          right: 15px;
+          top: 0;
+        }
+      }
+
+      &.active:after {
+        content: "\f106";
+      }
+
+      &:last-child:after {
+        content: ''
+      }
+
+     
+
+     
+     
+      margin: 10px 0;
+      border: 1px solid grey;
+      width: 70%;
+      padding: 5px 10px;
+      position: relative;
+      z-index: 2;
+      background: rgb(218, 203, 169);
+      cursor: pointer;
+      @include mobile {
+        width:90%;
+      }
+      p,
+      h4 {
+        margin: 5px;
+      }
+
+      .date-process-task {
+        position: absolute;
+        top: 2%;
+        right: 3%;
+        color: grey;
+
+        @include mobile {
+          position: static;
+        }
+      }
+    }*/
+
+
+
+  .process-view {
+    overflow-y: auto;
+    height: 55vh;
+    
+    border-left: 2px solid transparent;
+    @include mobile {
+      height: 100%;
+      margin: 10px;
+    }
+
+
+    .next-tasks {
+      margin-left: 50px;
+      position: relative;
+      
+    
+
+     
+    }
+
+    .process-task ~ .next-tasks {
+      display: none;
+    }
+    .process-task.active ~ .next-tasks {
+      display: block;
+    }
+
+    .process-task {
+     
+      &:after {
+        font-family: "Font Awesome 5 Free";
+        content: "\f107";
+        font-weight: 700;
+        font-size: 1.5em;
+        position: absolute;
+        right: 30px;
+        bottom: 5px;
+        color: grey;
+
+        @include mobile {
+         
+          right: 15px;
+          top: 0;
+        }
+      }
+
+      &.active:after {
+        content: "\f106";
+      }
+
+      &:last-child:after {
+        content: ''
+      }
+
+     
+
+     
+     
+      margin: 10px 0;
+      border: 1px solid grey;
+      width: 70%;
+      padding: 5px 10px;
+      position: relative;
+   
+      background: rgb(218, 203, 169);
+      cursor: pointer;
+      @include mobile {
+        width:90%;
+      }
+      p,
+      h4 {
+        margin: 5px;
+      }
+
+      .date-process-task {
+        position: absolute;
+        top: 2%;
+        right: 3%;
+        color: grey;
+
+        @include mobile {
+          position: static;
+        }
+      }
+    }
+
+        ul {
+      padding: 0;
+      margin: 0;
+      
+      list-style-type: none;
+      position: relative;
+  }
+  
+  li {
+      list-style-type: none;
+      border-left: 2px solid #000;
+      margin-bottom: 0;
+      padding-left: 27px;
+      margin-left: 30px;
+      @include mobile {
+        margin-left: 10px;
+        
+      }
+    
+    
+  }
+  
+  li div {
+      padding-left: 2em;
+      position: relative;
+      
+      
+  }
+  
+  li div::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: -30px;
+      bottom: 50%;
+      width: 2em;
+      border: 2px solid #000;
+      border-top: 0 none transparent;
+      border-right: 0 none transparent;
+
+      @include mobile {
+        top: -12%;
+      }
+     
+  }
+  
+  ul > li:last-child {
+      border-left: 2px solid transparent;
+  }
+  }
+
+  
+  
 }

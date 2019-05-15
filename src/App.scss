@@ -180,7 +180,7 @@ input[type="submit"] {
 
     span {
       padding: 7px;
-      height: 40px;
+      height: 35px;
 
       input[type="date"] {
         margin-top: -2px;
@@ -196,6 +196,8 @@ input[type="submit"] {
           margin-right: 10px;
         }
       }
+
+  
 
       select {
         width: 210px;
@@ -242,3 +244,29 @@ input[type="submit"] {
     display: block;
   }
 }
+
+input, select, textarea {
+  border: 0;
+  background: rgba(255,255,255,0.7);
+  //border-bottom: 2px solid black;
+  color: black;
+}
+
+input[type="text"]:invalid {
+  background: rgba(255,0,0,0.2);
+  
+  
+}
+
+input[type="text"]:placeholder-shown {
+  background: rgba(255,255,255,0.7);
+}
+
+input[type="file"] {
+  border: 0;
+}
+
+input[type="text"]:disabled, input:disabled, select:disabled {
+  background: rgba(0,0,0,0.2);
+}
+

@@ -30,9 +30,18 @@
   justify-content: center;
 }
 
+.lab-order-form input {
+  margin: 15px;
+}
+
+.lab-order-form .date-label {
+  width: 220px;
+  margin: 0 auto;
+}
+
 .lab-order-form .tests {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   justify-content: center;
 }
 

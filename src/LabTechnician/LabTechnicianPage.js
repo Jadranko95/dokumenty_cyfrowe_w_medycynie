@@ -6,13 +6,17 @@ class LabTechnicianPage extends Component {
   state = {
     resultType: "",
     results: [],
-    parameters: []
+    parameters: [],
+    labOrders: [],
+    patientID: "",
   };
 
   componentDidMount() {
     fetch("https://medical-documentation.herokuapp.com/lab-data")
       .then(result => result.json())
       .then(data => this.setState({ parameters: data }));
+
+    
   }
 
   chooseResultType = e => {
@@ -52,6 +56,7 @@ class LabTechnicianPage extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         labPatientID: e.target.patientID.value,
+        labOrder: e.target.labOrder.value,
         orderingDoctor: e.target.orderingDoctor.value,
         title,
         testDate: collectionDate.join(" "),
@@ -64,6 +69,52 @@ class LabTechnicianPage extends Component {
     window.location.reload();
   };
 
+  choosePatient = async e => {
+    let patientID = e.target.value;
+    if (patientID.match(/[0-9]{5}/)) {
+      
+
+      await fetch(
+        "https://medical-documentation.herokuapp.com/get-patient-data",
+        {
+          method: "put",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ patientID })
+        }
+      ).then(result => {
+        if (result.status === 400) {
+          alert("Nie ma takiego pacjenta");
+        } else {
+          result.json().then(data => this.setState({ patientID: data }));
+        }
+      });
+
+      await fetch("https://medical-documentation.herokuapp.com/attached-documents")
+      .then(result => result.json())
+      .then(data =>
+        this.setState({
+          labOrders: data.filter(document => document.type === "zlecenie badań")
+        })
+      );
+
+      
+    } else {
+      await fetch(
+        "https://medical-documentation.herokuapp.com/get-patient-data",
+        {
+          method: "put",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ patientID: "" })
+        }
+      );
+      this.setState({patientID: ""});
+      
+
+    }
+   
+
+  }
+
   render() {
     return (
       <div className="container lab-container">
@@ -71,19 +122,36 @@ class LabTechnicianPage extends Component {
         <form className="form" onSubmit={this.submitResult}>
           <label htmlFor="patientID" className="mainLabel">
             ID pacjenta{" "}
-            <input name="patientID" type="text" required pattern="[0-9]{5}" />
+            <input name="patientID" type="text" required pattern="[0-9]{5}" placeholder=" " onChange={this.choosePatient}/>
+          </label>
+
+          <label className="mainLabel">
+            Zlecenie:{" "}
+            <select className="lab-orders" name="labOrder" defaultValue="" disabled={!this.state.patientID}>
+              <option value="" disabled>
+                Wybierz zlecenie
+              </option>
+              {this.state.labOrders.map((labOrder, i) => {
+                return (
+                  <option key={i} value={labOrder._id}>
+                    {labOrder.title}
+                  </option>
+                );
+              })}
+            </select>
           </label>
           <label htmlFor="orderingDoctor" className="mainLabel">
             Lekarz zlecający{" "}
-            <input name="orderingDoctor" type="text" required />
+            <input name="orderingDoctor" type="text" required placeholder=" " disabled={!this.state.patientID}/>
           </label>
           <label htmlFor="collectionDate" className="mainLabel">
-            Data pobrania <input name="collectionDate" type="datetime-local" />
+            Data pobrania <input name="collectionDate" type="datetime-local"  disabled={!this.state.patientID} />
           </label>
 
           <label className="mainLabel">
             Typ badania
             <select
+             disabled={!this.state.patientID}
               name="result-type"
               onChange={this.chooseResultType}
               defaultValue="default"
@@ -194,6 +262,7 @@ class LabTechnicianPage extends Component {
               )}
             </div>
           )}
+   
         </form>
       </div>
     );

@@ -2,7 +2,7 @@
 
 .new-document {
   width: 60%;
-  margin: 20px auto;
+  margin: 0 auto;
 
   @include mobile {
     margin-top: 50px;
@@ -29,7 +29,7 @@
   }
 
   select {
-    margin: 10px 0;
+    margin: 0 0 10px 0;
     margin-left: 110px;
     width: 310px;
 
@@ -40,11 +40,17 @@
     }
   }
 
+  .referrals{
+    float: right;
+    margin: 2px 20px 10px 20px;
+    width: 315px;
+  }
+
   textarea {
     margin: 0 20px 20px 0;
 
     width: 310px;
-    height: 100px;
+    height: 80px;
     float: right;
     @include mobile {
       margin: 10px 0;

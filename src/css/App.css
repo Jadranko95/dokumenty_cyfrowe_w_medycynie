@@ -203,7 +203,7 @@ input[type="submit"]:hover {
 
 .register-container form span {
   padding: 7px;
-  height: 40px;
+  height: 35px;
 }
 
 .register-container form span input[type="date"] {
@@ -271,4 +271,26 @@ input[type="submit"]:hover {
     width: 300px;
     display: block;
   }
+}
+
+input, select, textarea {
+  border: 0;
+  background: rgba(255, 255, 255, 0.7);
+  color: black;
+}
+
+input[type="text"]:invalid {
+  background: rgba(255, 0, 0, 0.2);
+}
+
+input[type="text"]:placeholder-shown {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+input[type="file"] {
+  border: 0;
+}
+
+input[type="text"]:disabled, input:disabled, select:disabled {
+  background: rgba(0, 0, 0, 0.2);
 }

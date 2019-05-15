@@ -1,13 +1,27 @@
 # System wspierania szpitala w rejestracji dokumentów cyfrowych
 
-Projekt z Dokumentów Cyfrowych w Medycynie
+## Projekt z Dokumentów Cyfrowych w Medycynie
+Aplikacja internetowa w wersji desktop i mobile do przeglądania dokumentacji medycznej pacjentów, z możliwością edycji danych przez konto lekarza, dodawania dokumentów, zadań, zaleceń przez lekarza i wyników badań przez laboranta.
 
-### Testowe dane logowania:
+Technologie: React, Node.js, Express.js, Sass.
 
-- konto lekarza: login D10000 hasło doktor,
-- konto laboranta: login L10000 hasło laborant,
+Baza danych: MongoDB (Atlas)
+
+#### Testowe dane logowania:
+
+- konto lekarza: login D10000 / D10001 hasło doktor,
+- konto laboranta: login L10000 / L10001 hasło laborant,
 - konto pacjenta: login P12345 hasło 123,
-- konto pacjenta: login P11111 hasło abc)
+- konto pacjenta: login P11111 hasło abc.
+
+#### Testowe ID pacjentów do wybierania przez lekarza / laboranta
+
+W panelu Lekarza należy podać ciąg 5 znaków, żeby zobaczyć dane o Pacjencie. ID utworzonych kont pacjentów:
+
+- 11111
+- 12345
+
+Podobnie przy dodawaniu wyniku badań laboratoryjnych przez laboranta
 
 #### Link do strony
 
@@ -23,8 +37,6 @@ https://medical-documentation.herokuapp.com
 
 Loginy składają się z litery i 5 cyfr, P - pacjent, D - doktor, L - laborant
 
-W panelu Lekarza należy podać ciąg 5 znaków, żeby zobaczyć dane o Pacjencie. Utworzone i wypełnione konta Pacjentów: P11111 i P12345
-
 Podczas rejestracji hasło: 8-12 cyfr, ma zawierać duże i małe litery, cyfry i znaki specjalne.
 
 ##### Work in progress
@@ -33,16 +45,18 @@ Do zrobienia
 
 - [x] logowanie
 - [x] rejestracja z generacją loginu
-- [x] pobieranie informacji z bazy
+- [x] pobieranie danych z bazy
 - [x] dodawanie nowych dokumentów i zadań do bazy
 - [x] filtrowanie dokumentów po typie i po dacie
 - [x] sortowanie dokumentów chronologicznie
 - [x] wyróżnienie zaleceń zalogowanego lekarza
 - [x] edycja zadań i danych pacjenta
-- [x] raporty HTM badań laboratoryjnych
+- [x] raporty HTML badań laboratoryjnych
 - [x] zagwarantowanie responsywności
-- [ ] zagwarantowanie bezpieczeństwa
-- [ ] połączenia między dokumentami (np. id zlecenia do wyników badań)
+- [x] zagwarantowanie bezpieczeństwa
+- [x] połączenia między dokumentami (np. id zlecenia do wyników badań)
+- [x] połączenie zadań z poprzedzającymi i następującymi
+- [x] widok procesu medycznego
 
 Baza danych
 

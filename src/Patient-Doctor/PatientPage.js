@@ -17,7 +17,7 @@ class PatientPage extends Component {
   componentDidMount() {
     fetch("https://medical-documentation.herokuapp.com/medical-process")
       .then(result => result.json())
-      .then(data => this.setState({ tasks: data }));
+      .then(data => this.setState({ tasks: data.sort(this.compare)  }));
   }
 
   editTask = async id => {
@@ -32,7 +32,7 @@ class PatientPage extends Component {
       })
     })
       .then(result => result.json())
-      .then(data => this.setState({ tasks: data }));
+      .then(data => this.setState({ tasks: data.sort(this.compare)  }));
   };
 
   toggleComplete = e => {
@@ -54,7 +54,27 @@ class PatientPage extends Component {
       body: JSON.stringify({ id: id, completed: isCompleted })
     })
       .then(response => response.json())
-      .then(data => this.setState({ tasks: data }));
+      .then(data => this.setState({ tasks: data.sort(this.compare) }));
+  };
+
+  compare = (a, b) => {
+    const dateA =
+      parseInt(
+        a.date
+          .split(" ")[0]
+          .split("-")
+          .join("")
+      ) || 0;
+    const dateB =
+      parseInt(
+        b.date
+          .split(" ")[0]
+          .split("-")
+          .join("")
+      ) || 0;
+    console.log(dateA);
+    console.log(dateB);
+    return dateA > dateB ? -1 : dateA < dateB ? 1 : 0;
   };
 
   render() {

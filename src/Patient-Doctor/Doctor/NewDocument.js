@@ -4,8 +4,15 @@ import { Link } from "react-router-dom";
 import { today, threeDaysAgo } from "../../DateParser";
 class NewDocument extends Component {
   state = {
-    documentType: ""
+    documentType: "",
+    referrals: []
   };
+
+  componentDidMount() {
+    fetch("https://medical-documentation.herokuapp.com/attached-documents")
+      .then(result => result.json())
+      .then(data => this.setState({ referrals: data.filter(document=>document.type==="skierowanie") }));
+  }
 
   chooseDocumentType = e => {
     this.setState({ documentType: e.target.value });
@@ -25,7 +32,7 @@ class NewDocument extends Component {
         documentType: this.state.documentType,
         title,
         testDate: e.target.testDate.value.split("T").join(" "),
-
+        referralID: e.target.referral.value,
         orderingDoctor: e.target.orderingDoctor.value,
         performingDoctor: e.target.performingDoctor.value,
         content: e.target.content.value
@@ -41,7 +48,7 @@ class NewDocument extends Component {
         <Link to="/documentation" className="backButton">
           <button>Powrót</button>
         </Link>
-        
+
         <h2 style={{ textAlign: "center" }}>Nowy dokument</h2>
 
         <div className="new-document">
@@ -89,17 +96,31 @@ class NewDocument extends Component {
                   required
                 />
               </label>
+              <label>
+                {" "}
+                Skierowanie:{" "}
+                <select className="referrals" name="referral" defaultValue="">
+                  <option value="" disabled>Wybierz skierowanie</option>
+                  {this.state.referrals.map((referral, i) => {
+                      return (
+                        <option key={i} value={referral._id}>
+                          {referral.title}
+                        </option>
+                      );
+                    })}
+                </select>
+              </label>
 
               <label>
                 {" "}
                 Lekarz zlecający:{" "}
-                <input type="text" name="orderingDoctor" required />
+                <input type="text" name="orderingDoctor" required placeholder="Imię i nazwisko lekarza"/>
               </label>
 
               <label>
                 {" "}
                 Lekarz wykonujący:{" "}
-                <input type="text" name="performingDoctor" required />
+                <input type="text" name="performingDoctor" required placeholder="Imię i nazwisko lekarza" />
               </label>
               <label>
                 {" "}

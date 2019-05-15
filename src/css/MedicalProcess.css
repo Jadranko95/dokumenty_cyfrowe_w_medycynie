@@ -1,7 +1,160 @@
+.medical-process-container {
+  /*
+
+    .li {
+      position: relative;
+      &:before {
+        content: '';
+        border-left: 2px solid grey;
+        //height: 100%;
+        position: absolute;
+        top: 0px;
+        bottom: 28px;
+        left: 16px;
+        
+      }
+  
+      
+    }
+
+    .next-tasks {
+      margin-left: 50px;
+      position: relative;
+      
+      &:before {
+        content: "";
+       // border-left: 2px solid grey;
+        position: absolute;
+        bottom: 50%;
+        left: -35px;
+        top: 0;
+        //height: 150%;
+      }
+      &:last-child:before {
+        border-left: 2px solid transparent;
+       }
+
+     
+    }
+
+    .process-task ~ .next-tasks {
+      display: none;
+    }
+    .process-task.active ~ .next-tasks {
+      display: block;
+    }
+
+    .process-task {
+      &:before {
+        content: "";
+        border-bottom: 2px solid grey;
+       // border-left: 2px solid grey;
+        position: absolute;
+        left: -35px;
+        top: -10px;
+    
+        width: 30px;
+        height: 70%;
+        z-index: 1;
+      }
+      &:after {
+        font-family: "Font Awesome 5 Free";
+        content: "\f107";
+        font-weight: 700;
+        font-size: 1.5em;
+        position: absolute;
+        right: 30px;
+        bottom: 5px;
+        color: grey;
+
+        @include mobile {
+         
+          right: 15px;
+          top: 0;
+        }
+      }
+
+      &.active:after {
+        content: "\f106";
+      }
+
+      &:last-child:after {
+        content: ''
+      }
+
+     
+
+     
+     
+      margin: 10px 0;
+      border: 1px solid grey;
+      width: 70%;
+      padding: 5px 10px;
+      position: relative;
+      z-index: 2;
+      background: rgb(218, 203, 169);
+      cursor: pointer;
+      @include mobile {
+        width:90%;
+      }
+      p,
+      h4 {
+        margin: 5px;
+      }
+
+      .date-process-task {
+        position: absolute;
+        top: 2%;
+        right: 3%;
+        color: grey;
+
+        @include mobile {
+          position: static;
+        }
+      }
+    }*/
+}
+
+.medical-process-container * {
+  box-sizing: border-box;
+}
+
 @media screen and (max-width: 470px) {
   .medical-process-container {
     margin-top: 15px !important;
   }
+}
+
+.medical-process-container .change-view {
+  margin: auto;
+  display: block;
+  width: 300px;
+}
+
+.medical-process-container .change-view input[type="radio"] {
+  visibility: hidden;
+}
+
+.medical-process-container .change-view label {
+  cursor: pointer;
+  padding: 7px 13px;
+  margin: 0;
+  background: #b9b9b9;
+}
+
+.medical-process-container .change-view label.tasks-label {
+  border-radius: 15px 0 0 15px;
+  margin-right: -26px;
+}
+
+.medical-process-container .change-view label.process-label {
+  border-radius: 0 15px 15px 0;
+  margin-left: -26px;
+}
+
+.medical-process-container .change-view input[type="radio"]:checked + label {
+  background: #e4ab6a;
+  border: 1px solid #777;
 }
 
 .medical-process-container .set-done,
@@ -16,9 +169,17 @@
   font-size: 14px;
 }
 
+.medical-process-container .edit {
+  background: url("../img/edit.png");
+  background-size: cover;
+  background-color: #646464;
+}
+
 .medical-process-container .content {
+  margin-top: 30px;
   overflow-y: auto;
-  height: 50vh;
+  height: 43vh;
+  padding-right: 10px;
 }
 
 @media screen and (max-width: 470px) {
@@ -31,6 +192,7 @@
 
 .medical-process-container form {
   display: flex;
+  flex-direction: column;
   width: 100%;
   justify-content: space-between;
   align-items: center;
@@ -40,7 +202,7 @@
 @media screen and (max-width: 470px) {
   .medical-process-container form {
     flex-direction: column;
-    height: 250px;
+    height: 300px;
     margin-top: 15px;
   }
   .medical-process-container form p {
@@ -48,30 +210,72 @@
   }
 }
 
+.medical-process-container form span {
+  height: 30px;
+  display: flex;
+  align-content: center;
+  margin: 5px;
+}
+
+@media screen and (max-width: 470px) {
+  .medical-process-container form span {
+    width: 90%;
+    flex-direction: column;
+    height: 160px;
+    align-content: center;
+    margin-top: 0px;
+  }
+}
+
 .medical-process-container form input,
 .medical-process-container form select {
-  margin: 20px 5px 10px 5px;
-  flex: 2 1 250px;
+  margin: 0 5px 10px 5px;
+  width: 180px;
+  height: 30px;
 }
 
 @media screen and (max-width: 470px) {
   .medical-process-container form input,
   .medical-process-container form select {
-    width: 80%;
+    width: 100%;
     margin-top: 5px;
   }
 }
 
+.medical-process-container form input.preceding-document,
+.medical-process-container form select.preceding-document {
+  width: 200px;
+}
+
+.medical-process-container form input[type="datetime-local"] {
+  width: 190px;
+}
+
+@media screen and (max-width: 470px) {
+  .medical-process-container form input[type="datetime-local"] {
+    width: 100%;
+  }
+}
+
+.medical-process-container form .previous-task {
+  width: 250px;
+}
+
+@media screen and (max-width: 470px) {
+  .medical-process-container form .previous-task {
+    width: 100%;
+  }
+}
+
 .medical-process-container form textarea {
-  margin: 30px 10px 0 10px;
-  height: 50px;
-  flex: 2 1 300px;
+  height: 30px;
+  width: 400px;
 }
 
 @media screen and (max-width: 470px) {
   .medical-process-container form textarea {
-    width: 80%;
-    margin: 5px auto 10px auto;
+    width: 100%;
+    margin: 5px;
   }
 }
 
@@ -107,6 +311,10 @@
   }
 }
 
+.medical-process-container ul li .previous-task-label select {
+  margin: 0 10px;
+}
+
 .medical-process-container ul li input {
   margin: 5px 0;
 }
@@ -121,6 +329,12 @@
   width: 300px;
 }
 
+@media screen and (max-width: 470px) {
+  .medical-process-container ul li #title {
+    width: 100%;
+  }
+}
+
 .medical-process-container ul li #details {
   width: 500px;
 }
@@ -129,4 +343,138 @@
   .medical-process-container ul li #details {
     width: 100%;
   }
+}
+
+.medical-process-container .process-view {
+  overflow-y: auto;
+  height: 55vh;
+  border-left: 2px solid transparent;
+}
+
+@media screen and (max-width: 470px) {
+  .medical-process-container .process-view {
+    height: 100%;
+    margin: 10px;
+  }
+}
+
+.medical-process-container .process-view .next-tasks {
+  margin-left: 50px;
+  position: relative;
+}
+
+.medical-process-container .process-view .process-task ~ .next-tasks {
+  display: none;
+}
+
+.medical-process-container .process-view .process-task.active ~ .next-tasks {
+  display: block;
+}
+
+.medical-process-container .process-view .process-task {
+  margin: 10px 0;
+  border: 1px solid grey;
+  width: 70%;
+  padding: 5px 10px;
+  position: relative;
+  background: #dacba9;
+  cursor: pointer;
+}
+
+.medical-process-container .process-view .process-task:after {
+  font-family: "Font Awesome 5 Free";
+  content: "\f107";
+  font-weight: 700;
+  font-size: 1.5em;
+  position: absolute;
+  right: 30px;
+  bottom: 5px;
+  color: grey;
+}
+
+@media screen and (max-width: 470px) {
+  .medical-process-container .process-view .process-task:after {
+    right: 15px;
+    top: 0;
+  }
+}
+
+.medical-process-container .process-view .process-task.active:after {
+  content: "\f106";
+}
+
+.medical-process-container .process-view .process-task:last-child:after {
+  content: '';
+}
+
+@media screen and (max-width: 470px) {
+  .medical-process-container .process-view .process-task {
+    width: 90%;
+  }
+}
+
+.medical-process-container .process-view .process-task p,
+.medical-process-container .process-view .process-task h4 {
+  margin: 5px;
+}
+
+.medical-process-container .process-view .process-task .date-process-task {
+  position: absolute;
+  top: 2%;
+  right: 3%;
+  color: grey;
+}
+
+@media screen and (max-width: 470px) {
+  .medical-process-container .process-view .process-task .date-process-task {
+    position: static;
+  }
+}
+
+.medical-process-container .process-view ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  position: relative;
+}
+
+.medical-process-container .process-view li {
+  list-style-type: none;
+  border-left: 2px solid #000;
+  margin-bottom: 0;
+  padding-left: 27px;
+  margin-left: 30px;
+}
+
+@media screen and (max-width: 470px) {
+  .medical-process-container .process-view li {
+    margin-left: 10px;
+  }
+}
+
+.medical-process-container .process-view li div {
+  padding-left: 2em;
+  position: relative;
+}
+
+.medical-process-container .process-view li div::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: -30px;
+  bottom: 50%;
+  width: 2em;
+  border: 2px solid #000;
+  border-top: 0 none transparent;
+  border-right: 0 none transparent;
+}
+
+@media screen and (max-width: 470px) {
+  .medical-process-container .process-view li div::before {
+    top: -12%;
+  }
+}
+
+.medical-process-container .process-view ul > li:last-child {
+  border-left: 2px solid transparent;
 }

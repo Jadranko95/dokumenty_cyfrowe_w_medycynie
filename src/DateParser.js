@@ -27,24 +27,10 @@ const transformDate = date => {
   return `20${year}-${month}-${day}`;
 };
 
-/* const transformFromDB = date => {
-  if (date !== null) {
-    const dateTime = date.split("T");
-    const time = dateTime[1].slice(0, 5);
-    return `${dateTime[0]} ${time}`
-    
-  }
-
-}; */
-
-/* const sort = (a, b) => {
-  a.date = a.date.split('-').join('');
-  b.date = b.date.split('-').join('');
-  return a.date > b.date ? 1 : a.date < b.date ? -1 : 0;
-}
- */
 const today = transformDate(new Date());
 const threeDaysAgo = transformDate(new Date(Date.now() - 3 * 24 * 3600 * 1000));
+const dateWithTime = `${threeDaysAgo} 07:00`
+
 const now = transformDateTime(new Date());
 
-export { today, threeDaysAgo, now, transformDate, transformDateTime };
+export { today, threeDaysAgo, now, dateWithTime, transformDate, transformDateTime };
