@@ -91,32 +91,18 @@ class Document extends Component {
             </div>
           )}
 
-          <button
-            onClick={() => this.handleClick(currentDocument, currentPatient)}
-          >
-            Zapisz do PDF
-          </button>
+          <a target="_blank"
+             href={'https://medical-documentation.herokuapp.com/examination-pdf?id=' + this.props.match.params.documentId}>
+            <button>
+              Zapisz do PDF
+            </button>
+          </a>
         </div>
       );
     }
     return null;
   }
 
-  handleClick(currentDocument, currentPatient) {
-    //const FileSaver = require('file-saver');
-    const filePatient = new File(
-      [JSON.stringify(currentPatient)],
-      "patient.json",
-      { type: "text/plain;charset=utf-8" }
-    );
-    FileSaver.saveAs(filePatient);
-    const fileResults = new File(
-      [JSON.stringify(currentDocument)],
-      "results.json",
-      { type: "text/plain;charset=utf-8" }
-    );
-    FileSaver.saveAs(fileResults);
-  }
 }
 
 export default Document;

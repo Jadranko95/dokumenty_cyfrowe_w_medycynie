@@ -21,8 +21,8 @@ class Recommendations extends Component {
   }
 
   async componentDidUpdate(prevProps, prevState) {
-    console.log(prevProps.location.pathname);
-    console.log(this.props.location.pathname);
+    // console.log(prevProps.location.pathname);
+    //console.log(this.props.location.pathname);
     if (prevProps.location.pathname !== this.props.location.pathname) {
       console.log("CHANGE");
       await fetch("https://medical-documentation.herokuapp.com/recommendations")
@@ -47,10 +47,6 @@ class Recommendations extends Component {
         .join("")
     );
     return dateA > dateB ? -1 : dateA < dateB ? 1 : 0;
-  };
-
-  saveToPdf = e => {
-    const documentId = e.target.id;
   };
 
   render() {
@@ -86,14 +82,21 @@ class Recommendations extends Component {
                 <p className="attached-documents">
                   Załączone dokumenty:{" "}
                   {recommendation.attachedDocuments.map((attachment, i) => (
-                    <element
-                      className="attachment-button"
+                    <a
                       key={i}
-                      id={attachment.id}
-                      onClick={this.saveToPdf}
+                      target="_blank"
+                      style={{
+                        margin: "10px",
+                        textDecoration: "underline",
+                        color: "white"
+                      }}
+                      href={
+                        "https://medical-documentation.herokuapp.com/attachment-pdf?id=" +
+                        attachment.id
+                      }
                     >
                       {attachment.title}
-                    </element>
+                    </a>
                   ))}
                 </p>
               </div>

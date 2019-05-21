@@ -11,7 +11,11 @@ class NewDocument extends Component {
   componentDidMount() {
     fetch("https://medical-documentation.herokuapp.com/attached-documents")
       .then(result => result.json())
-      .then(data => this.setState({ referrals: data.filter(document=>document.type==="skierowanie") }));
+      .then(data =>
+        this.setState({
+          referrals: data.filter(document => document.type === "skierowanie")
+        })
+      );
   }
 
   chooseDocumentType = e => {
@@ -21,6 +25,7 @@ class NewDocument extends Component {
   createDocument = e => {
     //console.log(e.target);
     e.preventDefault();
+    console.log(e.target.files.value);
     const title = `${this.state.documentType}: ${
       e.target.region ? e.target.region.value : ""
     }  ${e.target.testDate.value.split("T")[0]}`;
@@ -36,7 +41,8 @@ class NewDocument extends Component {
         orderingDoctor: e.target.orderingDoctor.value,
         performingDoctor: e.target.performingDoctor.value,
         content: e.target.content.value
-      })
+      }),
+      files: e.target.files.value
     });
 
     this.props.history.push("/documentation");
@@ -52,7 +58,7 @@ class NewDocument extends Component {
         <h2 style={{ textAlign: "center" }}>Nowy dokument</h2>
 
         <div className="new-document">
-          <label >
+          <label>
             Typ dokumentu:
             <select
               name="documentType"
@@ -100,27 +106,39 @@ class NewDocument extends Component {
                 {" "}
                 Skierowanie:{" "}
                 <select className="referrals" name="referral" defaultValue="">
-                  <option value="" disabled>Wybierz skierowanie</option>
+                  <option value="" disabled>
+                    Wybierz skierowanie
+                  </option>
                   {this.state.referrals.map((referral, i) => {
-                      return (
-                        <option key={i} value={referral._id}>
-                          {referral.title}
-                        </option>
-                      );
-                    })}
+                    return (
+                      <option key={i} value={referral._id}>
+                        {referral.title}
+                      </option>
+                    );
+                  })}
                 </select>
               </label>
 
               <label>
                 {" "}
                 Lekarz zlecający:{" "}
-                <input type="text" name="orderingDoctor" required placeholder="Imię i nazwisko lekarza"/>
+                <input
+                  type="text"
+                  name="orderingDoctor"
+                  required
+                  placeholder="Imię i nazwisko lekarza"
+                />
               </label>
 
               <label>
                 {" "}
                 Lekarz wykonujący:{" "}
-                <input type="text" name="performingDoctor" required placeholder="Imię i nazwisko lekarza" />
+                <input
+                  type="text"
+                  name="performingDoctor"
+                  required
+                  placeholder="Imię i nazwisko lekarza"
+                />
               </label>
               <label>
                 {" "}
@@ -128,7 +146,8 @@ class NewDocument extends Component {
               </label>
               <label>
                 {" "}
-                Załączniki: <input type="file" multiple="multiple" />
+                Załączniki:{" "}
+                <input type="file" multiple="multiple" name="files" />
               </label>
 
               <input type="submit" value="Dodaj dokument" />

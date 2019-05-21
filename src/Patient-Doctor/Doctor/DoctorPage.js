@@ -14,13 +14,20 @@ import NewAttachment from "./NewAttachment";
 class DoctorPage extends Component {
   state = {
     patientID: "",
-    tasks: []
+    tasks: [],
+    patients: []
   };
 
   async componentDidMount() {
     await fetch("https://medical-documentation.herokuapp.com/medical-process")
       .then(result => result.json())
       .then(data => this.setState({ tasks: data.sort(this.compare) }));
+    await fetch("https://medical-documentation.herokuapp.com/patients")
+      .then(result => result.json())
+      .then(data => {
+        console.log(data);
+        this.setState({ patients: data.map(patient => patient.id) });
+      });
   }
   //MEDICAL PROCESS
   addTask = async e => {
@@ -138,14 +145,12 @@ class DoctorPage extends Component {
 
   searchPatient = async e => {
     e.preventDefault();
-    /* e.target.patientID.setCustomValidity(
-      "Wprowadź poprawne 5-cyfrowe ID pacjenta"
-    ); */
+
+    //console.log(e.target.patientID.value);
     let patientID;
     if (!this.state.patientID) {
       e.preventDefault();
       patientID = e.target.patientID.value;
-      e.target.patientID.required = false;
 
       await fetch(
         "https://medical-documentation.herokuapp.com/get-patient-data",
@@ -158,7 +163,7 @@ class DoctorPage extends Component {
         if (result.status === 400) {
           alert("Nie ma takiego pacjenta");
         } else {
-          result.json().then(data => this.setState({ patientID: data }));
+          this.setState({ patientID });
         }
       });
 
@@ -169,13 +174,13 @@ class DoctorPage extends Component {
         });
     } else {
       this.setState({ patientID: "" });
-      e.target.patientID.value = "";
+
       fetch("https://medical-documentation.herokuapp.com/get-patient-data", {
         method: "put",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ patientID: "" })
       });
-      e.target.patientID.required = true;
+      //e.target.patientID.required = true;
     }
   };
 
@@ -199,17 +204,26 @@ class DoctorPage extends Component {
   };
 
   render() {
+    let patientID = this.state.patientID;
     return (
       <div>
         <form className="ID-form" onSubmit={this.searchPatient}>
-          <input
-            type="text"
-            placeholder="Wpisz ID pacjenta"
-            name="patientID"
-            pattern="[0-9]{5}"
-            disabled={this.state.patientID}
-            required
-          />
+          {patientID ? (
+            <p className="id-info">{patientID}</p>
+          ) : (
+            <select name="patientID" defaultValue="">
+              <option value="" disabled>
+                Wybierz pacjenta
+              </option>
+              {this.state.patients.map((patient, i) => {
+                return (
+                  <option key={i} value={patient}>
+                    {patient}
+                  </option>
+                );
+              })}
+            </select>
+          )}
 
           <input
             type="submit"
