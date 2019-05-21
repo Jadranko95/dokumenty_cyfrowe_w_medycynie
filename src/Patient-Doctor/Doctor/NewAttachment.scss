@@ -10,8 +10,6 @@
     margin: 60px auto;
   }
 
-  
-
   input[type="text"],
   input[type="date"] {
     float: right;
@@ -31,7 +29,6 @@
 
   input {
     margin: 15px;
-
   }
 
   .date-label {
@@ -42,10 +39,9 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     justify-content: center;
-    
 
     @include mobile {
-      grid-template-columns: repeat(2, 1fr)
+      grid-template-columns: repeat(2, 1fr);
     }
   }
   @include mobile {

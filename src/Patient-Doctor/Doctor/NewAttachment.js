@@ -142,7 +142,7 @@ class NewAttachment extends Component {
                 />
               </label>
               <label>
-                Miejsce pracy: <input type="text" name="placeOfWork" required />
+                Miejsce pracy: <input type="text" name="placeOfWork" required placeholder=" "/>
               </label>
               <label>
                 od:{" "}

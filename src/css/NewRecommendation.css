@@ -27,7 +27,7 @@
   align-items: center;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .form-container .attachments-choice {
     flex-direction: column;
   }
@@ -44,13 +44,13 @@
   padding: 10px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .form-container form {
     margin-top: 40px;
   }
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .form-container form {
     width: 100%;
   }
@@ -67,7 +67,7 @@
   width: 300px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .form-container form label input {
     width: 80%;
   }
@@ -80,7 +80,7 @@
   height: 70px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .form-container form label textarea {
     width: 80%;
   }

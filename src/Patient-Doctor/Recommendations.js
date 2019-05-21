@@ -8,8 +8,8 @@ class Recommendations extends Component {
     activeUser: []
   };
   /*https://medical-documentation.herokuapp.com*/
-  componentWillMount() {
-    fetch("https://medical-documentation.herokuapp.com/recommendations")
+  async componentWillMount() {
+    await fetch("https://medical-documentation.herokuapp.com/recommendations")
       .then(result => result.json())
       .then(data =>
         this.setState({ recommendations: data.sort(this.compare) })
@@ -18,6 +18,19 @@ class Recommendations extends Component {
     fetch("https://medical-documentation.herokuapp.com/active-user")
       .then(result => result.json())
       .then(data => this.setState({ activeUser: data }));
+  }
+
+  async componentDidUpdate(prevProps, prevState) {
+    console.log(prevProps.location.pathname);
+    console.log(this.props.location.pathname);
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      console.log("CHANGE");
+      await fetch("https://medical-documentation.herokuapp.com/recommendations")
+        .then(result => result.json())
+        .then(data =>
+          this.setState({ recommendations: data.sort(this.compare) })
+        );
+    }
   }
 
   compare = (a, b) => {
@@ -35,7 +48,17 @@ class Recommendations extends Component {
     );
     return dateA > dateB ? -1 : dateA < dateB ? 1 : 0;
   };
+
+  saveToPdf = e => {
+    const documentId = e.target.id;
+  };
+
   render() {
+    fetch("https://medical-documentation.herokuapp.com/recommendations")
+      .then(result => result.json())
+      .then(data =>
+        this.setState({ recommendations: data.sort(this.compare) })
+      );
     //const height = this.props.activeAccount === "doctor" ? "50vh" : "65vh";
     return (
       <div className="container recommendations-container">
@@ -60,22 +83,17 @@ class Recommendations extends Component {
                 <p>Data: {recommendation.date} </p>
                 <p>Lekarz: {recommendation.doctor} </p>
                 <p>Treść: {recommendation.content}</p>
-                <p>
+                <p className="attached-documents">
                   Załączone dokumenty:{" "}
                   {recommendation.attachedDocuments.map((attachment, i) => (
-                    <Link
+                    <element
+                      className="attachment-button"
                       key={i}
-                      style={{
-                        margin: "10px",
-                        color: "white",
-                        textDecoration: "underline"
-                      }}
-                      to={`/recommendations/attached-document-:${
-                        attachment.id
-                      }`}
+                      id={attachment.id}
+                      onClick={this.saveToPdf}
                     >
                       {attachment.title}
-                    </Link>
+                    </element>
                   ))}
                 </p>
               </div>

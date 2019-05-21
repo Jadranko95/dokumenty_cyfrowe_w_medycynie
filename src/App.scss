@@ -197,8 +197,6 @@ input[type="submit"] {
         }
       }
 
-  
-
       select {
         width: 210px;
         @include mobile {
@@ -245,28 +243,29 @@ input[type="submit"] {
   }
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   border: 0;
-  background: rgba(255,255,255,0.7);
+  background: rgba(255, 255, 255, 0.7);
   //border-bottom: 2px solid black;
   color: black;
 }
 
 input[type="text"]:invalid {
-  background: rgba(255,0,0,0.2);
-  
-  
+  background: rgba(255, 0, 0, 0.2);
 }
 
 input[type="text"]:placeholder-shown {
-  background: rgba(255,255,255,0.7);
+  background: rgba(255, 255, 255, 0.7);
 }
 
 input[type="file"] {
   border: 0;
 }
 
-input[type="text"]:disabled, input:disabled, select:disabled {
-  background: rgba(0,0,0,0.2);
+input[type="text"]:disabled,
+input:disabled,
+select:disabled {
+  background: rgba(0, 0, 0, 0.2);
 }
-

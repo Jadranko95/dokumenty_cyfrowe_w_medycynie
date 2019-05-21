@@ -122,6 +122,7 @@ class Raport extends Component {
               <button>Zapisz do PDF</button>
             </div>
           )}
+          {(!this.state.filteredResults.length && this.state.chosenParameter) && <p> Brak danych</p>}
         </div>
       </div>
     );

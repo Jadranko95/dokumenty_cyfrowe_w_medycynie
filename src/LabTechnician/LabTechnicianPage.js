@@ -8,15 +8,13 @@ class LabTechnicianPage extends Component {
     results: [],
     parameters: [],
     labOrders: [],
-    patientID: "",
+    patientID: ""
   };
 
   componentDidMount() {
     fetch("https://medical-documentation.herokuapp.com/lab-data")
       .then(result => result.json())
       .then(data => this.setState({ parameters: data }));
-
-    
   }
 
   chooseResultType = e => {
@@ -72,8 +70,6 @@ class LabTechnicianPage extends Component {
   choosePatient = async e => {
     let patientID = e.target.value;
     if (patientID.match(/[0-9]{5}/)) {
-      
-
       await fetch(
         "https://medical-documentation.herokuapp.com/get-patient-data",
         {
@@ -89,15 +85,17 @@ class LabTechnicianPage extends Component {
         }
       });
 
-      await fetch("https://medical-documentation.herokuapp.com/attached-documents")
-      .then(result => result.json())
-      .then(data =>
-        this.setState({
-          labOrders: data.filter(document => document.type === "zlecenie badań")
-        })
-      );
-
-      
+      await fetch(
+        "https://medical-documentation.herokuapp.com/attached-documents"
+      )
+        .then(result => result.json())
+        .then(data =>
+          this.setState({
+            labOrders: data.filter(
+              document => document.type === "zlecenie badań"
+            )
+          })
+        );
     } else {
       await fetch(
         "https://medical-documentation.herokuapp.com/get-patient-data",
@@ -107,13 +105,9 @@ class LabTechnicianPage extends Component {
           body: JSON.stringify({ patientID: "" })
         }
       );
-      this.setState({patientID: ""});
-      
-
+      this.setState({ patientID: "" });
     }
-   
-
-  }
+  };
 
   render() {
     return (
@@ -122,12 +116,24 @@ class LabTechnicianPage extends Component {
         <form className="form" onSubmit={this.submitResult}>
           <label htmlFor="patientID" className="mainLabel">
             ID pacjenta{" "}
-            <input name="patientID" type="text" required pattern="[0-9]{5}" placeholder=" " onChange={this.choosePatient}/>
+            <input
+              name="patientID"
+              type="text"
+              required
+              pattern="[0-9]{5}"
+              placeholder=" "
+              onChange={this.choosePatient}
+            />
           </label>
 
           <label className="mainLabel">
             Zlecenie:{" "}
-            <select className="lab-orders" name="labOrder" defaultValue="" disabled={!this.state.patientID}>
+            <select
+              className="lab-orders"
+              name="labOrder"
+              defaultValue=""
+              disabled={!this.state.patientID}
+            >
               <option value="" disabled>
                 Wybierz zlecenie
               </option>
@@ -142,16 +148,27 @@ class LabTechnicianPage extends Component {
           </label>
           <label htmlFor="orderingDoctor" className="mainLabel">
             Lekarz zlecający{" "}
-            <input name="orderingDoctor" type="text" required placeholder=" " disabled={!this.state.patientID}/>
+            <input
+              name="orderingDoctor"
+              type="text"
+              required
+              placeholder=" "
+              disabled={!this.state.patientID}
+            />
           </label>
           <label htmlFor="collectionDate" className="mainLabel">
-            Data pobrania <input name="collectionDate" type="datetime-local"  disabled={!this.state.patientID} />
+            Data pobrania{" "}
+            <input
+              name="collectionDate"
+              type="datetime-local"
+              disabled={!this.state.patientID}
+            />
           </label>
 
           <label className="mainLabel">
             Typ badania
             <select
-             disabled={!this.state.patientID}
+              disabled={!this.state.patientID}
               name="result-type"
               onChange={this.chooseResultType}
               defaultValue="default"
@@ -222,7 +239,12 @@ class LabTechnicianPage extends Component {
                 </label>
                 <label>
                   Wartość
-                  <input type="text" name="result" id="result" />
+                  <input
+                    type="text"
+                    name="result"
+                    id="result"
+                    pattern="[0-9.,]{1,7}"
+                  />
                 </label>
                 <input
                   type="submit"
@@ -262,7 +284,6 @@ class LabTechnicianPage extends Component {
               )}
             </div>
           )}
-   
         </form>
       </div>
     );

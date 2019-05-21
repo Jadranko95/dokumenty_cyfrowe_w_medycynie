@@ -1,4 +1,4 @@
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .documentation-container {
     margin-top: 15px;
   }
@@ -8,7 +8,7 @@
   margin: 30px 40px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .documentation-container button {
     width: 300px;
     display: block;
@@ -22,7 +22,7 @@
   margin-top: 5px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .documentation-container .buttons {
     flex-direction: column;
   }
@@ -44,7 +44,7 @@
   align-items: center;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .documentation-container .filterForm {
     height: 170px;
   }
@@ -70,7 +70,7 @@
   display: inline;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .documentation-container .filterForm {
     flex-direction: column;
     width: 90%;

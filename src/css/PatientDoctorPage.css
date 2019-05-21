@@ -2,7 +2,7 @@ nav {
   margin: 40px 40px 0px 6%;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   nav {
     margin: 25px 0 0 0;
   }
@@ -17,7 +17,7 @@ nav a {
   color: black;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   nav a {
     padding: 20px 7px 20px 7px;
   }
@@ -34,7 +34,7 @@ nav a.active {
   left: 30%;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .ID-form {
     top: 60px;
     left: 0;

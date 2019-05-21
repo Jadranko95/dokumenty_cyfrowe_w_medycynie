@@ -4,7 +4,7 @@
   text-align: center;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .report-content {
     width: 95%;
   }

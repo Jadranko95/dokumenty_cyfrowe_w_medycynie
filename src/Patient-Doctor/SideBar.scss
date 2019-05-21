@@ -5,7 +5,7 @@
   top: $header-height;
   right: 0;
   width: 18%;
-  height: 100vh;
+  height: 85vh;
   background: rgb(201, 201, 201);
   padding: 15px 20px;
 
@@ -63,6 +63,8 @@
   ul {
     list-style: none;
     padding-left: 0;
+    height: 18vh;
+    overflow-y: auto;
 
     input {
       margin: 10px;
@@ -82,7 +84,7 @@
     width: 100%;
     td {
       width: 50%;
-      padding: 4px;
+      padding: 2.5px 4px;
 
       p {
         margin: 0;

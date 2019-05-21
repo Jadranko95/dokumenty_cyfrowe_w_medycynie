@@ -7,8 +7,8 @@ class Documentation extends Component {
     documents: []
   };
 
-  componentDidMount() {
-    fetch("https://medical-documentation.herokuapp.com/documentation")
+  async componentDidMount() {
+    await fetch("https://medical-documentation.herokuapp.com/documentation")
       .then(result => result.json())
       .then(data => this.setState({ documents: data.sort(this.compare) }));
   }
@@ -73,6 +73,9 @@ class Documentation extends Component {
   };
 
   render() {
+    fetch("https://medical-documentation.herokuapp.com/documentation")
+      .then(result => result.json())
+      .then(data => this.setState({ documents: data.sort(this.compare) }));
     //const height = this.props.activeAccount === "doctor" ? "41vh" : "55vh";
     return (
       <div className="container documentation-container">

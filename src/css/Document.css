@@ -11,7 +11,7 @@
   margin: 0 auto;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .document-container .result-info {
     width: 90%;
     margin-top: 50px;
@@ -31,7 +31,7 @@
   padding: 5px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .document-container .mobile-out {
     display: none;
   }

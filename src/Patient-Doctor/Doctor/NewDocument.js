@@ -52,7 +52,7 @@ class NewDocument extends Component {
         <h2 style={{ textAlign: "center" }}>Nowy dokument</h2>
 
         <div className="new-document">
-          <label style={{ width: "70%", margin: "auto" }}>
+          <label >
             Typ dokumentu:
             <select
               name="documentType"

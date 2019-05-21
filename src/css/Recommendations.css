@@ -3,7 +3,7 @@
   flex-direction: column;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .recommendations-container {
     margin-top: 15px;
   }
@@ -13,7 +13,7 @@
   overflow-y: auto;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .recommendations-container .content {
     height: 100%;
   }
@@ -25,11 +25,19 @@
   width: 200px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .recommendations-container button {
     margin: 20px auto;
     width: 300px;
   }
+}
+
+.recommendations-container .attached-documents .attachment-button {
+  margin: 10px;
+  color: white;
+  text-decoration: underline;
+  background: none;
+  display: inline-block;
 }
 
 .recommendation {
@@ -43,7 +51,7 @@
   margin: 5px auto 20px auto;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .recommendation {
     width: 90%;
   }

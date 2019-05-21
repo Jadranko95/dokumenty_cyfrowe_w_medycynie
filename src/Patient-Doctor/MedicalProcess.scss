@@ -112,7 +112,6 @@
       &.preceding-document {
         width: 200px;
       }
-    
     }
 
     input[type="datetime-local"] {
@@ -200,144 +199,19 @@
     }
   }
 
-
- 
-
-/*
-
-    .li {
-      position: relative;
-      &:before {
-        content: '';
-        border-left: 2px solid grey;
-        //height: 100%;
-        position: absolute;
-        top: 0px;
-        bottom: 28px;
-        left: 16px;
-        
-      }
-  
-      
-    }
-
-    .next-tasks {
-      margin-left: 50px;
-      position: relative;
-      
-      &:before {
-        content: "";
-       // border-left: 2px solid grey;
-        position: absolute;
-        bottom: 50%;
-        left: -35px;
-        top: 0;
-        //height: 150%;
-      }
-      &:last-child:before {
-        border-left: 2px solid transparent;
-       }
-
-     
-    }
-
-    .process-task ~ .next-tasks {
-      display: none;
-    }
-    .process-task.active ~ .next-tasks {
-      display: block;
-    }
-
-    .process-task {
-      &:before {
-        content: "";
-        border-bottom: 2px solid grey;
-       // border-left: 2px solid grey;
-        position: absolute;
-        left: -35px;
-        top: -10px;
-    
-        width: 30px;
-        height: 70%;
-        z-index: 1;
-      }
-      &:after {
-        font-family: "Font Awesome 5 Free";
-        content: "\f107";
-        font-weight: 700;
-        font-size: 1.5em;
-        position: absolute;
-        right: 30px;
-        bottom: 5px;
-        color: grey;
-
-        @include mobile {
-         
-          right: 15px;
-          top: 0;
-        }
-      }
-
-      &.active:after {
-        content: "\f106";
-      }
-
-      &:last-child:after {
-        content: ''
-      }
-
-     
-
-     
-     
-      margin: 10px 0;
-      border: 1px solid grey;
-      width: 70%;
-      padding: 5px 10px;
-      position: relative;
-      z-index: 2;
-      background: rgb(218, 203, 169);
-      cursor: pointer;
-      @include mobile {
-        width:90%;
-      }
-      p,
-      h4 {
-        margin: 5px;
-      }
-
-      .date-process-task {
-        position: absolute;
-        top: 2%;
-        right: 3%;
-        color: grey;
-
-        @include mobile {
-          position: static;
-        }
-      }
-    }*/
-
-
-
   .process-view {
     overflow-y: auto;
     height: 55vh;
-    
+
     border-left: 2px solid transparent;
     @include mobile {
       height: 100%;
       margin: 10px;
     }
 
-
     .next-tasks {
       margin-left: 50px;
       position: relative;
-      
-    
-
-     
     }
 
     .process-task ~ .next-tasks {
@@ -348,7 +222,6 @@
     }
 
     .process-task {
-     
       &:after {
         font-family: "Font Awesome 5 Free";
         content: "\f107";
@@ -360,7 +233,6 @@
         color: grey;
 
         @include mobile {
-         
           right: 15px;
           top: 0;
         }
@@ -371,23 +243,19 @@
       }
 
       &:last-child:after {
-        content: ''
+        content: "";
       }
 
-     
-
-     
-     
       margin: 10px 0;
       border: 1px solid grey;
       width: 70%;
       padding: 5px 10px;
       position: relative;
-   
+
       background: rgb(218, 203, 169);
       cursor: pointer;
       @include mobile {
-        width:90%;
+        width: 90%;
       }
       p,
       h4 {
@@ -406,15 +274,15 @@
       }
     }
 
-        ul {
+    ul {
       padding: 0;
       margin: 0;
-      
+
       list-style-type: none;
       position: relative;
-  }
-  
-  li {
+    }
+
+    li {
       list-style-type: none;
       border-left: 2px solid #000;
       margin-bottom: 0;
@@ -422,21 +290,16 @@
       margin-left: 30px;
       @include mobile {
         margin-left: 10px;
-        
       }
-    
-    
-  }
-  
-  li div {
+    }
+
+    li div {
       padding-left: 2em;
       position: relative;
-      
-      
-  }
-  
-  li div::before {
-      content: '';
+    }
+
+    li div::before {
+      content: "";
       position: absolute;
       top: -20%;
       left: -30px;
@@ -449,14 +312,10 @@
       @include mobile {
         top: -12%;
       }
-     
-  }
-  
-  ul > li:last-child {
-      border-left: 2px solid transparent;
-  }
-  }
+    }
 
-  
-  
+    ul > li:last-child {
+      border-left: 2px solid transparent;
+    }
+  }
 }

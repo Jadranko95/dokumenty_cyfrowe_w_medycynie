@@ -20,19 +20,24 @@ class DoctorPage extends Component {
   async componentDidMount() {
     await fetch("https://medical-documentation.herokuapp.com/medical-process")
       .then(result => result.json())
-      .then(data => this.setState({ tasks:  data.sort(this.compare) }));
+      .then(data => this.setState({ tasks: data.sort(this.compare) }));
   }
   //MEDICAL PROCESS
   addTask = async e => {
     e.preventDefault();
+    e.persist();
+    e.target.title.value = e.target.title.value.trim();
+
+    if (e.target.title.value.length === 0) {
+      return;
+    }
     const completed = e.target.completed.value === "done" ? true : false;
 
-    fetch("https://medical-documentation.herokuapp.com/new-task", {
+    await fetch("https://medical-documentation.herokuapp.com/new-task", {
       method: "post",
-      mode: "cors",
+
       headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         title: e.target.title.value,
@@ -43,7 +48,7 @@ class DoctorPage extends Component {
       })
     })
       .then(response => response.json())
-      .then(data => this.setState({ tasks: data }));
+      .then(data => this.setState({ tasks: data.sort(this.compare) }));
 
     e.target.title.value = "";
     e.target.details.value = "";
@@ -51,21 +56,28 @@ class DoctorPage extends Component {
   };
 
   //SIDE BAR
-  addTaskFromSideBar = e => {
+  addTaskFromSideBar = async e => {
     e.preventDefault();
+    console.log(e.target);
+    e.persist();
+    e.target.title.value = e.target.title.value.trim();
 
-    fetch("https://medical-documentation.herokuapp.com/new-task", {
+    if (e.target.title.value.length === 0) {
+      return;
+    }
+    await fetch("https://medical-documentation.herokuapp.com/new-task", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         title: e.target.title.value,
         date: "",
         completed: false,
-        details: ""
+        details: "",
+        previousTask: ""
       })
     })
       .then(response => response.json())
-      .then(data => this.setState({ tasks:  data.sort(this.compare) }));
+      .then(data => this.setState({ tasks: data.sort(this.compare) }));
 
     e.target.title.value = "";
   };
@@ -87,7 +99,6 @@ class DoctorPage extends Component {
   };
 
   setCompleted = e => {
-
     const id = e.target.id;
     this.setState({
       tasks: this.state.tasks.map((task, i) => {
@@ -154,7 +165,6 @@ class DoctorPage extends Component {
       await fetch("https://medical-documentation.herokuapp.com/medical-process")
         .then(result => result.json())
         .then(data => {
-
           this.setState({ tasks: data.sort(this.compare) });
         });
     } else {
@@ -170,18 +180,20 @@ class DoctorPage extends Component {
   };
 
   compare = (a, b) => {
-    const dateA = parseInt(
-      a.date
-        .split(" ")[0]
-        .split("-")
-        .join("")
-    ) || 0;
-    const dateB = parseInt(
-      b.date
-        .split(" ")[0]
-        .split("-")
-        .join("")
-    ) || 0;
+    const dateA =
+      parseInt(
+        a.date
+          .split(" ")[0]
+          .split("-")
+          .join("")
+      ) || 0;
+    const dateB =
+      parseInt(
+        b.date
+          .split(" ")[0]
+          .split("-")
+          .join("")
+      ) || 0;
 
     return dateA > dateB ? -1 : dateA < dateB ? 1 : 0;
   };
@@ -195,6 +207,7 @@ class DoctorPage extends Component {
             placeholder="Wpisz ID pacjenta"
             name="patientID"
             pattern="[0-9]{5}"
+            disabled={this.state.patientID}
             required
           />
 

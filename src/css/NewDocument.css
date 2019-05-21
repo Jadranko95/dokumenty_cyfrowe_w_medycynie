@@ -3,13 +3,13 @@
   margin: 0 auto;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .new-document {
     margin-top: 50px;
   }
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .new-document {
     width: 90%;
   }
@@ -21,7 +21,7 @@
   float: right;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .new-document input {
     margin: 10px 0;
     width: 100%;
@@ -30,16 +30,20 @@
 
 .new-document input[type="submit"] {
   width: 300px;
-  margin: 0 auto;
+  margin: 10px auto;
+}
+
+.new-document label {
+  width: 100%;
 }
 
 .new-document select {
-  margin: 0 0 10px 0;
-  margin-left: 110px;
+  margin: 0 20px 10px 0;
+  float: right;
   width: 310px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .new-document select {
     margin: 10px 0;
     display: block;
@@ -50,7 +54,14 @@
 .new-document .referrals {
   float: right;
   margin: 2px 20px 10px 20px;
-  width: 315px;
+  width: 310px;
+}
+
+@media screen and (max-width: 590px) {
+  .new-document .referrals {
+    width: 100%;
+    margin: 10px auto;
+  }
 }
 
 .new-document textarea {
@@ -60,7 +71,7 @@
   float: right;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .new-document textarea {
     margin: 10px 0;
     width: 100%;
@@ -68,6 +79,7 @@
 }
 
 .new-document .document-form {
+  width: 100%;
   display: flex;
   flex-direction: column;
 }

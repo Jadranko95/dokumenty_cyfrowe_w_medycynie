@@ -6,7 +6,7 @@
   overflow: auto;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .lab-container {
     width: 100%;
     margin: 0;
@@ -21,7 +21,7 @@
   margin: 0 auto;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .lab-container form {
     width: 100%;
   }
@@ -31,7 +31,7 @@
   margin-right: 150px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .lab-container form .mainLabel {
     margin: 0;
     width: 100%;
@@ -49,19 +49,19 @@
   margin-top: 4px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .lab-container form .lab-orders {
     margin-right: 0;
   }
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .lab-container form .result-display {
     width: 100%;
   }
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .lab-container form .result-display .inner-form {
     width: 100%;
     display: flex;
@@ -88,7 +88,7 @@
   border: 2px solid black;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .table table {
     width: 100%;
   }
@@ -101,7 +101,7 @@
   text-align: center;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .table .mobile-out {
     display: none;
   }

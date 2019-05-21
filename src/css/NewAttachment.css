@@ -5,7 +5,7 @@
   justify-content: center;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .attachment-form {
     margin: 60px auto;
   }
@@ -18,7 +18,7 @@
   width: 300px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .attachment-form input[type="text"],
   .attachment-form input[type="date"] {
     margin: 10px 0;
@@ -45,13 +45,13 @@
   justify-content: center;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .lab-order-form .tests {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .lab-order-form {
     margin-top: 40px;
   }

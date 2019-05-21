@@ -1,125 +1,8 @@
-.medical-process-container {
-  /*
-
-    .li {
-      position: relative;
-      &:before {
-        content: '';
-        border-left: 2px solid grey;
-        //height: 100%;
-        position: absolute;
-        top: 0px;
-        bottom: 28px;
-        left: 16px;
-        
-      }
-  
-      
-    }
-
-    .next-tasks {
-      margin-left: 50px;
-      position: relative;
-      
-      &:before {
-        content: "";
-       // border-left: 2px solid grey;
-        position: absolute;
-        bottom: 50%;
-        left: -35px;
-        top: 0;
-        //height: 150%;
-      }
-      &:last-child:before {
-        border-left: 2px solid transparent;
-       }
-
-     
-    }
-
-    .process-task ~ .next-tasks {
-      display: none;
-    }
-    .process-task.active ~ .next-tasks {
-      display: block;
-    }
-
-    .process-task {
-      &:before {
-        content: "";
-        border-bottom: 2px solid grey;
-       // border-left: 2px solid grey;
-        position: absolute;
-        left: -35px;
-        top: -10px;
-    
-        width: 30px;
-        height: 70%;
-        z-index: 1;
-      }
-      &:after {
-        font-family: "Font Awesome 5 Free";
-        content: "\f107";
-        font-weight: 700;
-        font-size: 1.5em;
-        position: absolute;
-        right: 30px;
-        bottom: 5px;
-        color: grey;
-
-        @include mobile {
-         
-          right: 15px;
-          top: 0;
-        }
-      }
-
-      &.active:after {
-        content: "\f106";
-      }
-
-      &:last-child:after {
-        content: ''
-      }
-
-     
-
-     
-     
-      margin: 10px 0;
-      border: 1px solid grey;
-      width: 70%;
-      padding: 5px 10px;
-      position: relative;
-      z-index: 2;
-      background: rgb(218, 203, 169);
-      cursor: pointer;
-      @include mobile {
-        width:90%;
-      }
-      p,
-      h4 {
-        margin: 5px;
-      }
-
-      .date-process-task {
-        position: absolute;
-        top: 2%;
-        right: 3%;
-        color: grey;
-
-        @include mobile {
-          position: static;
-        }
-      }
-    }*/
-}
-
 .medical-process-container * {
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .medical-process-container {
     margin-top: 15px !important;
   }
@@ -182,7 +65,7 @@
   padding-right: 10px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .medical-process-container .content {
     padding: 15px;
     overflow-y: visible;
@@ -199,7 +82,7 @@
   height: 70px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .medical-process-container form {
     flex-direction: column;
     height: 300px;
@@ -217,7 +100,7 @@
   margin: 5px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .medical-process-container form span {
     width: 90%;
     flex-direction: column;
@@ -234,7 +117,7 @@
   height: 30px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .medical-process-container form input,
   .medical-process-container form select {
     width: 100%;
@@ -251,7 +134,7 @@
   width: 190px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .medical-process-container form input[type="datetime-local"] {
     width: 100%;
   }
@@ -261,7 +144,7 @@
   width: 250px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .medical-process-container form .previous-task {
     width: 100%;
   }
@@ -272,7 +155,7 @@
   width: 400px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .medical-process-container form textarea {
     width: 100%;
     margin: 5px;
@@ -305,7 +188,7 @@
   margin: 5px 0;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .medical-process-container ul li .task-info {
     flex-direction: column;
   }
@@ -319,7 +202,7 @@
   margin: 5px 0;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .medical-process-container ul li input {
     width: 100%;
   }
@@ -329,7 +212,7 @@
   width: 300px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .medical-process-container ul li #title {
     width: 100%;
   }
@@ -339,7 +222,7 @@
   width: 500px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .medical-process-container ul li #details {
     width: 100%;
   }
@@ -351,7 +234,7 @@
   border-left: 2px solid transparent;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .medical-process-container .process-view {
     height: 100%;
     margin: 10px;
@@ -392,7 +275,7 @@
   color: grey;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .medical-process-container .process-view .process-task:after {
     right: 15px;
     top: 0;
@@ -404,10 +287,10 @@
 }
 
 .medical-process-container .process-view .process-task:last-child:after {
-  content: '';
+  content: "";
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .medical-process-container .process-view .process-task {
     width: 90%;
   }
@@ -425,7 +308,7 @@
   color: grey;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .medical-process-container .process-view .process-task .date-process-task {
     position: static;
   }
@@ -446,7 +329,7 @@
   margin-left: 30px;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .medical-process-container .process-view li {
     margin-left: 10px;
   }
@@ -458,7 +341,7 @@
 }
 
 .medical-process-container .process-view li div::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -20%;
   left: -30px;
@@ -469,7 +352,7 @@
   border-right: 0 none transparent;
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 590px) {
   .medical-process-container .process-view li div::before {
     top: -12%;
   }

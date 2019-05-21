@@ -25,12 +25,17 @@
   }
   input[type="submit"] {
     width: 300px;
-    margin: 0 auto;
+    margin: 10px auto;
+  }
+
+  label {
+    width: 100%;
   }
 
   select {
-    margin: 0 0 10px 0;
-    margin-left: 110px;
+    margin: 0 20px 10px 0;
+    float: right;
+
     width: 310px;
 
     @include mobile {
@@ -40,10 +45,14 @@
     }
   }
 
-  .referrals{
+  .referrals {
     float: right;
     margin: 2px 20px 10px 20px;
-    width: 315px;
+    width: 310px;
+    @include mobile {
+      width: 100%;
+      margin: 10px auto;
+    }
   }
 
   textarea {
@@ -58,6 +67,7 @@
     }
   }
   .document-form {
+    width: 100%;
     display: flex;
     flex-direction: column;
   }

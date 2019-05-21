@@ -72,7 +72,7 @@ class SideBar extends Component {
                   <td>Imię i nazwisko: </td>
                   <td>
                     {this.state.editMode ? (
-                      <input type="text" defaultValue={name} id="name" />
+                      <input type="text" defaultValue={name} id="name" required />
                     ) : (
                       <p>{name}</p>
                     )}
@@ -82,7 +82,7 @@ class SideBar extends Component {
                   <td>Płeć: </td>
                   <td>
                     {this.state.editMode ? (
-                      <input type="text" defaultValue={patient.sex} id="sex" />
+                      <input type="text" defaultValue={patient.sex} id="sex" required pattern="[MK]"/>
                     ) : (
                       <p>{patient.sex}</p>
                     )}
@@ -101,6 +101,8 @@ class SideBar extends Component {
                         type="text"
                         defaultValue={patient.PESEL}
                         id="PESEL"
+                        required
+                        pattern="[0-9]{11}"
                       />
                     ) : (
                       <p>{patient.PESEL}</p>
@@ -119,6 +121,7 @@ class SideBar extends Component {
                         type="text"
                         defaultValue={patient.address}
                         id="address"
+                        required
                       />
                     ) : (
                       <p>{patient.address}</p>
@@ -134,6 +137,8 @@ class SideBar extends Component {
                         type="text"
                         defaultValue={patient.telephone}
                         id="telephone"
+                        required
+                        pattern="[0-9]{9}"
                       />
                     ) : (
                       <p>{patient.telephone}</p>
