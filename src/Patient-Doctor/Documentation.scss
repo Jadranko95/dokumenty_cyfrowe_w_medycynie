@@ -1,4 +1,4 @@
-@import "_config";
+@import "_config.scss";
 
 .documentation-container {
   @include mobile {
@@ -24,9 +24,13 @@
     }
   }
   .documents {
-    height: 35vh;
+    height: 38vh;
     text-align: left;
     overflow-y: auto;
+
+    @include mobile {
+      height: 100%;
+    }
   }
 
   .filterForm {

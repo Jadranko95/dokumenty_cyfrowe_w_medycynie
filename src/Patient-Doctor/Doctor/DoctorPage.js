@@ -35,7 +35,9 @@ class DoctorPage extends Component {
         this.setState({ patients: data.map(patient => patient.id) });
       });
     await fetch(
-      ` https://medical-documentation.herokuapp.com/medical-process?patientID=${this.state.patientID}`
+      `https://medical-documentation.herokuapp.com/medical-process?patientID=${
+        this.state.patientID
+      }`
     )
       .then(result => result.json())
       .then(data => this.setState({ tasks: data.sort(this.compare) }));
@@ -103,20 +105,25 @@ class DoctorPage extends Component {
   };
 
   editTask = async id => {
-    await fetch(" https://medical-documentation.herokuapp.com/edit-task", {
-      method: "put",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        patientID: this.state.patientID,
-        title: document.querySelector("#title").value,
-        details: document.querySelector("#details").value,
-        date: document.querySelector("#date").value,
-        previousTaskId: document.querySelector("#previous-task").value,
-        id: id
+    const title = document.querySelector("#title").value;
+    const details = document.querySelector("#details").value;
+    const date = document.querySelector("#date");
+   
+      await fetch(" https://medical-documentation.herokuapp.com/edit-task", {
+        method: "put",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          patientID: this.state.patientID,
+          title,
+          details,
+          date: date.value,
+          previousTaskId: document.querySelector("#previous-task").value,
+          id: id
+        })
       })
-    })
-      .then(result => result.json())
-      .then(data => this.setState({ tasks: data.sort(this.compare) }));
+        .then(result => result.json())
+        .then(data => this.setState({ tasks: data.sort(this.compare) }));
+    
   };
 
   setCompleted = e => {
@@ -160,26 +167,11 @@ class DoctorPage extends Component {
   searchPatient = async e => {
     e.preventDefault();
 
-    //console.log(e.target.patientID.value);
     let patientID;
     if (!this.state.patientID) {
       e.preventDefault();
       patientID = e.target.patientID.value;
       await this.setState({ patientID });
-      /*await fetch(
-        " https://medical-documentation.herokuapp.com/get-patient-data",
-        {
-          method: "put",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ patientID })
-        }
-      ).then(result => {
-        if (result.status === 400) {
-          alert("Nie ma takiego pacjenta");
-        } else {
-          this.setState({ patientID });
-        }
-      });*/
 
       await fetch(
         ` https://medical-documentation.herokuapp.com/medical-process?patientID=${
@@ -190,13 +182,6 @@ class DoctorPage extends Component {
         .then(data => this.setState({ tasks: data.sort(this.compare) }));
     } else {
       await this.setState({ patientID: "" });
-
-      /*fetch(" https://medical-documentation.herokuapp.com/get-patient-data", {
-        method: "put",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ patientID: "" })
-      });*/
-      //e.target.patientID.required = true;
     }
   };
 

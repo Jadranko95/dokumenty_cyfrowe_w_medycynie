@@ -27,7 +27,7 @@ nav {
 
 .ID-form {
   position: absolute;
-  top: 10px;
+  top: 0;
   left: 30%;
   display: flex;
 
@@ -39,9 +39,11 @@ nav {
   }
 
   .id-info {
-    padding-left: 24px;
-    padding-top: 10px;
+    text-align: right;
+    padding-top: 8px;
     width: 120px;
+    font-weight: 700;
+    margin-right: 45px;
   }
 
   @include mobile {

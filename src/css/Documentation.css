@@ -29,9 +29,15 @@
 }
 
 .documentation-container .documents {
-  height: 35vh;
+  height: 38vh;
   text-align: left;
   overflow-y: auto;
+}
+
+@media screen and (max-width: 590px) {
+  .documentation-container .documents {
+    height: 100%;
+  }
 }
 
 .documentation-container .filterForm {

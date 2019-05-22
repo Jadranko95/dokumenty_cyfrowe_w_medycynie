@@ -36,13 +36,11 @@ class Documentation extends Component {
       parseInt(e.target.fromDate.value.split("-").join("")) || null;
     const toDate = parseInt(e.target.toDate.value.split("-").join("")) || null;
     const tag = e.target.tags.value;
-    /*     await fetch(
-      ` https://medical-documentation.herokuapp.com/documentation?patientID=${JSON.parse(
-        sessionStorage.getItem("patientID")
-      )}`
+         await fetch(
+      `https://medical-documentation.herokuapp.com/documentation?patientID=${this.props.patientID}`
     )
       .then(result => result.json())
-      .then(data => this.setState({ documents: data })); */
+      .then(data => this.setState({ documents: data })); 
 
     console.log(fromDate, toDate);
     const filtered = this.state.documents
@@ -122,7 +120,7 @@ class Documentation extends Component {
           </label>
           <input type="submit" value="Filtruj" />
         </form>
-        <div className="documents content" style={{ height: "41vh" }}>
+        <div className="documents content">
           <ul>
             {this.state.documents.map((document, i) => {
               return (

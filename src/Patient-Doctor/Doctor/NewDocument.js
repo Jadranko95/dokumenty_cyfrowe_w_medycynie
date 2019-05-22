@@ -11,7 +11,7 @@ class NewDocument extends Component {
   };
 
   componentDidMount() {
-    fetch(" https://medical-documentation.herokuapp.com/attached-documents")
+    fetch(`https://medical-documentation.herokuapp.com/attached-documents?patientID=${this.props.patientID}`)
       .then(result => result.json())
       .then(data =>
         this.setState({
@@ -63,7 +63,7 @@ class NewDocument extends Component {
         patientID: this.props.patientID,
         documentType: this.state.documentType,
         title,
-        testDate: e.target.testDate.value.split("T").join(" "),
+        testDate: `${e.target.testDate.value} ${e.target.testTime.value}`,
         referralID: e.target.referral.value,
         orderingDoctor: e.target.orderingDoctor.value,
         performingDoctor: e.target.performingDoctor.value,
@@ -135,11 +135,20 @@ class NewDocument extends Component {
                 {" "}
                 Data badania:{" "}
                 <input
-                  type="datetime-local"
+                  type="date"
                   name="testDate"
                   min={threeDaysAgo}
                   max={today}
                   defaultValue={today}
+                />
+              </label>
+              <label>
+                {" "}
+                Godzina badania:{" "}
+                <input
+                  type="time"
+                  name="testTime"
+                
                 />
               </label>
               <label>

@@ -25,7 +25,7 @@ header {
     font-size: 16px;
     font-weight: 500;
     margin-top: 0;
-    padding: 35px 50px;
+    padding: 25px 50px;
 
     @include mobile {
       display: none;
@@ -34,7 +34,7 @@ header {
 
   .log-out {
     position: absolute;
-    top: 12px;
+    top: 2px;
     right: 10px;
     margin: 15px;
     @include mobile {
@@ -62,7 +62,7 @@ select {
 .container {
   background: $container-color;
   width: 60%;
-  height: 65vh;
+  height: 67vh;
   margin: 15px 6%;
   border-radius: 0 10px 10px 10px;
   padding: 20px 50px;

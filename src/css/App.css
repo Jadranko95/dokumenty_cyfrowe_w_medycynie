@@ -4,7 +4,7 @@ body {
 
 header {
   background: #929292;
-  height: 90px;
+  height: 70px;
   width: 100%;
   position: relative;
 }
@@ -30,7 +30,7 @@ header .login-info {
   font-size: 16px;
   font-weight: 500;
   margin-top: 0;
-  padding: 35px 50px;
+  padding: 25px 50px;
 }
 
 @media screen and (max-width: 590px) {
@@ -41,7 +41,7 @@ header .login-info {
 
 header .log-out {
   position: absolute;
-  top: 12px;
+  top: 2px;
   right: 10px;
   margin: 15px;
 }
@@ -71,7 +71,7 @@ select {
 .container {
   background: #e4dcc4;
   width: 60%;
-  height: 65vh;
+  height: 67vh;
   margin: 15px 6%;
   border-radius: 0 10px 10px 10px;
   padding: 20px 50px;

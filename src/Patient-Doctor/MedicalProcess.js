@@ -15,11 +15,17 @@ class MedicalProcess extends Component {
     if (this.state.editMode !== id) {
       await this.setState({ editMode: id });
     } else {
-      //dodanie do bazy
-      this.props.editTask(id);
-      //usunięcie z tablicy editMode
+      const title = document.querySelector("#title").value;
+      const details = document.querySelector("#details").value;
+      const date = document.querySelector("#date");
+      if (title.trim() && details.trim() && date.checkValidity()) {
+      
+        //dodanie do bazy
+        this.props.editTask(id);
+        //usunięcie z tablicy editMode
 
-      await this.setState({ editMode: "" });
+        await this.setState({ editMode: "" });
+      }
     }
   };
 
@@ -118,6 +124,7 @@ class MedicalProcess extends Component {
                                 type="text"
                                 name="title"
                                 id="title"
+                                required
                                 defaultValue={task.title}
                               />
                             ) : (
@@ -147,6 +154,7 @@ class MedicalProcess extends Component {
                               type="text"
                               name="details"
                               id="details"
+                              required
                               defaultValue={task.details}
                               placeholder="Szczegóły"
                             />
@@ -161,6 +169,7 @@ class MedicalProcess extends Component {
                               id="date"
                               defaultValue={task.date}
                               placeholder="Data"
+                              pattern="([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))"
                             />
                           ) : (
                             <p>{task.date}</p>

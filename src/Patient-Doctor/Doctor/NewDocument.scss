@@ -1,7 +1,7 @@
 @import "_config";
 
 .new-document {
-  width: 60%;
+  width: 65%;
   margin: 0 auto;
 
   @include mobile {
@@ -13,7 +13,7 @@
   }
 
   input {
-    width: 300px;
+    width: 400px;
     margin: 0 20px 10px 30px;
 
     float: right;
@@ -24,8 +24,8 @@
     }
   }
   input[type="submit"] {
-    width: 300px;
-    margin: 10px auto;
+    width: 400px;
+    margin: 5px auto;
   }
 
   label {
@@ -36,7 +36,7 @@
     margin: 0 20px 10px 0;
     float: right;
 
-    width: 310px;
+    width: 410px;
 
     @include mobile {
       margin: 10px 0;
@@ -48,7 +48,7 @@
   .referrals {
     float: right;
     margin: 2px 20px 10px 20px;
-    width: 310px;
+    width: 410px;
     @include mobile {
       width: 100%;
       margin: 10px auto;
@@ -56,10 +56,10 @@
   }
 
   textarea {
-    margin: 0 20px 20px 0;
+    margin: 0 20px 10px 0;
 
-    width: 310px;
-    height: 80px;
+    width: 405px;
+    height: 50px;
     float: right;
     @include mobile {
       margin: 10px 0;

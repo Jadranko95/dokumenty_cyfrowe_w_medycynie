@@ -9,7 +9,11 @@ class SideBar extends Component {
   };
 
   async componentDidMount() {
-    await fetch(` https://medical-documentation.herokuapp.com/patient?patientID=${this.props.patientID}`).then(result => {
+    await fetch(
+      ` https://medical-documentation.herokuapp.com/patient?patientID=${
+        this.props.patientID
+      }`
+    ).then(result => {
       if (result.status === 400) {
         alert("Nie ma takiego pacjenta");
       } else {
@@ -23,25 +27,38 @@ class SideBar extends Component {
       this.setState({ editMode: true });
     } else {
       //sent to db
-      await fetch(
-        " https://medical-documentation.herokuapp.com/edit-patient-data",
-        {
-          method: "put",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            patientID: this.props.patientID,
-            name: document.querySelector("#name").value,
-            sex: document.querySelector("#sex").value,
-            PESEL: document.querySelector("#PESEL").value,
-            telephone: document.querySelector("#telephone").value,
-            address: document.querySelector("#address").value,
-            icd10: document.querySelector("#icd10").value
-          })
-        }
-      )
-        .then(result => result.json())
-        .then(data => this.setState({ patient: data }));
-      this.setState({ editMode: false });
+      const name = document.querySelector("#name");
+      const sex = document.querySelector("#sex");
+      const PESEL = document.querySelector("#PESEL");
+      const telephone = document.querySelector("#telephone");
+      const address = document.querySelector("#address");
+      if (
+        name.checkValidity() &&
+        sex.checkValidity() &&
+        PESEL.checkValidity() &&
+        telephone.checkValidity() &&
+        address.checkValidity()
+      ) {
+        await fetch(
+          "https://medical-documentation.herokuapp.com/edit-patient-data",
+          {
+            method: "put",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              patientID: this.props.patientID,
+              name: document.querySelector("#name").value,
+              sex: document.querySelector("#sex").value,
+              PESEL: document.querySelector("#PESEL").value,
+              telephone: document.querySelector("#telephone").value,
+              address: document.querySelector("#address").value,
+              icd10: document.querySelector("#icd10").value
+            })
+          }
+        )
+          .then(result => result.json())
+          .then(data => this.setState({ patient: data }));
+        this.setState({ editMode: false });
+      }
     }
   };
 
@@ -73,7 +90,13 @@ class SideBar extends Component {
                   <td>Imię i nazwisko: </td>
                   <td>
                     {this.state.editMode ? (
-                      <input type="text" defaultValue={name} id="name" required />
+                      <input
+                        type="text"
+                        defaultValue={name}
+                        id="name"
+                        required
+                        pattern="[A-Za-z\s]{5,17}"
+                      />
                     ) : (
                       <p>{name}</p>
                     )}
@@ -83,7 +106,13 @@ class SideBar extends Component {
                   <td>Płeć: </td>
                   <td>
                     {this.state.editMode ? (
-                      <input type="text" defaultValue={patient.sex} id="sex" required pattern="[MK]"/>
+                      <input
+                        type="text"
+                        defaultValue={patient.sex}
+                        id="sex"
+                        required
+                        pattern="[MK]"
+                      />
                     ) : (
                       <p>{patient.sex}</p>
                     )}
@@ -123,6 +152,7 @@ class SideBar extends Component {
                         defaultValue={patient.address}
                         id="address"
                         required
+                        pattern="[A-Za-z0-9\s]{5,20}"
                       />
                     ) : (
                       <p>{patient.address}</p>

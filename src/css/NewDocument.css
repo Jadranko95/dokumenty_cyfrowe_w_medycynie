@@ -1,5 +1,5 @@
 .new-document {
-  width: 60%;
+  width: 65%;
   margin: 0 auto;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .new-document input {
-  width: 300px;
+  width: 400px;
   margin: 0 20px 10px 30px;
   float: right;
 }
@@ -29,8 +29,8 @@
 }
 
 .new-document input[type="submit"] {
-  width: 300px;
-  margin: 10px auto;
+  width: 400px;
+  margin: 5px auto;
 }
 
 .new-document label {
@@ -40,7 +40,7 @@
 .new-document select {
   margin: 0 20px 10px 0;
   float: right;
-  width: 310px;
+  width: 410px;
 }
 
 @media screen and (max-width: 590px) {
@@ -54,7 +54,7 @@
 .new-document .referrals {
   float: right;
   margin: 2px 20px 10px 20px;
-  width: 310px;
+  width: 410px;
 }
 
 @media screen and (max-width: 590px) {
@@ -65,9 +65,9 @@
 }
 
 .new-document textarea {
-  margin: 0 20px 20px 0;
-  width: 310px;
-  height: 80px;
+  margin: 0 20px 10px 0;
+  width: 405px;
+  height: 50px;
   float: right;
 }
 
