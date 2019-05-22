@@ -9,7 +9,7 @@ class SideBar extends Component {
   };
 
   async componentDidMount() {
-    await fetch("https://medical-documentation.herokuapp.com/patient").then(result => {
+    await fetch(` https://medical-documentation.herokuapp.com/patient?patientID=${this.props.patientID}`).then(result => {
       if (result.status === 400) {
         alert("Nie ma takiego pacjenta");
       } else {
@@ -24,11 +24,12 @@ class SideBar extends Component {
     } else {
       //sent to db
       await fetch(
-        "https://medical-documentation.herokuapp.com/edit-patient-data",
+        " https://medical-documentation.herokuapp.com/edit-patient-data",
         {
           method: "put",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
+            patientID: this.props.patientID,
             name: document.querySelector("#name").value,
             sex: document.querySelector("#sex").value,
             PESEL: document.querySelector("#PESEL").value,

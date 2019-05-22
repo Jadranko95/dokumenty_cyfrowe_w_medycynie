@@ -6,11 +6,12 @@ class NewDocument extends Component {
   state = {
     documentType: "",
     referrals: [],
-    files: []
+    files: [],
+    activeUser: JSON.parse(sessionStorage.getItem("user")) || []
   };
 
   componentDidMount() {
-    fetch("https://medical-documentation.herokuapp.com/attached-documents")
+    fetch(" https://medical-documentation.herokuapp.com/attached-documents")
       .then(result => result.json())
       .then(data =>
         this.setState({
@@ -21,16 +22,6 @@ class NewDocument extends Component {
 
   chooseDocumentType = e => {
     this.setState({ documentType: e.target.value });
-  };
-
-  handleFiles = e => {
-    const files = e.target;
-    let fileArray = [];
-    for (var i = 0; i < files.length; i++) {
-      fileArray.append(files[i]);
-    }
-    this.setState({ files: fileArray });
-    console.log(fileArray);
   };
 
   // *********** Upload file to Cloudinary ******************** //
@@ -58,7 +49,6 @@ class NewDocument extends Component {
   };
 
   createDocument = async e => {
-    
     e.preventDefault();
     console.log(e.target.files.files);
     const files = e.target.files.files;
@@ -66,16 +56,18 @@ class NewDocument extends Component {
       e.target.region ? e.target.region.value : ""
     }  ${e.target.testDate.value.split("T")[0]}`;
 
-    await fetch("https://medical-documentation.herokuapp.com/new-document", {
+    await fetch(" https://medical-documentation.herokuapp.com/new-document", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        patientID: this.props.patientID,
         documentType: this.state.documentType,
         title,
         testDate: e.target.testDate.value.split("T").join(" "),
         referralID: e.target.referral.value,
         orderingDoctor: e.target.orderingDoctor.value,
         performingDoctor: e.target.performingDoctor.value,
+        describingDoctor: this.state.activeUser.name,
         content: e.target.content.value
       })
     })
@@ -86,8 +78,10 @@ class NewDocument extends Component {
 
         for (let i = 0; i < files.length; i++) {
           //zmiana nazwy plików
-          let blob = files[i].slice(0, files[i].size, 'image/jpg'); 
-          const newFile = new File([blob], `${documentId}.jpg`, {type: 'image/jpg'});
+          let blob = files[i].slice(0, files[i].size, "image/jpg");
+          const newFile = new File([blob], `${documentId}.jpg`, {
+            type: "image/jpg"
+          });
           this.uploadFile(newFile);
         }
       });

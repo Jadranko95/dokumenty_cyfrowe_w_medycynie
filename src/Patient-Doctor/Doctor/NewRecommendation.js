@@ -7,7 +7,8 @@ class NewRecommendation extends Component {
   state = {
     dataSaved: JSON.parse(sessionStorage.getItem("saved")),
     data: JSON.parse(sessionStorage.getItem("recommendationData")) || {},
-    attachments: JSON.parse(sessionStorage.getItem("attachments")) || []
+    attachments: JSON.parse(sessionStorage.getItem("attachments")) || [],
+    activeUser: JSON.parse(sessionStorage.getItem("user")) || []
   };
 
   toggleSave = async e => {
@@ -43,12 +44,14 @@ class NewRecommendation extends Component {
 
 
   submitRecommendation = () => {
-    fetch("https://medical-documentation.herokuapp.com/new-recommendation", {
+    fetch(" https://medical-documentation.herokuapp.com/new-recommendation", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        patientID: this.props.patientID,
         date: document.getElementById("date").value,
         content: document.getElementById("content").value,
+        doctor: this.state.activeUser.name,
         attachments: this.state.attachments
       })
     });

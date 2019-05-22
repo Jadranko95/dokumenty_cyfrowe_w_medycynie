@@ -18,17 +18,27 @@ class DoctorPage extends Component {
     patients: []
   };
 
+  async componentDidUpdate() {
+    //because setState is asynchronous
+
+    await sessionStorage.setItem(
+      "patientID",
+      JSON.stringify(this.state.patientID)
+    );
+  }
+
   async componentDidMount() {
-    await fetch("https://medical-documentation.herokuapp.com/patients")
-    .then(result => result.json())
-    .then(data => {
-      console.log(data);
-      this.setState({ patients: data.map(patient => patient.id) });
-    });
-    await fetch("https://medical-documentation.herokuapp.com/medical-process")
+    await fetch(" https://medical-documentation.herokuapp.com/patients")
+      .then(result => result.json())
+      .then(data => {
+        console.log(data);
+        this.setState({ patients: data.map(patient => patient.id) });
+      });
+    await fetch(
+      ` https://medical-documentation.herokuapp.com/medical-process?patientID=${this.state.patientID}`
+    )
       .then(result => result.json())
       .then(data => this.setState({ tasks: data.sort(this.compare) }));
- 
   }
   //MEDICAL PROCESS
   addTask = async e => {
@@ -41,13 +51,14 @@ class DoctorPage extends Component {
     }
     const completed = e.target.completed.value === "done" ? true : false;
 
-    await fetch("https://medical-documentation.herokuapp.com/new-task", {
+    await fetch(" https://medical-documentation.herokuapp.com/new-task", {
       method: "post",
 
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
+        patientID: this.state.patientID,
         title: e.target.title.value,
         date: e.target.date.value.split("T").join(" "),
         completed,
@@ -73,10 +84,11 @@ class DoctorPage extends Component {
     if (e.target.title.value.length === 0) {
       return;
     }
-    await fetch("https://medical-documentation.herokuapp.com/new-task", {
+    await fetch(" https://medical-documentation.herokuapp.com/new-task", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        patientID: this.state.patientID,
         title: e.target.title.value,
         date: "",
         completed: false,
@@ -91,10 +103,11 @@ class DoctorPage extends Component {
   };
 
   editTask = async id => {
-    await fetch("https://medical-documentation.herokuapp.com/edit-task", {
+    await fetch(" https://medical-documentation.herokuapp.com/edit-task", {
       method: "put",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        patientID: this.state.patientID,
         title: document.querySelector("#title").value,
         details: document.querySelector("#details").value,
         date: document.querySelector("#date").value,
@@ -117,7 +130,7 @@ class DoctorPage extends Component {
       })
     });
 
-    fetch("https://medical-documentation.herokuapp.com/complete-task", {
+    fetch(" https://medical-documentation.herokuapp.com/complete-task", {
       method: "put",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: id, completed: true })
@@ -137,7 +150,7 @@ class DoctorPage extends Component {
       })
     });
     //dodanie do bazy
-    await fetch("https://medical-documentation.herokuapp.com/complete-task", {
+    await fetch(" https://medical-documentation.herokuapp.com/complete-task", {
       method: "put",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: id, completed: isCompleted })
@@ -152,9 +165,9 @@ class DoctorPage extends Component {
     if (!this.state.patientID) {
       e.preventDefault();
       patientID = e.target.patientID.value;
-
-      await fetch(
-        "https://medical-documentation.herokuapp.com/get-patient-data",
+      await this.setState({ patientID });
+      /*await fetch(
+        " https://medical-documentation.herokuapp.com/get-patient-data",
         {
           method: "put",
           headers: { "Content-Type": "application/json" },
@@ -166,21 +179,23 @@ class DoctorPage extends Component {
         } else {
           this.setState({ patientID });
         }
-      });
+      });*/
 
-      await fetch("https://medical-documentation.herokuapp.com/medical-process")
+      await fetch(
+        ` https://medical-documentation.herokuapp.com/medical-process?patientID=${
+          this.state.patientID
+        }`
+      )
         .then(result => result.json())
-        .then(data => {
-          this.setState({ tasks: data.sort(this.compare) });
-        });
+        .then(data => this.setState({ tasks: data.sort(this.compare) }));
     } else {
-      this.setState({ patientID: "" });
+      await this.setState({ patientID: "" });
 
-      fetch("https://medical-documentation.herokuapp.com/get-patient-data", {
+      /*fetch(" https://medical-documentation.herokuapp.com/get-patient-data", {
         method: "put",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ patientID: "" })
-      });
+      });*/
       //e.target.patientID.required = true;
     }
   };
@@ -236,7 +251,7 @@ class DoctorPage extends Component {
           <div>
             <SideBar
               activeAccount="doctor"
-              patient={this.state.patientID}
+              patientID={patientID}
               tasks={this.state.tasks}
               addTask={this.addTaskFromSideBar}
               toggleComplete={this.toggleComplete}
@@ -258,57 +273,109 @@ class DoctorPage extends Component {
                   exact
                   path="/recommendations/create-new/generate-prescription"
                   render={props => (
-                    <NewAttachment {...props} documentType="prescription" />
+                    <NewAttachment
+                      {...props}
+                      documentType="prescription"
+                      patientID={patientID}
+                    />
                   )}
                 />
                 <Route
                   exact
                   path="/recommendations/create-new/generate-sickleave"
                   render={props => (
-                    <NewAttachment {...props} documentType="sickleave" />
+                    <NewAttachment
+                      {...props}
+                      documentType="sickleave"
+                      patientID={patientID}
+                    />
                   )}
                 />
                 <Route
                   exact
                   path="/recommendations/create-new/generate-referral"
                   render={props => (
-                    <NewAttachment {...props} documentType="referral" />
+                    <NewAttachment
+                      {...props}
+                      documentType="referral"
+                      patientID={patientID}
+                    />
                   )}
                 />
                 <Route
                   exact
                   path="/recommendations/create-new/generate-lab-order"
                   render={props => (
-                    <NewAttachment {...props} documentType="lab-order" />
+                    <NewAttachment
+                      {...props}
+                      documentType="lab-order"
+                      patientID={patientID}
+                    />
                   )}
                 />
                 <Route
                   exact
                   path="/documentation/document:documentId"
-                  component={Document}
+                  render={props => (
+                    <Document
+                      {...props}
+                      activeAccount="doctor"
+                      patientID={patientID}
+                    />
+                  )}
                 />
                 <Route
                   exact
                   path="/recommendations/create-new"
-                  component={NewRecommendation}
+                  render={props => (
+                    <NewRecommendation
+                      {...props}
+                      activeAccount="doctor"
+                      patientID={patientID}
+                    />
+                  )}
                 />
                 <Route
                   exact
                   path="/documentation/create-new"
-                  component={NewDocument}
+                  render={props => (
+                    <NewDocument
+                      {...props}
+                      activeAccount="doctor"
+                      patientID={patientID}
+                    />
+                  )}
                 />
-                <Route exact path="/documentation/report" component={Report} />}
+                <Route
+                  exact
+                  path="/documentation/report"
+                  render={props => (
+                    <Report
+                      {...props}
+                      activeAccount="doctor"
+                      patientID={patientID}
+                    />
+                  )}
                 />
+                } />
                 <Route
                   path="/documentation"
                   render={props => (
-                    <Documentation {...props} activeAccount="doctor" />
+                    <Documentation
+                      {...props}
+                      activeAccount="doctor"
+                      patientID={patientID}
+                    />
                   )}
                 />
                 <Route
                   path="/recommendations"
                   render={props => (
-                    <Recommendations {...props} activeAccount="doctor" />
+                    <Recommendations
+                      {...props}
+                      activeAccount="doctor"
+                      patientID={patientID}
+                    />
                   )}
                 />
                 <Route

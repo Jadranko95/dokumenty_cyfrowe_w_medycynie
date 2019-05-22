@@ -10,7 +10,7 @@ class Document extends Component {
   };
 
   async componentDidMount() {
-    await fetch("https://medical-documentation.herokuapp.com/documentation")
+    await fetch(` https://medical-documentation.herokuapp.com/documentation?patientID=${this.props.patientID}`)
       .then(response => response.json())
       .then(data => {
         console.log(data);
@@ -121,7 +121,7 @@ class Document extends Component {
               <a
                 target="_blank"
                 href={
-                  "https://medical-documentation.herokuapp.com/examination-pdf?id=" +
+                  " https://medical-documentation.herokuapp.com/examination-pdf?id=" +
                   this.props.match.params.documentId
                 }
               >

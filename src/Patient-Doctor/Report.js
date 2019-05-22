@@ -10,12 +10,12 @@ class Raport extends Component {
     filteredResults: []
   };
 
-  componentDidMount() {
-    fetch("https://medical-documentation.herokuapp.com/lab-data")
+  async componentDidMount() {
+    await fetch(" https://medical-documentation.herokuapp.com/lab-data")
       .then(result => result.json())
       .then(data => this.setState({ parameters: data }));
 
-    fetch("https://medical-documentation.herokuapp.com/documentation")
+      await fetch(` https://medical-documentation.herokuapp.com/documentation?patientID=${this.props.patientID}`)
       .then(result => result.json())
       .then(data => this.setState({ documents: data.sort(this.compare) }));
   }

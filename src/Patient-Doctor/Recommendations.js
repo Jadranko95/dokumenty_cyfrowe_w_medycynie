@@ -5,34 +5,20 @@ import { Link } from "react-router-dom";
 class Recommendations extends Component {
   state = {
     recommendations: [],
-    activeUser: []
+    activeUser: JSON.parse(sessionStorage.getItem("user")) || []
   };
-  /*https://medical-documentation.herokuapp.com*/
+  /*http://localhost:3001*/
   async componentWillMount() {
-    await fetch("https://medical-documentation.herokuapp.com/recommendations")
+    await fetch(` https://medical-documentation.herokuapp.com/recommendations?patientID=${this.props.patientID}`)
       .then(result => result.json())
       .then(data =>
         this.setState({ recommendations: data.sort(this.compare) })
       );
 
-    fetch("https://medical-documentation.herokuapp.com/active-user")
-      .then(result => result.json())
-      .then(data => this.setState({ activeUser: data }));
+ 
   }
 
-  async componentDidUpdate(prevProps, prevState) {
-    // console.log(prevProps.location.pathname);
-    //console.log(this.props.location.pathname);
-    if (prevProps.location.pathname !== this.props.location.pathname) {
-      console.log("CHANGE");
-      await fetch("https://medical-documentation.herokuapp.com/recommendations")
-        .then(result => result.json())
-        .then(data =>
-          this.setState({ recommendations: data.sort(this.compare) })
-        );
-    }
-  }
-
+  
   compare = (a, b) => {
     const dateA = parseInt(
       a.date
@@ -50,11 +36,11 @@ class Recommendations extends Component {
   };
 
   render() {
-    fetch("https://medical-documentation.herokuapp.com/recommendations")
-      .then(result => result.json())
-      .then(data =>
-        this.setState({ recommendations: data.sort(this.compare) })
-      );
+     fetch(` https://medical-documentation.herokuapp.com/recommendations?patientID=${this.props.patientID}`)
+    .then(result => result.json())
+    .then(data =>
+      this.setState({ recommendations: data.sort(this.compare) })
+    );
     //const height = this.props.activeAccount === "doctor" ? "50vh" : "65vh";
     return (
       <div className="container recommendations-container">
@@ -91,7 +77,7 @@ class Recommendations extends Component {
                         color: "white"
                       }}
                       href={
-                        "https://medical-documentation.herokuapp.com/attachment-pdf?id=" +
+                        " https://medical-documentation.herokuapp.com/attachment-pdf?id=" +
                         attachment.id
                       }
                     >

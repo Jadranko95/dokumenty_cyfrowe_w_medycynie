@@ -15,16 +15,21 @@ class PatientPage extends Component {
   };
 
   componentDidMount() {
-    fetch("https://medical-documentation.herokuapp.com/medical-process")
+    fetch(
+      `https://medical-documentation.herokuapp.com/medical-process?patientID=${
+        this.props.patientID
+      }`
+    )
       .then(result => result.json())
-      .then(data => this.setState({ tasks: data.sort(this.compare)  }));
+      .then(data => this.setState({ tasks: data.sort(this.compare) }));
   }
 
   editTask = async id => {
-    await fetch("https://medical-documentation.herokuapp.com/edit-task", {
+    await fetch(" https://medical-documentation.herokuapp.com/edit-task", {
       method: "put",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        patientID: this.state.patientID,
         title: document.querySelector("#title").value,
         details: document.querySelector("#details").value,
         date: document.querySelector("#date").value,
@@ -32,7 +37,7 @@ class PatientPage extends Component {
       })
     })
       .then(result => result.json())
-      .then(data => this.setState({ tasks: data.sort(this.compare)  }));
+      .then(data => this.setState({ tasks: data.sort(this.compare) }));
   };
 
   toggleComplete = e => {
@@ -48,7 +53,7 @@ class PatientPage extends Component {
       })
     });
     //dodanie do bazy
-    fetch("https://medical-documentation.herokuapp.com/complete-task", {
+    fetch(" https://medical-documentation.herokuapp.com/complete-task", {
       method: "put",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: id, completed: isCompleted })
@@ -78,9 +83,10 @@ class PatientPage extends Component {
   };
 
   render() {
+    const patientID = this.props.patientID;
     return (
       <div>
-        <SideBar tasks={this.state.tasks} />
+        <SideBar tasks={this.state.tasks} patientID={patientID} />
 
         <HashRouter>
           <nav>
@@ -95,8 +101,28 @@ class PatientPage extends Component {
             </NavLink>
           </nav>
           <Switch>
-            <Route exact path="/documentation" component={Documentation} />
-            <Route exact path="/recommendations" component={Recommendations} />
+            <Route
+              exact
+              path="/documentation"
+              render={props => (
+                <Documentation
+                  {...props}
+                  activeAccount="doctor"
+                  patientID={patientID}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/recommendations"
+              render={props => (
+                <Recommendations
+                  {...props}
+                  activeAccount="doctor"
+                  patientID={patientID}
+                />
+              )}
+            />
             <Route
               path="/medical-process"
               render={props => (
@@ -107,11 +133,28 @@ class PatientPage extends Component {
                 />
               )}
             />
-            <Route exact path="/documentation/report" component={Report} />}
+            <Route
+              exact
+              path="/documentation/report"
+              render={props => (
+                <Report
+                  {...props}
+                  activeAccount="doctor"
+                  patientID={patientID}
+                />
+              )}
+            />
+            }
             <Route
               exact
               path="/documentation/document:documentId"
-              component={Document}
+              render={props => (
+                <Document
+                  {...props}
+                  activeAccount="doctor"
+                  patientID={patientID}
+                />
+              )}
             />
             <Redirect from="/" to="/documentation" />
           </Switch>

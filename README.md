@@ -1,6 +1,7 @@
 # System wspierania szpitala w rejestracji dokumentów cyfrowych
 
 ## Projekt z Dokumentów Cyfrowych w Medycynie
+
 Aplikacja internetowa w wersji desktop i mobile do przeglądania dokumentacji medycznej pacjentów, z możliwością edycji danych przez konto lekarza, dodawania dokumentów, zadań, zaleceń przez lekarza i wyników badań przez laboranta.
 
 Technologie: React, Node.js, Express.js, Sass.
@@ -61,4 +62,4 @@ Do zrobienia
 Baza danych
 
 - [x] słownik laboratoryjny (zakresy i jednostki)
-- [ ] dodawanie plików multimedialnych do bazy (IMG, PDF)
+- [x] dodawanie plików multimedialnych do bazy

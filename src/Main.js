@@ -10,14 +10,25 @@ class Main extends Component {
       ? JSON.parse(sessionStorage.getItem("account"))
       : "",
     isLoggedIn: JSON.parse(sessionStorage.getItem("isLoggedIn")) || "false",
-    activeUser: JSON.parse(sessionStorage.getItem("user")) || []
+    activeUser: JSON.parse(sessionStorage.getItem("user")) || [],
+    patientID: JSON.parse(sessionStorage.getItem("patientID")) || [],
   };
 
-  componentDidUpdate() {
+  async componentDidUpdate() {
     //because setState is asynchronous
-    sessionStorage.setItem("isLoggedIn", JSON.stringify(this.state.isLoggedIn));
-    sessionStorage.setItem("account", JSON.stringify(this.state.activeAccount));
-    sessionStorage.setItem("user", JSON.stringify(this.state.activeUser));
+    await sessionStorage.setItem(
+      "isLoggedIn",
+      JSON.stringify(this.state.isLoggedIn)
+    );
+    await sessionStorage.setItem(
+      "account",
+      JSON.stringify(this.state.activeAccount)
+    );
+    await sessionStorage.setItem("user", JSON.stringify(this.state.activeUser));
+    await sessionStorage.setItem(
+      "patientID",
+      JSON.stringify(this.state.patientID)
+    );
   }
 
   changeAccount = e => {
@@ -26,6 +37,7 @@ class Main extends Component {
 
   logIn = async e => {
     e.preventDefault();
+    let patientID;
     await fetch("https://medical-documentation.herokuapp.com/login", {
       method: "post",
       headers: { "Content-Type": "application/json" },
@@ -41,17 +53,24 @@ class Main extends Component {
           document.querySelector("#login-info").innerHTML =
             "Niepoprawny login i hasło";
         } else {
+          patientID = data.accountType === "patient" ? data.ID : "";
           this.setState({
             activeAccount: data.accountType,
             isLoggedIn: "true",
-            activeUser: data
+            activeUser: data,
+            patientID
           });
         }
       });
   };
 
   logOut = async () => {
-    this.setState({ activeAccount: "", isLoggedIn: "false" });
+    this.setState({
+      activeAccount: "",
+      isLoggedIn: "false",
+      activeUser: [],
+      patientID: []
+    });
     //await sessionStorage.setItem("isLoggedIn", false);
     this.props.history.push("/");
   };
@@ -138,7 +157,7 @@ class Main extends Component {
             </header>
 
             {this.state.activeAccount === "patient" ? (
-              <PatientPage />
+              <PatientPage patientID={this.state.patientID} />
             ) : this.state.activeAccount === "doctor" ? (
               <DoctorPage />
             ) : (

@@ -5,7 +5,8 @@ import { today, threeDaysAgo } from "../../DateParser";
 
 class NewAttachment extends Component {
   state = {
-    startDate: ""
+    startDate: "",
+    activeUser: JSON.parse(sessionStorage.getItem("user")) || [],
   };
 
   submitAttachment = async e => {
@@ -17,36 +18,42 @@ class NewAttachment extends Component {
       case "prescription":
         const { medicine, payment } = e.target;
         attachedDocument = {
+          patientID: this.props.patientID,
           title: `Recepta ${medicine.value}`,
           medicine: medicine.value,
           payment: payment.value,
           issueDate: date.value,
           startDate: startDate.value,
-          type: "recepta"
+          type: "recepta",
+          doctor: this.state.activeUser.name
         };
         break;
       case "sickleave":
         const { placeOfWork, endDate } = e.target;
         attachedDocument = {
+          patientID: this.props.patientID,
           title: `Zwolnienie ${startDate.value}-${endDate.value}`,
           issueDate: date.value,
           placeOfWork: placeOfWork.value,
           startDate: startDate.value,
           endDate: endDate.value,
-          type: "zwolnienie"
+          type: "zwolnienie",
+          doctor: this.state.activeUser.name
         };
         break;
 
       case "referral":
         const { place, examination, diagnosis, aim } = e.target;
         attachedDocument = {
+          patientID: this.props.patientID,
           title: `Skierowanie na ${examination.value} ${date.value}`,
           issueDate: date.value,
           place: place.value,
           examination: examination.value,
           diagnosis: diagnosis.value,
           aim: aim.value,
-          type: "skierowanie"
+          type: "skierowanie",
+          doctor: this.state.activeUser.name
         };
         break;
       case "lab-order":
@@ -57,17 +64,19 @@ class NewAttachment extends Component {
 
         console.log(labTests);
         attachedDocument = {
+          patientID: this.props.patientID,
           title: `Zlecenie badań laboratoryjnych ${date.value}`,
           date: date.value,
           labTests: labTests,
-          type: "zlecenie badań"
+          type: "zlecenie badań",
+          doctor: this.state.activeUser.name
         };
         break;
       default:
         return;
     }
 
-    await fetch("https://medical-documentation.herokuapp.com/attach-document", {
+    await fetch(" https://medical-documentation.herokuapp.com/attach-document", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(attachedDocument)
@@ -117,7 +126,8 @@ class NewAttachment extends Component {
                 />
               </label>
               <label>
-                Odpłatność: <input type="text" name="payment" required placeholder=" "/>
+                Odpłatność:{" "}
+                <input type="text" name="payment" required placeholder=" " />
               </label>
               <label>
                 Data od dnia: <input type="date" name="startDate" />
@@ -142,7 +152,13 @@ class NewAttachment extends Component {
                 />
               </label>
               <label>
-                Miejsce pracy: <input type="text" name="placeOfWork" required placeholder=" "/>
+                Miejsce pracy:{" "}
+                <input
+                  type="text"
+                  name="placeOfWork"
+                  required
+                  placeholder=" "
+                />
               </label>
               <label>
                 od:{" "}
@@ -202,10 +218,11 @@ class NewAttachment extends Component {
                 />
               </label>
               <label>
-                Rozpoznanie: <input type="text" name="diagnosis" required placeholder=" " />
+                Rozpoznanie:{" "}
+                <input type="text" name="diagnosis" required placeholder=" " />
               </label>
               <label>
-                Cel: <input type="text" name="aim" required placeholder=" "/>
+                Cel: <input type="text" name="aim" required placeholder=" " />
               </label>
               <input type="submit" value="Dodaj" />
             </form>

@@ -8,7 +8,8 @@ class Documentation extends Component {
   };
 
   async componentDidMount() {
-    await fetch("https://medical-documentation.herokuapp.com/documentation")
+    console.log(sessionStorage.getItem("patientID"));
+    await fetch(` https://medical-documentation.herokuapp.com/documentation?patientID=${this.props.patientID}`)
       .then(result => result.json())
       .then(data => this.setState({ documents: data.sort(this.compare) }));
   }
@@ -35,9 +36,13 @@ class Documentation extends Component {
       parseInt(e.target.fromDate.value.split("-").join("")) || null;
     const toDate = parseInt(e.target.toDate.value.split("-").join("")) || null;
     const tag = e.target.tags.value;
-    await fetch("https://medical-documentation.herokuapp.com/documentation")
+    /*     await fetch(
+      ` https://medical-documentation.herokuapp.com/documentation?patientID=${JSON.parse(
+        sessionStorage.getItem("patientID")
+      )}`
+    )
       .then(result => result.json())
-      .then(data => this.setState({ documents: data }));
+      .then(data => this.setState({ documents: data })); */
 
     console.log(fromDate, toDate);
     const filtered = this.state.documents
@@ -73,9 +78,9 @@ class Documentation extends Component {
   };
 
   render() {
-    fetch("https://medical-documentation.herokuapp.com/documentation")
+    /*  fetch(" https://medical-documentation.herokuapp.com/documentation")
       .then(result => result.json())
-      .then(data => this.setState({ documents: data.sort(this.compare) }));
+      .then(data => this.setState({ documents: data.sort(this.compare) })); */
     //const height = this.props.activeAccount === "doctor" ? "41vh" : "55vh";
     return (
       <div className="container documentation-container">

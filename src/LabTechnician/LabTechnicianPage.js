@@ -8,11 +8,12 @@ class LabTechnicianPage extends Component {
     results: [],
     parameters: [],
     labOrders: [],
-    patientID: ""
+    patientID: "",
+    activeUser: JSON.parse(sessionStorage.getItem("user")) || []
   };
 
   componentDidMount() {
-    fetch("https://medical-documentation.herokuapp.com/lab-data")
+    fetch(" https://medical-documentation.herokuapp.com/lab-data")
       .then(result => result.json())
       .then(data => this.setState({ parameters: data }));
   }
@@ -49,7 +50,7 @@ class LabTechnicianPage extends Component {
     const title = `Badanie krwi ${collectionDate[0]}`;
     const issueDate = today;
 
-    fetch("https://medical-documentation.herokuapp.com/lab-result", {
+    fetch(" https://medical-documentation.herokuapp.com/lab-result", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -59,7 +60,7 @@ class LabTechnicianPage extends Component {
         title,
         testDate: collectionDate.join(" "),
         issueDate,
-
+        labTechnician: this.state.activeUser.name,
         results: this.state.results
       })
     });
@@ -70,43 +71,30 @@ class LabTechnicianPage extends Component {
   choosePatient = async e => {
     let patientID = e.target.value;
     if (patientID.match(/[0-9]{5}/)) {
-      await fetch(
-        "https://medical-documentation.herokuapp.com/get-patient-data",
-        {
-          method: "put",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ patientID })
-        }
-      ).then(result => {
-        if (result.status === 400) {
-          alert("Nie ma takiego pacjenta");
-        } else {
-          result.json().then(data => this.setState({ patientID: data }));
-        }
-      });
-
-      await fetch(
-        "https://medical-documentation.herokuapp.com/attached-documents"
-      )
-        .then(result => result.json())
-        .then(data =>
-          this.setState({
-            labOrders: data.filter(
-              document => document.type === "zlecenie badań"
-            )
-          })
-        );
-    } else {
-      await fetch(
-        "https://medical-documentation.herokuapp.com/get-patient-data",
-        {
-          method: "put",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ patientID: "" })
-        }
+      await fetch(" https://medical-documentation.herokuapp.com/patients").then(result =>
+        result.json().then(data => {
+          const ids = data.map(patient => patient.id);
+          if (ids.includes(patientID)) {
+            this.setState({ patientID });
+          } else {
+            alert("Nie ma takiego pacjenta");
+            this.setState({ patientID: "" });
+          }
+        })
       );
-      this.setState({ patientID: "" });
     }
+
+    await fetch(
+      ` https://medical-documentation.herokuapp.com/attached-documents?patientID=${
+        this.state.patientID
+      }`
+    )
+      .then(result => result.json())
+      .then(data =>
+        this.setState({
+          labOrders: data.filter(document => document.type === "zlecenie badań")
+        })
+      );
   };
 
   render() {
@@ -133,6 +121,7 @@ class LabTechnicianPage extends Component {
               name="labOrder"
               defaultValue=""
               disabled={!this.state.patientID}
+              required
             >
               <option value="" disabled>
                 Wybierz zlecenie
@@ -244,7 +233,6 @@ class LabTechnicianPage extends Component {
                     name="result"
                     id="result"
                     pattern="[0-9.,]{1,7}"
-                    
                   />
                 </label>
                 <input
