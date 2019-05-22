@@ -3,6 +3,13 @@
   flex-direction: column;
   align-content: center;
   text-align: center;
+  height: 60vh;
+  overflow-y: auto;
+}
+
+.document-container img {
+  max-height: 300px;
+  width: auto;
 }
 
 .document-container .result-info {

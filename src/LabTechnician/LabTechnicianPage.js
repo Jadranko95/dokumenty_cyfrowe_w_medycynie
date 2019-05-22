@@ -30,7 +30,7 @@ class LabTechnicianPage extends Component {
       .range;
     let unit = this.state.parameters.find(parameter => parameter.name === name)
       .unit;
-    if (value) {
+    if (/^[0-9.,]{1,7}$/.test(value)) {
       const newParameter = {
         name,
         value,
@@ -244,6 +244,7 @@ class LabTechnicianPage extends Component {
                     name="result"
                     id="result"
                     pattern="[0-9.,]{1,7}"
+                    
                   />
                 </label>
                 <input

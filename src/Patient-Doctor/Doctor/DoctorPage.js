@@ -19,15 +19,16 @@ class DoctorPage extends Component {
   };
 
   async componentDidMount() {
+    await fetch("https://medical-documentation.herokuapp.com/patients")
+    .then(result => result.json())
+    .then(data => {
+      console.log(data);
+      this.setState({ patients: data.map(patient => patient.id) });
+    });
     await fetch("https://medical-documentation.herokuapp.com/medical-process")
       .then(result => result.json())
       .then(data => this.setState({ tasks: data.sort(this.compare) }));
-    await fetch("https://medical-documentation.herokuapp.com/patients")
-      .then(result => result.json())
-      .then(data => {
-        console.log(data);
-        this.setState({ patients: data.map(patient => patient.id) });
-      });
+ 
   }
   //MEDICAL PROCESS
   addTask = async e => {

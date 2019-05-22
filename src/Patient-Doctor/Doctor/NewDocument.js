@@ -5,7 +5,8 @@ import { today, threeDaysAgo } from "../../DateParser";
 class NewDocument extends Component {
   state = {
     documentType: "",
-    referrals: []
+    referrals: [],
+    files: []
   };
 
   componentDidMount() {
@@ -22,15 +23,50 @@ class NewDocument extends Component {
     this.setState({ documentType: e.target.value });
   };
 
-  createDocument = e => {
-    //console.log(e.target);
+  handleFiles = e => {
+    const files = e.target;
+    let fileArray = [];
+    for (var i = 0; i < files.length; i++) {
+      fileArray.append(files[i]);
+    }
+    this.setState({ files: fileArray });
+    console.log(fileArray);
+  };
+
+  // *********** Upload file to Cloudinary ******************** //
+  uploadFile = file => {
+    const cloudName = "mickanie";
+    const unsignedUploadPreset = "default";
+    var url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
+    var xhr = new XMLHttpRequest();
+    var fd = new FormData();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+
+    xhr.onreadystatechange = function(e) {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        // File uploaded successfully
+        var response = JSON.parse(xhr.responseText);
+        console.log(response);
+      }
+    };
+
+    fd.append("upload_preset", unsignedUploadPreset);
+    fd.append("tags", "medical_documentation"); // Optional - add tag for image admin in Cloudinary
+    fd.append("file", file);
+    xhr.send(fd);
+  };
+
+  createDocument = async e => {
+    
     e.preventDefault();
-    console.log(e.target.files.value);
+    console.log(e.target.files.files);
+    const files = e.target.files.files;
     const title = `${this.state.documentType}: ${
       e.target.region ? e.target.region.value : ""
     }  ${e.target.testDate.value.split("T")[0]}`;
-    //console.log(title);
-    fetch("https://medical-documentation.herokuapp.com/new-document", {
+
+    await fetch("https://medical-documentation.herokuapp.com/new-document", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -41,9 +77,20 @@ class NewDocument extends Component {
         orderingDoctor: e.target.orderingDoctor.value,
         performingDoctor: e.target.performingDoctor.value,
         content: e.target.content.value
-      }),
-      files: e.target.files.value
-    });
+      })
+    })
+      .then(result => result.json())
+      .then(data => {
+        const documentId = data._id;
+        console.log(documentId);
+
+        for (let i = 0; i < files.length; i++) {
+          //zmiana nazwy plików
+          let blob = files[i].slice(0, files[i].size, 'image/jpg'); 
+          const newFile = new File([blob], `${documentId}.jpg`, {type: 'image/jpg'});
+          this.uploadFile(newFile);
+        }
+      });
 
     this.props.history.push("/documentation");
   };
@@ -99,7 +146,6 @@ class NewDocument extends Component {
                   min={threeDaysAgo}
                   max={today}
                   defaultValue={today}
-                  required
                 />
               </label>
               <label>
@@ -147,7 +193,12 @@ class NewDocument extends Component {
               <label>
                 {" "}
                 Załączniki:{" "}
-                <input type="file" multiple="multiple" name="files" />
+                <input
+                  type="file"
+                  multiple="multiple"
+                  name="files"
+                  accept="image/*"
+                />
               </label>
 
               <input type="submit" value="Dodaj dokument" />

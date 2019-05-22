@@ -38,6 +38,10 @@ class NewRecommendation extends Component {
     await sessionStorage.setItem("saved", JSON.stringify(this.state.dataSaved));
   };
 
+
+
+
+
   submitRecommendation = () => {
     fetch("https://medical-documentation.herokuapp.com/new-recommendation", {
       method: "post",
