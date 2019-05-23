@@ -154,7 +154,7 @@ class NewDocument extends Component {
               <label>
                 {" "}
                 Skierowanie:{" "}
-                <select className="referrals" name="referral" defaultValue="">
+                <select className="referrals" name="referral" defaultValue="" required>
                   <option value="" disabled>
                     Wybierz skierowanie
                   </option>

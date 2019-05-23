@@ -6,7 +6,7 @@ import { today, threeDaysAgo } from "../../DateParser";
 class NewAttachment extends Component {
   state = {
     startDate: "",
-    activeUser: JSON.parse(sessionStorage.getItem("user")) || [],
+    activeUser: JSON.parse(sessionStorage.getItem("user")) || []
   };
 
   submitAttachment = async e => {
@@ -68,7 +68,7 @@ class NewAttachment extends Component {
           title: `Zlecenie badań laboratoryjnych ${date.value}`,
           date: date.value,
           labTests: labTests,
-          type: "zlecenie badań",
+          type: "zlecenie badan",
           doctor: this.state.activeUser.name
         };
         break;
@@ -76,11 +76,14 @@ class NewAttachment extends Component {
         return;
     }
 
-    await fetch(" https://medical-documentation.herokuapp.com/attach-document", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(attachedDocument)
-    })
+    await fetch(
+      " https://medical-documentation.herokuapp.com/attach-document",
+      {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(attachedDocument)
+      }
+    )
       .then(result => result.json())
       .then(data => (attachedDocument.id = data));
     console.log(attachedDocument.id);

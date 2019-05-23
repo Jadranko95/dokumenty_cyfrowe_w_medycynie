@@ -106,11 +106,23 @@ class Register extends Component {
           </span>
           <span>
             <label htmlFor="name">Imię </label>
-            <input type="text" name="name" required placeholder=" " pattern="[A-Za-z]{3,}"/>
+            <input
+              type="text"
+              name="name"
+              required
+              placeholder=" "
+              pattern="[A-Za-z]{3,}"
+            />
           </span>
           <span>
             <label htmlFor="surname">Nazwisko </label>
-            <input type="text" name="surname" required placeholder=" " pattern="[A-Za-z]{3,}"/>
+            <input
+              type="text"
+              name="surname"
+              required
+              placeholder=" "
+              pattern="[A-Za-z]{3,}"
+            />
           </span>
 
           {this.state.accountType === "patient" && (
@@ -121,7 +133,7 @@ class Register extends Component {
               </span>
               <span>
                 <label htmlFor="surname">Adres </label>
-                <input type="text" name="address" required placeholder=" "/>
+                <input type="text" name="address" required placeholder=" " />
               </span>
               <span>
                 <label htmlFor="surname">Telefon </label>
@@ -147,11 +159,12 @@ class Register extends Component {
               <span>
                 <label htmlFor="surname">Płeć </label>
                 <select name="sex" defaultValue="" required>
-                  <option value="" disabled>Wybierz płeć</option>
+                  <option value="" disabled>
+                    Wybierz płeć
+                  </option>
                   <option value="K">Kobieta</option>
                   <option value="M">Mężczyzna</option>
                 </select>
-               
               </span>
             </>
           )}
@@ -176,8 +189,7 @@ class Register extends Component {
               type="password"
               required
               id="password"
-              
-              //pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
             />
           </span>
           <span>
@@ -186,7 +198,7 @@ class Register extends Component {
               type="password"
               required
               id="confirm-password"
-              //pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
               onChange={this.validatePassword}
             />
           </span>

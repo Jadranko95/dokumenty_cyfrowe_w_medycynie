@@ -22,7 +22,7 @@ class Document extends Component {
       });
 
     await fetch(
-      "http://res.cloudinary.com/mickanie/image/list/medical_documentation.json"
+      "https://res.cloudinary.com/mickanie/image/list/medical_documentation.json"
     )
       .then(result => result.json())
       .then(data =>

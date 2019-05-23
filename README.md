@@ -15,15 +15,6 @@ Baza danych: MongoDB (Atlas)
 - konto pacjenta: login P12345 hasło 123,
 - konto pacjenta: login P11111 hasło abc.
 
-#### Testowe ID pacjentów do wybierania przez lekarza / laboranta
-
-W panelu Lekarza należy podać ciąg 5 znaków, żeby zobaczyć dane o Pacjencie. ID utworzonych kont pacjentów:
-
-- 11111
-- 12345
-
-Podobnie przy dodawaniu wyniku badań laboratoryjnych przez laboranta
-
 #### Link do strony
 
 https://mickanie.github.io/dokumenty_cyfrowe_w_medycynie/
@@ -54,12 +45,12 @@ Do zrobienia
 - [x] edycja zadań i danych pacjenta
 - [x] raporty HTML badań laboratoryjnych
 - [x] zagwarantowanie responsywności
-- [x] zagwarantowanie bezpieczeństwa
-- [x] połączenia między dokumentami (np. id zlecenia do wyników badań)
+- [x] zagwarantowanie bezpieczeństwa (haszowanie haseł, wylogowanie i usuwanie wrażliwych danych po wyjściu z przeglądarki, wymaganie silnych haseł)
+- [x] połączenia między dokumentami (id zlecenia do wyników badań)
 - [x] połączenie zadań z poprzedzającymi i następującymi
 - [x] widok procesu medycznego
 
 Baza danych
 
 - [x] słownik laboratoryjny (zakresy i jednostki)
-- [x] dodawanie plików multimedialnych do bazy
+- [x] dodawanie plików multimedialnych do chmury (Cloudinary)

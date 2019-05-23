@@ -15,7 +15,8 @@ class DoctorPage extends Component {
   state = {
     patientID: "",
     tasks: [],
-    patients: []
+    patients: [],
+    activeUser: JSON.parse(sessionStorage.getItem("user")) || [],
   };
 
   async componentDidUpdate() {
@@ -65,7 +66,8 @@ class DoctorPage extends Component {
         date: e.target.date.value.split("T").join(" "),
         completed,
         details: e.target.details.value,
-        previousTask: e.target.previousTask.value
+        previousTask: e.target.previousTask.value,
+        doctor: this.state.activeUser.name
       })
     })
       .then(response => response.json())
@@ -95,7 +97,9 @@ class DoctorPage extends Component {
         date: "",
         completed: false,
         details: "",
-        previousTask: ""
+        previousTask: "",
+        doctor: this.state.activeUser.name
+
       })
     })
       .then(response => response.json())
