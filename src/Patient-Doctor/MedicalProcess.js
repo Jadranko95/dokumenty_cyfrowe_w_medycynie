@@ -130,7 +130,7 @@ class MedicalProcess extends Component {
                               task.title
                             )}
                           </strong>
-                          {this.props.activeAccount === "doctor" && (
+                    
                             <button
                               className="set-done"
                               id={task._id}
@@ -138,7 +138,7 @@ class MedicalProcess extends Component {
                             >
                               ✓
                             </button>
-                          )}
+                        
 
                           <button
                             className="edit"

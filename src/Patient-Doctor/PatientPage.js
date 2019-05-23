@@ -10,7 +10,6 @@ import Report from "./Report";
 
 class PatientPage extends Component {
   state = {
-    patientID: "",
     tasks: []
   };
 
@@ -25,14 +24,19 @@ class PatientPage extends Component {
   }
 
   editTask = async id => {
+    const title = document.querySelector("#title").value;
+    const details = document.querySelector("#details").value;
+    const date = document.querySelector("#date");
+
     await fetch(" https://medical-documentation.herokuapp.com/edit-task", {
       method: "put",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        patientID: this.state.patientID,
-        title: document.querySelector("#title").value,
-        details: document.querySelector("#details").value,
-        date: document.querySelector("#date").value,
+        patientID: this.props.patientID,
+        title,
+        details,
+        date: date.value,
+        previousTaskId: document.querySelector("#previous-task").value,
         id: id
       })
     })
@@ -40,7 +44,25 @@ class PatientPage extends Component {
       .then(data => this.setState({ tasks: data.sort(this.compare) }));
   };
 
-  toggleComplete = e => {
+  setCompleted = e => {
+    const id = e.target.id;
+    this.setState({
+      tasks: this.state.tasks.map((task, i) => {
+        if (task._id === id) {
+          task.completed = true;
+        }
+        return task;
+      })
+    });
+
+    fetch(" https://medical-documentation.herokuapp.com/complete-task", {
+      method: "put",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: id, completed: true })
+    });
+  };
+
+  toggleComplete = async e => {
     const id = e.target.id;
     let isCompleted = "";
     this.setState({
@@ -53,13 +75,11 @@ class PatientPage extends Component {
       })
     });
     //dodanie do bazy
-    fetch(" https://medical-documentation.herokuapp.com/complete-task", {
+    await fetch(" https://medical-documentation.herokuapp.com/complete-task", {
       method: "put",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: id, completed: isCompleted })
-    })
-      .then(response => response.json())
-      .then(data => this.setState({ tasks: data.sort(this.compare) }));
+    });
   };
 
   compare = (a, b) => {
@@ -105,22 +125,14 @@ class PatientPage extends Component {
               exact
               path="/documentation"
               render={props => (
-                <Documentation
-                  {...props}
-                  activeAccount="doctor"
-                  patientID={patientID}
-                />
+                <Documentation {...props} patientID={patientID} />
               )}
             />
             <Route
               exact
               path="/recommendations"
               render={props => (
-                <Recommendations
-                  {...props}
-                  activeAccount="doctor"
-                  patientID={patientID}
-                />
+                <Recommendations {...props} patientID={patientID} />
               )}
             />
             <Route
@@ -130,31 +142,20 @@ class PatientPage extends Component {
                   {...props}
                   tasks={this.state.tasks}
                   editTask={this.editTask}
+                  setCompleted={this.setCompleted}
                 />
               )}
             />
             <Route
               exact
               path="/documentation/report"
-              render={props => (
-                <Report
-                  {...props}
-                  activeAccount="doctor"
-                  patientID={patientID}
-                />
-              )}
+              render={props => <Report {...props} patientID={patientID} />}
             />
             }
             <Route
               exact
               path="/documentation/document:documentId"
-              render={props => (
-                <Document
-                  {...props}
-                  activeAccount="doctor"
-                  patientID={patientID}
-                />
-              )}
+              render={props => <Document {...props} patientID={patientID} />}
             />
             <Redirect from="/" to="/documentation" />
           </Switch>

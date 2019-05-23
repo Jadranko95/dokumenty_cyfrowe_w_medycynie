@@ -11,7 +11,7 @@
 .medical-process-container .change-view {
   margin: auto;
   display: block;
-  width: 300px;
+  width: 280px;
 }
 
 .medical-process-container .change-view input[type="radio"] {
@@ -23,21 +23,25 @@
   padding: 7px 13px;
   margin: 0;
   background: #b9b9b9;
+  position: relative;
+  z-index: 0;
 }
 
 .medical-process-container .change-view label.tasks-label {
   border-radius: 15px 0 0 15px;
-  margin-right: -26px;
+  margin-left: -25px;
+  margin-right: -10%;
 }
 
 .medical-process-container .change-view label.process-label {
   border-radius: 0 15px 15px 0;
-  margin-left: -26px;
+  margin-left: -10%;
 }
 
 .medical-process-container .change-view input[type="radio"]:checked + label {
   background: #e4ab6a;
   border: 1px solid #777;
+  z-index: 3;
 }
 
 .medical-process-container .set-done,
@@ -179,6 +183,10 @@
   display: flex;
 }
 
+.medical-process-container ul li .task-header button {
+  min-width: 25px;
+}
+
 .medical-process-container ul li .task-info {
   display: flex;
   justify-content: space-between;
@@ -214,7 +222,7 @@
 
 @media screen and (max-width: 590px) {
   .medical-process-container ul li #title {
-    width: 100%;
+    width: 90%;
   }
 }
 
