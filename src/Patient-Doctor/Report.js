@@ -119,7 +119,7 @@ class Raport extends Component {
                   })}
                 </tbody>
               </table>
-              <button>Zapisz do PDF</button>
+            
             </div>
           )}
           {(!this.state.filteredResults.length && this.state.chosenParameter) && <p> Brak danych</p>}

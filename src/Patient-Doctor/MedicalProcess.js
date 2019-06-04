@@ -64,6 +64,8 @@ class MedicalProcess extends Component {
             Widok procesu
           </label>
         </div>
+
+        {/**************WIDOK ZADAŃ******************/}
         {this.state.view === "tasks" && (
           <div className="task-view">
             {this.props.activeAccount === "doctor" && (
@@ -130,15 +132,14 @@ class MedicalProcess extends Component {
                               task.title
                             )}
                           </strong>
-                    
-                            <button
-                              className="set-done"
-                              id={task._id}
-                              onClick={this.props.setCompleted}
-                            >
-                              ✓
-                            </button>
-                        
+
+                          <button
+                            className="set-done"
+                            id={task._id}
+                            onClick={this.props.setCompleted}
+                          >
+                            ✓
+                          </button>
 
                           <button
                             className="edit"
@@ -277,14 +278,19 @@ class MedicalProcess extends Component {
             </div>
           </div>
         )}
+
+        {/**************WIDOK PROCESU******************/}
         {this.state.view === "process" && (
           <div className="process-view">
             {this.props.tasks
               .filter(task => task.previousTask === "")
               .map((task, i) => {
                 const color = task.completed
-                  ? "rgb(218, 203, 169)"
-                  : "rgb(206, 206, 193)";
+                ? "rgb(210, 210, 200)"
+                : "rgb(200, 200, 190)";
+          
+
+                const visibility = task.completed ? "visible" : "hidden";
                 return (
                   <div className="process-task-list-item" key={i}>
                     <div
@@ -293,7 +299,9 @@ class MedicalProcess extends Component {
                       onClick={this.toggleActive}
                     >
                       {" "}
-                      <h4>{task.title}</h4>
+                      <h4>
+                        {task.title} <span style={{ visibility }}>✓</span>
+                      </h4>
                       <p className="date-process-task">{task.date}</p>
                       <p>{task.details}</p>{" "}
                     </div>
@@ -324,8 +332,10 @@ const Task = props => {
   return props.task.nextTasks.map((nextTaskId, i) => {
     const nextTask = props.tasks.filter(task => task._id === nextTaskId)[0];
     const color = nextTask.completed
-      ? "rgb(218, 203, 169)"
-      : "rgb(206, 206, 193)";
+      ? "rgb(210, 210, 200)"
+      : "rgb(200, 200, 190)";
+
+    const visibility = nextTask.completed ? "visible" : "hidden";
     return (
       <li className="next-task" key={i}>
         <div
@@ -334,7 +344,9 @@ const Task = props => {
           onClick={props.toggleActive}
         >
           {" "}
-          <h4>{nextTask.title}</h4>
+          <h4>
+            {nextTask.title} <span style={{ visibility }}>✓</span>
+          </h4>
           <p className="date-process-task">{nextTask.date}</p>
           <p>{nextTask.details}</p>{" "}
         </div>

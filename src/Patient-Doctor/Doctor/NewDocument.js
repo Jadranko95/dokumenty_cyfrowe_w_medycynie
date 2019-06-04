@@ -127,7 +127,7 @@ class NewDocument extends Component {
                 this.state.documentType === "Tomografia komputerowa") && (
                 <label>
                   {" "}
-                  Badany obszar: <input type="text" name="region" required />
+                  Badany obszar: <input type="text" name="region" required placeholder="np. głowa, jama brzuszna"/>
                 </label>
               )}
 
@@ -198,7 +198,7 @@ class NewDocument extends Component {
                 Załączniki:{" "}
                 <input
                   type="file"
-                  multiple="multiple"
+                  
                   name="files"
                   accept="image/*"
                 />

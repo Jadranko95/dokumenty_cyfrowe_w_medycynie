@@ -268,7 +268,8 @@
   width: 70%;
   padding: 5px 10px;
   position: relative;
-  background: #dacba9;
+  box-shadow: 2px 2px 2px grey;
+  background: #a0a0a0;
   cursor: pointer;
 }
 
@@ -339,7 +340,7 @@
 
 @media screen and (max-width: 590px) {
   .medical-process-container .process-view li {
-    margin-left: 10px;
+    margin-left: 5px;
   }
 }
 
@@ -351,7 +352,7 @@
 .medical-process-container .process-view li div::before {
   content: "";
   position: absolute;
-  top: -20%;
+  top: -18%;
   left: -30px;
   bottom: 50%;
   width: 2em;

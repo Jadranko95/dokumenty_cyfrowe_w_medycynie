@@ -260,8 +260,9 @@
       width: 70%;
       padding: 5px 10px;
       position: relative;
+      box-shadow: 2px 2px 2px grey;
 
-      background: rgb(218, 203, 169);
+      background: rgb(160, 160, 160);
       cursor: pointer;
       @include mobile {
         width: 90%;
@@ -298,7 +299,7 @@
       padding-left: 27px;
       margin-left: 30px;
       @include mobile {
-        margin-left: 10px;
+        margin-left: 5px;
       }
     }
 
@@ -310,7 +311,7 @@
     li div::before {
       content: "";
       position: absolute;
-      top: -20%;
+      top: -18%;
       left: -30px;
       bottom: 50%;
       width: 2em;
